@@ -1,1 +1,1 @@
-# MaviDurak-IO Mentörlük
+# MaviDurak-IO Mentör Front-End
