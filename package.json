@@ -14,6 +14,7 @@
     "core-js": "^3.6.4",
     "vee-validate": "^3.2.5",
     "vue": "^2.6.11",
+    "vue-multiselect": "^2.1.6",
     "vue-router": "^3.1.5"
   },
   "devDependencies": {
