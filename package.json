@@ -10,11 +10,13 @@
     "sass": "sass --watch src/styles/main.scss:public/styles.css"
   },
   "dependencies": {
-    "core-js": "^3.6.4",
-    "vue": "^2.6.11",
-    "vue-router": "^3.1.5",
     "bootstrap": "^4.4.1",
-    "vee-validate": "^3.2.5"
+    "chart.js": "^2.9.3",
+    "core-js": "^3.6.4",
+    "vee-validate": "^3.2.5",
+    "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.0",
+    "vue-router": "^3.1.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",
