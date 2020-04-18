@@ -33,7 +33,13 @@ const routes = [
     path: '/multiselect',
     name: 'multiselect',
     component: () => import('../views/multiselect.vue')
+  },
+  {
+  path: '/axios_demo',
+    name: 'AxiosDemo',
+    component: () => import( '../views/AxiosDemo.vue')
   }
+
 ]
 
 const router = new VueRouter({
