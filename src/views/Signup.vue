@@ -4,11 +4,11 @@
       <div class="col-md-4"></div>
       <div class="col-md-4">
         <h6>Signup Page</h6>
-          <ValidationObserver v-slot="{ invalid }">
-        <form class="text-left">
+          <ValidationObserver ref="form" v-slot="{ invalid }">
+        <form class="text-left" @submit.prevent="onSubmit()">
           <div class="form-group">
             <label for="inputMail">E-Mail :</label>
-            <validation-provider rules="required|email" v-slot="{ errors }">
+            <validation-provider name="email" rules="required|email" v-slot="{ errors }">
               <input
                 type="text"
                 class="form-control"
@@ -21,7 +21,7 @@
           </div>
           <div class="form-group">
             <label for="inputUsername">Kullanıcı Adı :</label>
-            <validation-provider rules="required|min:3|max:20" v-slot="{ errors }">
+            <validation-provider name="username" rules="required|min:3|max:20" v-slot="{ errors }">
               <input
               type="text"
               class="form-control"
@@ -33,7 +33,7 @@
             </validation-provider>
             </div>
           <div class="form-group">
-            <validation-provider rules="required|min:8|max:16"  v-slot="{ errors }" :bails="false">
+            <validation-provider name="password" rules="required|min:8|max:16"  v-slot="{ errors }" :bails="false">
             <label for="inputPassword">Password</label>
             <input
               type="password"
@@ -49,8 +49,8 @@
             type="submit"
             name="submitButton"
             id="submitButton"
-            class="btn btn-success"
-            @click.prevent="onSubmit()" :disabled="invalid"
+            class="btn btn-success float-right"
+            :disabled="invalid"
           >Kaydol</button>
         </form>  </ValidationObserver>
 
@@ -61,31 +61,7 @@
 </template>
 
 <script>
-import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
-import { required, email, max } from 'vee-validate/dist/rules'
-
-extend('required', {
-  ...required,
-  message: 'Bu alan gerekli'
-})
-
-extend('email', {
-  ...email,
-  message: 'Mailiniz geçerli değil.'
-})
-
-extend('max', {
-  ...max,
-  message: 'Maximum {length} karakter olmalı'
-})
-
-extend('min', {
-  validate (value, args) {
-    return value.length >= args.length
-  },
-  params: ['length'],
-  message: 'Length must be greater or equal than {length}'
-})
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
 
 export default {
   name: 'Signup',
@@ -116,8 +92,5 @@ export default {
 }
 </script>
 
-<style>
-#submitButton {
-  float: right;
-}
+<style scoped>
 </style>

@@ -7,6 +7,10 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    redirect: '/login'
+  },
+  {
+    path: '/Home',
     name: 'Home',
     component: Home
   },
@@ -19,15 +23,15 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
+  },
+  {
     path: '/signup',
     name: 'Signup',
 
     component: () => import('../views/Signup.vue')
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/Login.vue')
   },
   {
     path: '/multiselect',
@@ -35,9 +39,9 @@ const routes = [
     component: () => import('../views/multiselect.vue')
   },
   {
-  path: '/axios_demo',
+    path: '/axios_demo',
     name: 'AxiosDemo',
-    component: () => import( '../views/AxiosDemo.vue')
+    component: () => import('../views/AxiosDemo.vue')
   }
 
 ]
@@ -47,5 +51,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.replace('/login')
 
 export default router
