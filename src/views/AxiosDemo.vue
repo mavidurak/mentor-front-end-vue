@@ -16,27 +16,27 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  created() {
-    this.getPosts();
+  created () {
+    this.getPosts()
   },
-  data() {
+  data () {
     return {
       posts: [],
       errors: []
-    };
+    }
   },
   methods: {
-    getPosts() {
+    getPosts () {
       axios
-        .get("https://jsonplaceholder.typicode.com/posts")
+        .get('https://jsonplaceholder.typicode.com/posts')
         .then(response => (this.posts = response.data))
         .catch(error => {
-          this.errors.push(error);
-        });
+          this.errors.push(error)
+        })
     }
   }
-};
+}
 </script>
