@@ -42,6 +42,11 @@ const routes = [
     path: '/axios_demo',
     name: 'AxiosDemo',
     component: () => import('../views/AxiosDemo.vue')
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue')
   }
 
 ]
