@@ -1,53 +1,17 @@
-/*
-Error: File to import not found or unreadable: node_modules/bootstrap/scss/bootstrap.
-        on line 1 of src/styles/main.scss
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 1 | @import 'node_modules/bootstrap/scss/bootstrap';
+ *   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *   '
+ *   src/styles/main.scss 1:9  root stylesheet */
 
-1: @import 'node_modules/bootstrap/scss/bootstrap';
-
-Backtrace:
-src/styles/main.scss:1
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/import_node.rb:67:in `rescue in import'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/import_node.rb:44:in `import'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/import_node.rb:28:in `imported_file'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/import_node.rb:37:in `css_import?'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:310:in `visit_import'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/stack.rb:79:in `block in with_base'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/stack.rb:135:in `with_frame'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/stack.rb:79:in `with_base'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `visit'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `map'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:157:in `visit'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:10:in `visit'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/root_node.rb:36:in `css_tree'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/engine.rb:307:in `render_with_sourcemap'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:209:in `each'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:443:in `on_file_changed'
-/home/ozzy/gems/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:320:in `block in watch'
-/home/ozzy/gems/gems/sass-listen-4.0.0/lib/sass-listen/event/config.rb:23:in `call'
-/home/ozzy/gems/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:115:in `_process_changes'
-/home/ozzy/gems/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:19:in `block in loop_for'
-/home/ozzy/gems/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop'
-/home/ozzy/gems/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop_for'
-/home/ozzy/gems/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:84:in `_wait_for_changes'
-/home/ozzy/gems/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:42:in `block in setup'
-/home/ozzy/gems/gems/sass-listen-4.0.0/lib/sass-listen/internals/thread_pool.rb:6:in `block in add'
-*/
-body:before {
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
   white-space: pre;
-  font-family: monospace;
-  content: "Error: File to import not found or unreadable: node_modules/bootstrap/scss/bootstrap.\A         on line 1 of src/styles/main.scss\A \A 1: @import 'node_modules/bootstrap/scss/bootstrap';"; }
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import 'node_modules/bootstrap/scss/bootstrap';\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   src/styles/main.scss 1:9  root stylesheet";
+}
