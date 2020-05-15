@@ -6,11 +6,9 @@
           <img src="../assets/ppic.png" class="rounded img-fluid px-2" alt="...">
         </div>
         <div class="col-lg-8 px-5">
-          <div class="d-flex flex-row-reverse float-right justify-content-end" >
-            <div id="mySidenav" class="sidenav mx-auto px-5 p-2">
-              <div class="row">
-                <a href="#" class="rl" @click="gizleGoster('mySidenav')"><i class="fas fa-cog fa-3x closebtn mt-3"></i></a>
-              </div>
+          <div class="row" >
+            <a href="#" id="spin-cog" class="rl cog-i" @click="gizleGoster('mySidenav')"><i class="fas fa-cog fa-3x closebtn mt-3"></i></a>
+            <div id="mySidenav" class="sidenav mx-auto bg-dark d-flex">
               <div class="align-items-start px-3">
                 <router-link class="rl" to="/changeNick">Nick Değiştir</router-link>
                 <router-link class="rl" to="/changeEmail">Eposta Değiştir</router-link>
@@ -33,6 +31,14 @@
             </div>
             <div class="col-lg-6">
                <h3>MaviDurak-IO Üyesi</h3>
+            </div>
+          </div>
+          <div class="row border-bottom pt-3">
+            <div class="col-lg-6">
+               <h3>Telefon Numarası:</h3>
+            </div>
+            <div class="col-lg-6">
+               <h3>*** *** 13 42</h3>
             </div>
           </div>
           <div class="row pt-3">
@@ -90,14 +96,14 @@ export default {
   position: absolute;
   z-index: 1;
   top: 0;
-  left: 0;
-  background-color: #111;
+  right: 0;
+  /* background-color: #111; */
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
 }
 
-.sidenav .rl {
+.rl {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
@@ -106,16 +112,19 @@ export default {
   transition: 0.3s;
 }
 
-.sidenav .rl:hover {
+.rl:hover {
   color: #f1f1f1;
 }
 
-.sidenav .closebtn {
+.closebtn {
   position: absolute;
   top: 0;
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
+}
+.cog-i{
+  transition: 0.5s ease;
 }
 
 </style>
