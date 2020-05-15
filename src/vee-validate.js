@@ -14,7 +14,9 @@ localize({
     messages: en.messages,
     names: {
       email: 'E-mail Address',
-      password: 'Password'
+      password: 'Password',
+      newPassword: 'New Password',
+      confirmPassword: 'Confirm Password'
     }
   },
   tr: {
@@ -22,7 +24,9 @@ localize({
     names: {
       email: 'Email',
       password: 'Şifre',
-      username: 'Kullanıcı adı'
+      username: 'Kullanıcı adı',
+      newPassword: 'Yeni Şifre',
+      confirmPassword: 'Şifreyi Doğrula'
     }
   }
 })

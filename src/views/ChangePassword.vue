@@ -1,91 +1,101 @@
 <template>
-<div class="row">
-  <div class="col-sm"></div>
-  <div class="col-sm">
-    <form v-show="!isReset" @submit.prevent="onSubmit()">
-      <br>
-      <div class="alert alert-warning" role="alert">
-        <h3><strong>Forgot Password?</strong></h3><hr>
-        <h6>Don't worry.Reseting your password is easy.Just tell us the mail address you registered.Then check your mailbox.</h6>
-      </div>
-      <div>
-        <input type="email" required v-model="mail" class="form-control" placeholder="Your Email Address">
-      </div>
-      <div>
-        <br><button type="submit" class="btn btn-success">Reset Password</button>
-      </div>
-    </form>
-    <div v-show="isReset">
-      <br>
-      <div class="alert alert-success" role="alert">
-        <table>
-          <tr><th colspan="3"><h3>Successfull</h3><hr></th></tr>
-          <tr>
-            <td>
-              <img src="../assets/success.svg" alt="success" style="margin: 10px; width: 90px; heigth: 90px;">
-            </td>
-            <td>
-              <h5>An email has been sent to "<b>{{mail}}</b>".</h5>
-              <h5>Please follow the link in your email to complete your password reset request. </h5>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div v-show="isReset">
-      <br>
-      <div class="alert alert-danger" role="alert">
-        <table>
-          <tr><th colspan="3"><h3>Error</h3><hr></th></tr>
-          <tr>
-            <td>
-              <img src="../assets/error.svg" alt="error" style="margin: 10px; width: 90px; heigth: 90px;">
-            </td>
-            <td>
-              <h5>We are sorry."<b>{{mail}}</b>" is incorrect or the account does not exist.Please enter correct mail address</h5>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <button @click="tryAgain()" class="btn btn-success">Try Again</button>
-    </div>
+  <div>
+    <div class="row text-center">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <h6>Change Password Page</h6>
+        <ValidationObserver ref="form" v-slot="{ invalid }">
+        <form class="text-left" @submit.prevent="onSubmit()">
+          <div class="form-group">
+            <label for="inputPassword">Eski Parola</label>
+             <validation-provider name="password" rules="required" v-slot="{ errors }">
+           <input
+              type="password"
+              class="form-control"
+              id="inputPassword"
+              v-model="password"
+              placeholder="Eski şifrenizi girin"
+            /> <span>{{ errors[0] }}</span>
+            </validation-provider>
+          </div>
+          <div class="form-group">
+            <label for="inputNewPassword">Yeni Parola</label>
+             <validation-provider name="newPassword" rules="required" v-slot="{ errors }">
+           <input
+              type="password"
+              class="form-control"
+              id="inputNewPassword"
+              v-model="newPassword"
+              placeholder="Yeni şifrenizi girin"
+            /> <span>{{ errors[0] }}</span>
+            </validation-provider>
+          </div>
+           <div class="form-group">
+            <label for="inputConfirmPassword">Yeni Parola</label>
+             <validation-provider name="confirmPassword" rules="required" v-slot="{ errors }">
+           <input
+              type="password"
+              class="form-control"
+              id="inputConfirmPassword"
+              v-model="confirmPassword"
+              placeholder="Yeni şifrenizi girin"
+            /> <span>{{ errors[0] }}</span>
+            </validation-provider>
+          </div>
+         <button
+            type="submit"
+            name="submitButton"
+            id="submitButton"
+            class="btn btn-success"
+            :disabled="invalid"
+          >Değiştir</button>
 
+        </form>
+        </ValidationObserver>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
   </div>
- <div class="col-sm"></div>
-</div>
 </template>
+
 <script>
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
+
 export default {
+  name: 'ChangePassword',
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
   data: () => {
     return {
-      mail: '',
+      truePassword: '123',
       password: '',
-      isReset: false
+      newPassword: '',
+      confirmPassword: ''
     }
   },
   methods: {
     onSubmit: function () {
-      // isMailCorrect = true => continue
-      this.successReset()
-      this.resetError()
-      this.isReset = true
+      if (this.password === this.truePassword) {
+        if (this.newPassword === this.confirmPassword) {
+          this.truePassword = this.newPassword
+          console.log('Old Password : ' + this.password + ' New Password : ' + this.newPassword)
+        } else {
+          alert('parolalar uyuşmuyor')
+        }
+      } else {
+        alert('parola hatalı')
+      }
     },
-    randomPassword: function () {
-      this.password = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2)
-    },
-    successReset: function () {
-      this.randomPassword()
-      console.log('mail: ' + this.mail + ' new password: ' + this.password)
-      // more code
-    },
-    resetError: function () {
-      this.isReset = false
-      // more code
-    },
-    tryAgain: function () {
-      this.isReset = false
-      this.mail = ''
-      // more code
+    switchLog: function () {
+      // switch the locale.
+      this.locale = this.locale === 'en' ? 'tr' : 'en'
+      // you could also import 'localize' and call it.
+      // localize('ar');
+
+      // re-validate to re-generate the messages.
+      this.$refs.form.validate()
     }
   }
 }
