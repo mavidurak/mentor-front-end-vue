@@ -5,7 +5,7 @@
     <form v-show="!isReset" @submit.prevent="onSubmit()">
       <br>
       <div class="alert alert-warning" role="alert">
-        <h3><strong>Forgot Password?</strong></h3>
+        <h3><strong>Forgot Password?</strong></h3><hr>
         <h6>Don't worry.Reseting your password is easy.Just tell us the mail address you registered.Then check your mailbox.</h6>
       </div>
       <div>
