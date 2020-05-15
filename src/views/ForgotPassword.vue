@@ -19,7 +19,7 @@
       <br>
       <div class="alert alert-success" role="alert">
         <table>
-          <tr><th colspan="3"><h3>Password Reset Successfull</h3><hr></th></tr>
+          <tr><th colspan="3"><h3>Successfull</h3><hr></th></tr>
           <tr>
             <td>
               <img src="../assets/success.svg" alt="success" style="margin: 10px; width: 90px; heigth: 90px;">
@@ -36,10 +36,10 @@
       <br>
       <div class="alert alert-danger" role="alert">
         <table>
-          <tr><th colspan="3"><h3>Password Reset Error</h3><hr></th></tr>
+          <tr><th colspan="3"><h3>Error</h3><hr></th></tr>
           <tr>
             <td>
-              <img src="../assets/error.svg" alt="success" style="margin: 10px; width: 90px; heigth: 90px;">
+              <img src="../assets/error.svg" alt="error" style="margin: 10px; width: 90px; heigth: 90px;">
             </td>
             <td>
               <h5>We are sorry."<b>{{mail}}</b>" is incorrect or the account does not exist.Please enter correct mail address</h5>
