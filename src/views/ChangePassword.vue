@@ -52,6 +52,7 @@
 
         </form>
         </ValidationObserver>
+        <div id="success" class="mt-3"></div>
       </div>
       <div class="col-md-4"></div>
     </div>
@@ -81,11 +82,12 @@ export default {
         if (this.newPassword === this.confirmPassword) {
           this.truePassword = this.newPassword
           console.log('Old Password : ' + this.password + ' New Password : ' + this.newPassword)
+          document.getElementById('success').innerHTML = 'Şifreniz başarıyla değiştirildi'
         } else {
-          alert('parolalar uyuşmuyor')
+          document.getElementById('success').innerHTML = 'Parolalar uyuşmuyor'
         }
       } else {
-        alert('parola hatalı')
+        document.getElementById('success').innerHTML = 'Parolala hatalı'
       }
     },
     switchLog: function () {

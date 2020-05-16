@@ -13,7 +13,7 @@
                 <router-link class="rl" to="/changeNick">Nick Değiştir</router-link>
                 <router-link class="rl" to="/changeEmail">Eposta Değiştir</router-link>
                 <router-link class="rl" to="/changePassword">Şifre Değiştir</router-link>
-                <router-link class="rl" to="/changePassword">Nick Değiştir</router-link>
+                <router-link class="rl" to="#">...</router-link>
               </div>
             </div>
           </div>
