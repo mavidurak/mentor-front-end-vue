@@ -29,6 +29,7 @@
               placeholder="Şifre giriniz"
             /> <span>{{ errors[0] }}</span>
             </validation-provider>
+            <router-link to="/forgotPassword">Forgot your password?</router-link>
           </div>
          <button
             type="submit"

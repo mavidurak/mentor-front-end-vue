@@ -1,7 +1,8 @@
 <template>
 <div align="center" >
   <label class="typo__label">Multiselect</label>
-  <multiselect v-model="value" :options="options" :multiple="true" :close-on-select="false" :clearText-on-select="false" :preserve-search="true" placeholder="Seçmek için dokun" label="language" track-by="extension" @tag="addTag" :preselect-first="false">
+  <div>
+    <multiselect style="width: 35%" v-model="value" :options="options" :multiple="true" :close-on-select="false" :clearText-on-select="false" :preserve-search="true" placeholder="Seçmek için dokun" label="language" track-by="extension" @tag="addTag" :preselect-first="false">
     <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="(values.length &amp;&amp; !isOpen)">{{ values.length }} tane seçili</span></template>
   </multiselect> <br>
   <div class="input-group mb-3" style="width: 35%" >
@@ -13,6 +14,7 @@
   <div class="input-group-append">
     <button class="btn btn-outline-secondary" type="button" @click="dataAdd">Ekle</button>
     <button class="btn btn-outline-secondary" type="button" @click="dataRemove" >Sil</button>
+  </div>
   </div>
 </div>
 </div>
