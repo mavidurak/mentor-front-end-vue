@@ -44,6 +44,26 @@ const routes = [
     component: () => import('../views/AxiosDemo.vue')
   },
   {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue')
+  },
+  {
+    path: '/changePassword',
+    name: 'ChangePassword',
+    component: () => import('../views/ChangePassword.vue')
+  },
+  {
+    path: '/changeNick',
+    name: 'ChangeNick',
+    component: () => import('../views/ChangeNick.vue')
+  },
+  {
+    path: '/changeEmail',
+    name: 'ChangeEmail',
+    component: () => import('../views/ChangeEmail.vue')
+  },
+  {
     path: '/forgotPassword',
     name: 'forgotPassword',
     component: () => import('../views/ForgotPassword.vue')
