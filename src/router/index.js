@@ -36,7 +36,7 @@ const routes = [
   {
     path: '/multiselect',
     name: 'multiselect',
-    component: () => import('../views/_multiselect.vue')
+    component: () => import('../views/Multiselect.vue')
   },
   {
     path: '/axios_demo',
