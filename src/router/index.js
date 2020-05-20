@@ -36,7 +36,7 @@ const routes = [
   {
     path: '/multiselect',
     name: 'multiselect',
-    component: () => import('../views/multiselect.vue')
+    component: () => import('../views/_multiselect.vue')
   },
   {
     path: '/axios_demo',
@@ -64,7 +64,7 @@ const routes = [
     component: () => import('../views/ChangeEmail.vue')
   },
   {
-    path: '/forgotPassword',
+    path: '/forgot_password',
     name: 'forgotPassword',
     component: () => import('../views/ForgotPassword.vue')
   }
