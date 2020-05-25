@@ -67,8 +67,18 @@ const routes = [
     path: '/forgotPassword',
     name: 'forgotPassword',
     component: () => import('../views/ForgotPassword.vue')
+  },
+  {
+    path: '/apiDashboard',
+    name: 'ApiDashboard',
+    component: () => import('../views/APIDashboard/Index.vue')
+  },
+  {
+    path: '/apiDashboard/addOrUpdate',
+    name: 'ApiAddOrUpdate',
+    component: () => import('../views/APIDashboard/AddOrUpdate.vue'),
+    props: true
   }
-
 ]
 
 const router = new VueRouter({

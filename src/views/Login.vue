@@ -67,15 +67,6 @@ export default {
     onSubmit: function () {
       console.log('Username : ' + this.username + ' Password : ' + this.password)
       VueCookies.set('Token', this.username)
-    },
-    switchLog: function () {
-      // switch the locale.
-      this.locale = this.locale === 'en' ? 'tr' : 'en'
-      // you could also import 'localize' and call it.
-      // localize('ar');
-
-      // re-validate to re-generate the messages.
-      this.$refs.form.validate()
     }
   }
 }
