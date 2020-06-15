@@ -7,7 +7,7 @@ export default {
       labels: ['Huawei', 'Oppo', 'Vestel', 'Xaomi', 'Blackberry', 'Honor', 'General-Mobile', 'Samsung', 'Iphone', 'Realme', 'Nokia'],
       datasets: [
         {
-          label: 'Telephone Sales',
+          label: 'Telefon Satışları',
           fill: false,
           data: [40, 20, 18, 39, 10, 40, 39, 80, 40, 20, 16], // veri girisi yapılır.
           borderColor: [

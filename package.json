@@ -7,18 +7,25 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "sass": "sass --watch src/styles/main.scss:public/styles.css"
+    "sass": "sass --watch src/styles/main.scss:public/styles.css",
+    "build-hooks": "cp -R hooks ./.git/ && chmod +x ./.git/hooks/pre-commit"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.4",
-    "vee-validate": "^3.2.5",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "vee-validate": "^3.3.3",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.5.0",
-    "vue-router": "^3.1.5"
+    "vue-cookies": "^1.7.0",
+    "vue-multiselect": "^2.1.6",
+    "vue-router": "^3.3.4"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-eslint": "~4.2.0",
     "@vue/cli-plugin-router": "~4.2.0",
@@ -28,13 +35,13 @@
     "@vue/test-utils": "1.0.0-beta.31",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.1.2",
-    "vue-template-compiler": "^2.6.11",
+    "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
-    "node-sass": "^4.13.1"
+    "vue-template-compiler": "^2.6.11"
   }
 }
