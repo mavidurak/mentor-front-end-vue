@@ -10,9 +10,9 @@
             <a href="#" id="spin-cog" class="rl cog-i" @click="gizleGoster('mySidenav')"><i class="fas fa-cog fa-3x closebtn mt-3"></i></a>
             <div id="mySidenav" class="sidenav mx-auto bg-dark d-flex">
               <div class="align-items-start px-3">
-                <router-link class="rl" to="/changeNick">Nick Değiştir</router-link>
-                <router-link class="rl" to="/changeEmail">Eposta Değiştir</router-link>
-                <router-link class="rl" to="/changePassword">Şifre Değiştir</router-link>
+                <router-link class="rl" to="/change_nick">Nick Değiştir</router-link>
+                <router-link class="rl" to="/change_email">Eposta Değiştir</router-link>
+                <router-link class="rl" to="/change_password">Şifre Değiştir</router-link>
                 <router-link class="rl" to="#">...</router-link>
               </div>
             </div>
