@@ -1,70 +1,68 @@
 <template>
   <div class="body">
     <div class="row">
-      <div class="col-lg-2">
-      </div>
-      <div class="col-lg-8">
-      <div class="border my-5 py-3 shadow-lg ">
-        <div class="row mx-auto">
-          <div class="col-lg-4">
-            <img src="../assets/ppic.png" class="rounded img-fluid px-2" alt="...">
-          </div>
-          <div class="col-lg-8 px-5">
-            <div class="row" >
-              <a href="#" id="spin-cog" class="rl cog-i" @click="gizleGoster('mySidenav')"><i class="fas fa-cog fa-3x closebtn mt-3"></i></a>
-              <div id="mySidenav" class="sidenav mx-auto bg-dark d-flex">
-                <div class="align-items-start px-3">
-                  <router-link class="rl" to="/change_nick">Nick Değiştir</router-link>
-                  <router-link class="rl" to="/change_email">Eposta Değiştir</router-link>
-                  <router-link class="rl" to="/change_password">Şifre Değiştir</router-link>
-                  <router-link class="rl" to="#">...</router-link>
+      <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+          <div class="border my-5 py-3 shadow-lg ">
+            <div class="row mx-auto">
+              <div class="col-lg-4">
+                <img src="../assets/ppic.png" class="rounded img-fluid px-2" alt="...">
+              </div>
+              <div class="col-lg-8 px-5">
+                <div class="row" >
+                  <a href="#" id="spin-cog" class="rl cog-i" @click="gizleGoster('mySidenav')"><i class="fas fa-cog fa-3x closebtn mt-3"></i></a>
+                  <div id="mySidenav" class="sidenav mx-auto bg-dark d-flex">
+                    <div class="align-items-start px-3">
+                      <router-link class="rl" to="/change-nick">Nick Değiştir</router-link>
+                      <router-link class="rl" to="/change-email">Eposta Değiştir</router-link>
+                      <router-link class="rl" to="/change-password">Şifre Değiştir</router-link>
+                      <router-link class="rl" to="#">...</router-link>
+                    </div>
+                  </div>
+                </div>
+                <div class="row border-bottom pt-3">
+                  <div class="col-lg-6 pb-1">
+                    <h3>Ad Soyad:</h3>
+                  </div>
+                  <div class="col-lg-6">
+                     <h3>Mert Can Yılmaz</h3>
+                  </div>
+                </div>
+                <div class="row border-bottom pt-3">
+                  <div class="col-lg-6">
+                     <h3>Üyelik Durumu:</h3>
+                  </div>
+                  <div class="col-lg-6">
+                     <h3>MaviDurak-IO Üyesi</h3>
+                  </div>
+                </div>
+                <div class="row border-bottom pt-3">
+                  <div class="col-lg-6">
+                     <h3>Telefon Numarası:</h3>
+                  </div>
+                  <div class="col-lg-6">
+                     <h3>*** *** 13 42</h3>
+                  </div>
+                </div>
+                <div class="row pt-3">
+                  <div class="col-lg-6">
+                     <h3 id="3">Eposta:</h3>
+                  </div>
+                  <div class="col-lg-6 text-break">
+                     <h3>xxxyyyzzz@hotmail.com</h3>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="row border-bottom pt-3">
-              <div class="col-lg-6 pb-1">
-                <h3>Ad Soyad:</h3>
-              </div>
-              <div class="col-lg-6">
-                 <h3>Mert Can Yılmaz</h3>
-              </div>
-            </div>
-            <div class="row border-bottom pt-3">
-              <div class="col-lg-6">
-                 <h3>Üyelik Durumu:</h3>
-              </div>
-              <div class="col-lg-6">
-                 <h3>MaviDurak-IO Üyesi</h3>
-              </div>
-            </div>
-            <div class="row border-bottom pt-3">
-              <div class="col-lg-6">
-                 <h3>Telefon Numarası:</h3>
-              </div>
-              <div class="col-lg-6">
-                 <h3>*** *** 13 42</h3>
-              </div>
-            </div>
-            <div class="row pt-3">
-              <div class="col-lg-6">
-                 <h3 id="3">Eposta:</h3>
-              </div>
-              <div class="col-lg-6 text-break">
-                 <h3>xxxyyyzzz@hotmail.com</h3>
-              </div>
-            </div>
           </div>
+            <div class="border my-5 py-3 shadow-lg " id="imf">
+              Grafik alanı
+            </div>
+            <div class="border my-5 py-3 shadow-lg " id="imf">
+              Grafik eklenecek
+            </div>
         </div>
-      </div>
-      <div class="border my-5 py-3 shadow-lg " id="imf">
-        Grafik alanı
-      </div>
-      <div class="border my-5 py-3 shadow-lg " id="imf">
-        Grafik eklenecek
-      </div>
-    </div>
-    </div>
-    <div class="col-lg-2">
+      <div class="col-lg-2"></div>
     </div>
   </div>
 </template>

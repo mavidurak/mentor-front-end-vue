@@ -21,10 +21,10 @@
             <router-link class="nav-link" to="/login">Login</router-link>
           </li>
            <li class="nav-item">
-            <router-link class="nav-link" to="/multi_select">MultiSelect</router-link>
+            <router-link class="nav-link" to="/multi-select">MultiSelect</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/axios_demo">Axios Demo</router-link>
+            <router-link class="nav-link" to="/axios-demo">Axios Demo</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/profile">Profil</router-link>

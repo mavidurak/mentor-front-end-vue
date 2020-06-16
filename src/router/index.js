@@ -34,12 +34,12 @@ const routes = [
     component: () => import('../views/Signup.vue')
   },
   {
-    path: '/multi_select',
+    path: '/multi-select',
     name: 'multiselect',
     component: () => import('../views/multiselect.vue')
   },
   {
-    path: '/axios_demo',
+    path: '/axios-demo',
     name: 'AxiosDemo',
     component: () => import('../views/AxiosDemo.vue')
   },
@@ -49,22 +49,22 @@ const routes = [
     component: () => import('../views/Profile.vue')
   },
   {
-    path: '/change_password',
+    path: '/change-password',
     name: 'ChangePassword',
     component: () => import('../views/ChangePassword.vue')
   },
   {
-    path: '/change_nick',
+    path: '/change-nick',
     name: 'ChangeNick',
     component: () => import('../views/ChangeNick.vue')
   },
   {
-    path: '/change_email',
+    path: '/change-email',
     name: 'ChangeEmail',
     component: () => import('../views/ChangeEmail.vue')
   },
   {
-    path: '/forgot_password',
+    path: '/forgot-password',
     name: 'forgotPassword',
     component: () => import('../views/ForgotPassword.vue')
   }
