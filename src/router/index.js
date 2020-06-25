@@ -67,6 +67,16 @@ const routes = [
     path: '/forgot-password',
     name: 'forgotPassword',
     component: () => import('../views/ForgotPassword.vue')
+  },
+  {
+    path: '/api-dashboard-vmc',
+    name: 'ApiDashboardVMC',
+    component: () => import('../views/APIDashboardVMC/Index.vue')
+  },
+  {
+    path: '/api-dashboard-vmc/add-or-update',
+    name: 'ApiAddOrUpdateMC',
+    component: () => import('../views/APIDashboardVMC/AddOrUpdate.vue')
   }
 
 ]

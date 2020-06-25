@@ -1,8 +1,8 @@
 <template>
   <div class="body">
+    <div class="container">
     <div class="row">
-      <div class="col-lg-2"></div>
-        <div class="col-lg-8">
+        <div class="col-lg-12">
           <div class="border my-5 py-3 shadow-lg ">
             <div class="row mx-auto">
               <div class="col-lg-4">
@@ -62,8 +62,8 @@
               Grafik eklenecek
             </div>
         </div>
-      <div class="col-lg-2"></div>
     </div>
+  </div>
   </div>
 </template>
 
