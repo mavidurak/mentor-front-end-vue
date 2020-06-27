@@ -1,8 +1,9 @@
 <template>
   <div>
+  <div class="container">
     <div class="row text-center">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
+      <div class="col-md-2"></div>
+      <div class="col-md-6">
         <h6>Change Email Page</h6>
         <ValidationObserver ref="form" v-slot="{ invalid }">
         <form v-show="emailChangerStatus" class="text-left" @submit.prevent="onSubmit()">
@@ -92,8 +93,9 @@
           </div>
         <div id="success"></div>
       </div>
-      <div class="col-md-4"></div>
+      <div class="col-md-2"></div>
     </div>
+  </div>
   </div>
 </template>
 

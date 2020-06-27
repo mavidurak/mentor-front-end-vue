@@ -33,6 +33,7 @@
             </tr>
           </tbody>
         </table>
+            <datatable v-bind="$data" />
       </div>
     </div>
         <router-view/>
@@ -51,7 +52,21 @@ export default {
         { id: 3, name: 'app3', description: 'app3-desc' },
         { id: 4, name: 'app4', description: 'app4-desc' },
         { id: 5, name: 'app5', description: 'app5-desc' }
-      ]
+      ],
+      columns: [
+        { title: 'User ID', field: 'uid', sortable: true },
+        { title: 'Username', field: 'name' },
+        { title: 'Age', field: 'age', sortable: true },
+        { title: 'Email', field: 'email' },
+        { title: 'Country', field: 'country' }
+      ],
+      data: [
+        { uid: 1, name: 'app1', age: 23, email: 'eml', country: 'tr' },
+        { uid: 2, name: 'app1', age: 25, email: 'eml2', country: 'tr' },
+        { uid: 3, name: 'app1', age: 20, email: 'em3', country: 'tr' }
+      ],
+      total: 3,
+      query: {}
     }
   }
 }

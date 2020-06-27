@@ -1,5 +1,6 @@
 <template>
   <div>
+  <div class="container">
     <div class="row text-center">
       <div class="col-md-4"></div>
       <div class="col-md-4">
@@ -56,6 +57,7 @@
       </div>
       <div class="col-md-4"></div>
     </div>
+  </div>
   </div>
 </template>
 
