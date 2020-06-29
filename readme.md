@@ -3,6 +3,7 @@
 ## Project setup
 ```
 yarn install
+npm run build-hooks
 ```
 
 ### Compiles and hot-reloads for development

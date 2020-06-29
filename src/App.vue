@@ -19,25 +19,15 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/login">Login</router-link>
+          </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/axios_demo">Axios Demo</router-link>
+            <router-link class="nav-link" to="/axios-demo">Axios Demo</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/profile">Profil</router-link>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-            </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-          </li>
           <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            <router-link class="nav-link" to="/api-dashboard-vmc">Apı Dashboard MC</router-link>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

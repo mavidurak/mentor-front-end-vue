@@ -34,12 +34,12 @@ const routes = [
     component: () => import('../views/Signup.vue')
   },
   {
-    path: '/multiselect',
-    name: 'Multiselect',
-    component: () => import('../views/Multiselect.vue')
+    path: '/multi-select',
+    name: 'multiselect',
+    component: () => import('../views/multiselect.vue')
   },
   {
-    path: '/axios_demo',
+    path: '/axios-demo',
     name: 'AxiosDemo',
     component: () => import('../views/AxiosDemo.vue')
   },
@@ -49,17 +49,17 @@ const routes = [
     component: () => import('../views/Profile.vue')
   },
   {
-    path: '/changePassword',
+    path: '/change-password',
     name: 'ChangePassword',
     component: () => import('../views/ChangePassword.vue')
   },
   {
-    path: '/changeNick',
+    path: '/change-nick',
     name: 'ChangeNick',
     component: () => import('../views/ChangeNick.vue')
   },
   {
-    path: '/changeEmail',
+    path: '/change-email',
     name: 'ChangeEmail',
     component: () => import('../views/ChangeEmail.vue')
   },
@@ -67,8 +67,17 @@ const routes = [
     path: '/forgot-password',
     name: 'ForgotPassword',
     component: () => import('../views/ForgotPassword.vue')
+  },
+  {
+    path: '/api-dashboard-vmc',
+    name: 'ApiDashboardVMC',
+    component: () => import('../views/APIDashboardVMC/Index.vue')
+  },
+  {
+    path: '/api-dashboard-vmc/add-or-update',
+    name: 'ApiAddOrUpdateMC',
+    component: () => import('../views/APIDashboardVMC/AddOrUpdate.vue')
   }
-
 ]
 
 const router = new VueRouter({
