@@ -72,4 +72,4 @@ export default {
 }
 </script>
 
-<style src="../../node_modules/vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style src="../../../node_modules/vue-multiselect/dist/vue-multiselect.min.css"></style>

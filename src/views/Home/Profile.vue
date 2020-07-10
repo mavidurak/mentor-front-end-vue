@@ -1,12 +1,14 @@
 <template>
-  <div class="body">
+  <div>
+    <Navbar/>
+    <div class="body">
     <div class="container">
     <div class="row">
         <div class="col-lg-12">
           <div class="border my-5 py-3 shadow-lg ">
             <div class="row mx-auto">
               <div class="col-lg-4">
-                <img src="../assets/ppic.png" class="rounded img-fluid px-2" alt="...">
+                <img src="../../assets/ppic.png" class="rounded img-fluid px-2" alt="...">
               </div>
               <div class="col-lg-8 px-5">
                 <div class="row" >
@@ -63,13 +65,20 @@
             </div>
         </div>
     </div>
+    </div>
   </div>
+
   </div>
 </template>
 
 <script>
+import Navbar from '../Home/Navbar'
+
 export default {
-  // define methods under the `methods` object
+  components: {
+    Navbar
+  },
+
   methods: {
     gizleGoster (ID) {
       var secilenID = document.getElementById(ID)

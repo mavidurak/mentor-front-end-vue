@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/Home/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -10,7 +10,7 @@ const routes = [
     redirect: '/login'
   },
   {
-    path: '/Home',
+    path: '/home',
     name: 'Home',
     component: Home
   },
@@ -20,53 +20,53 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Guests/About.vue')
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue')
+    component: () => import('../views/Guests/Login.vue')
   },
   {
     path: '/signup',
     name: 'Signup',
 
-    component: () => import('../views/Signup.vue')
+    component: () => import('../views/Guests/Signup.vue')
   },
   {
     path: '/multi-select',
     name: 'multiselect',
-    component: () => import('../views/Multiselect.vue')
+    component: () => import('../views/Home/Multiselect.vue')
   },
   {
     path: '/axios-demo',
     name: 'AxiosDemo',
-    component: () => import('../views/AxiosDemo.vue')
+    component: () => import('../views/Home/AxiosDemo.vue')
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: () => import('../views/Profile.vue')
+    component: () => import('../views/Home/Profile.vue')
   },
   {
     path: '/change-password',
     name: 'ChangePassword',
-    component: () => import('../views/ChangePassword.vue')
+    component: () => import('../views/Home/ChangePassword.vue')
   },
   {
     path: '/change-nick',
     name: 'ChangeNick',
-    component: () => import('../views/ChangeNick.vue')
+    component: () => import('../views/Home/ChangeNick.vue')
   },
   {
     path: '/change-email',
     name: 'ChangeEmail',
-    component: () => import('../views/ChangeEmail.vue')
+    component: () => import('../views/Home/ChangeEmail.vue')
   },
   {
     path: '/forgot-password',
     name: 'ForgotPassword',
-    component: () => import('../views/ForgotPassword.vue')
+    component: () => import('../views/Guests/ForgotPassword.vue')
   },
   {
     path: '/api-dashboard-vmc',
