@@ -1,19 +1,23 @@
 <template>
 <div class="container">
 <div class="row">
-  <div class="col-sm"></div>
-  <div class="col-sm">
-    <form v-show="!isReset" @submit.prevent="onSubmit()">
-      <br>
-      <div class="alert alert-warning" role="alert">
-        <h3><strong>Forgot Password?</strong></h3><hr>
-        <h6>Don't worry.Reseting your password is easy.Just tell us the mail address you registered.Then check your mailbox.</h6>
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6">
+     <div class="text-center">
+                  <img src="../../assets/mavidurak-io-logo.png" class="rounded" id="logo" alt="Mavidurak-io Logo">
+        </div>
+    <div class="card">
+      <div class="card-body">
+        <form v-show="!isReset" @submit.prevent="onSubmit()">
+          <div class="text-center">
+            <h4>Şifre Sıfırlama</h4>
+          </div>
+      <div>
+        <label for="mail">Email</label>
+        <input type="email" required v-model="mail" id="mail" class="form-control">
       </div>
       <div>
-        <input type="email" required v-model="mail" class="form-control" placeholder="Your Email Address">
-      </div>
-      <div>
-        <br><button type="submit" class="btn btn-success">Reset Password</button>
+        <br><button type="submit" class="btn btn-success float-right">Sıfırla</button>
       </div>
     </form>
     <div v-show="isReset">
@@ -23,7 +27,7 @@
           <tr><th colspan="3"><h3>Successfull</h3><hr></th></tr>
           <tr>
             <td>
-              <img src="../assets/success.svg" alt="success" style="margin: 10px; width: 90px; heigth: 90px;">
+              <img src="../../assets/success.svg" alt="success" style="margin: 10px; width: 90px; heigth: 90px;">
             </td>
             <td>
               <h5>An email has been sent to "<b>{{mail}}</b>".</h5>
@@ -40,7 +44,7 @@
           <tr><th colspan="3"><h3>Error</h3><hr></th></tr>
           <tr>
             <td>
-              <img src="../assets/error.svg" alt="error" style="margin: 10px; width: 90px; heigth: 90px;">
+              <img src="../../assets/error.svg" alt="error" style="margin: 10px; width: 90px; heigth: 90px;">
             </td>
             <td>
               <h5>We are sorry."<b>{{mail}}</b>" is incorrect or the account does not exist.Please enter correct mail address</h5>
@@ -50,9 +54,10 @@
       </div>
       <button @click="tryAgain()" class="btn btn-success">Try Again</button>
     </div>
-
+      </div>
+    </div>
   </div>
- <div class="col-sm"></div>
+ <div class="col-sm-3"></div>
 </div>
 </div>
 </template>
@@ -89,6 +94,8 @@ export default {
       this.mail = ''
       // more code
     }
+  },
+  created: () => {
   }
 }
 </script>

@@ -58,7 +58,7 @@
                 <tr><th colspan="3"><h3>Successfull</h3><hr></th></tr>
                 <tr>
                   <td>
-                    <img src="../assets/success.svg" alt="success" style="margin: 10px; width: 90px; heigth: 90px;">
+                    <img src="../../assets/success.svg" alt="success" style="margin: 10px; width: 90px; heigth: 90px;">
                   </td>
                   <td>
                     <h5>Email guncellemesi başarılı..</h5>
@@ -75,7 +75,7 @@
                 <tr><th colspan="3"><h3>Code invalid</h3><hr></th></tr>
                 <tr>
                   <td>
-                    <img src="../assets/error.svg" alt="error" style="margin: 10px; width: 90px; heigth: 90px;">
+                    <img src="../../assets/error.svg" alt="error" style="margin: 10px; width: 90px; heigth: 90px;">
                   </td>
                   <td>
                     <h5>Kod hatalı</h5>
