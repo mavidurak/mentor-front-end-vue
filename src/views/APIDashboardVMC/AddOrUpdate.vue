@@ -1,5 +1,7 @@
 <template>
-  <div class="container mt-5">
+  <div>
+    <Navbar/>
+    <div class="container mt-5">
     <div class="card">
       <div class="card-body">
         <h5 v-if="app.id == 0" class="card-title">Api Oluştur</h5>
@@ -43,12 +45,19 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
+import Navbar from '../Home/Navbar'
 
 export default {
   name: 'ApiAppAddOrUpdate',
+
+  components: {
+    Navbar
+  },
+
   data: () => {
     return {
       app: {

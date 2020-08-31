@@ -1,11 +1,16 @@
 <template>
   <div>
     <div class="row text-center">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <h6>Login Page</h6>
-                  <ValidationObserver ref="form" v-slot="{ invalid }">
-        <form class="text-left" @submit.prevent="onSubmit()">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        <div class="text-center">
+                  <img src="../../assets/mavidurak-io-logo.png" class="rounded" id="logo" alt="Mavidurak-io Logo">
+        </div>
+        <ValidationObserver ref="form" v-slot="{ invalid }">
+          <div class="card">
+            <div class="card-body">
+              <h4>Giriş</h4>
+              <form class="text-left" @submit.prevent="onSubmit()">
           <div class="form-group">
             <label for="inputUsername">Kullanıcı Adı : </label>
              <validation-provider name="username" rules="required" v-slot="{ errors }">
@@ -14,8 +19,8 @@
               class="form-control"
               id="inputUsername"
               v-model="username"
-              placeholder="Kullanıcı adı girinz"
-            /> <span>{{ errors[0] }}</span>
+              autocomplete="off"
+            /> <span class="text-danger">{{ errors[0] }}</span>
             </validation-provider>
           </div>
           <div class="form-group">
@@ -26,23 +31,26 @@
               class="form-control"
               id="inputPassword"
               v-model="password"
-              placeholder="Şifre giriniz"
-            /> <span>{{ errors[0] }}</span>
+            /> <span class="text-danger">{{ errors[0] }}</span>
             </validation-provider>
-            <router-link to="/forgot-password">Forgot your password?</router-link>
+            <router-link to="/forgot-password" class="d-block">Forgot your password?</router-link>
           </div>
          <button
             type="submit"
             name="submitButton"
             id="submitButton"
-            class="btn btn-success"
+            class="btn btn-success float-right"
             :disabled="invalid"
-          >Kaydol</button>
-
+          >Giriş</button>
+           <router-link to="/signup">
+            <button class="btn btn-outline-primary float-right mr-2">Kayıt Ol</button>
+          </router-link>
         </form>
+            </div>
+          </div>
         </ValidationObserver>
       </div>
-      <div class="col-md-4"></div>
+      <div class="col-sm-3"></div>
     </div>
   </div>
 </template>
@@ -50,6 +58,7 @@
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import VueCookies from 'vue-cookies'
+import router from '../../router'
 
 export default {
   name: 'Login',
@@ -67,7 +76,23 @@ export default {
     onSubmit: function () {
       console.log('Username : ' + this.username + ' Password : ' + this.password)
       VueCookies.set('Token', this.username)
+
+      router.push('/home')
     }
+  },
+
+  created: () => {
+    document.body.className = 'login-home'
   }
 }
 </script>
+
+<style>
+.login-home {
+  height: 100vh;
+  background-color: #eee;
+}
+#logo {
+  max-width: 150px;
+}
+</style>

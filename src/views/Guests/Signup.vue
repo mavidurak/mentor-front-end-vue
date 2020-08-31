@@ -1,11 +1,16 @@
 <template>
   <div>
     <div class="row text-center">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <h6>Signup Page</h6>
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="text-center">
+                  <img src="../../assets/mavidurak-io-logo.png" class="rounded" id="logo" alt="Mavidurak-io Logo">
+        </div>
           <ValidationObserver ref="form" v-slot="{ invalid }">
-        <form class="text-left" @submit.prevent="onSubmit()">
+            <div class="card">
+              <div class="card-body">
+                <h4>Kaydol</h4>
+                <form class="text-left" @submit.prevent="onSubmit()">
           <div class="form-group">
             <label for="inputMail">E-Mail :</label>
             <validation-provider name="email" rules="required|email" v-slot="{ errors }">
@@ -52,10 +57,16 @@
             class="btn btn-success float-right"
             :disabled="invalid"
           >Kaydol</button>
-        </form>  </ValidationObserver>
+          <router-link to="/login">
+            <button class="btn btn-outline-primary float-right mr-2">Giriş yap</button>
+          </router-link>
+        </form>
+              </div>
+            </div>
+         </ValidationObserver>
 
       </div>
-      <div class="col-md-4"></div>
+      <div class="col-md-3"></div>
     </div>
   </div>
 </template>
