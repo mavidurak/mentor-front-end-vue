@@ -30,7 +30,7 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <router-link class="nav-link" to="login">
-              Çıkış
+              <span v-on:click="logout()">Çıkış</span>
             </router-link>
           </li>
         </ul>
@@ -46,7 +46,7 @@ export default {
   methods: {
     logout () {
       // TODO: şuanda cookie silinemiyor. ilgilenilecek
-      this.$cookies.remove('Token')
+      window.localStorage.removeItem('X-AccessToken')
       router.push('/login')
     }
   }
