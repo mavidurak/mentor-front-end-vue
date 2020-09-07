@@ -16,7 +16,7 @@ var myMixin = {
       console.log('Token not Null')
       axios
         .get(
-          'http://localhost:4000/authentications/me/',
+          '/authentications/me/',
           {
             headers: {
               'X-AccessToken': localStorage.getItem('X-AccessToken')
@@ -30,13 +30,13 @@ var myMixin = {
           }
         }).catch(err => {
           if (err.response.status === 401) {
-            this.$router.push('Login')
+            this.$router.push('login')
             console.log('Token Validation Failed')
           }
         })
     } else {
       console.log('Token Null')
-      this.$router.push('Login')
+      this.$router.push('login')
     }
   }
 }
