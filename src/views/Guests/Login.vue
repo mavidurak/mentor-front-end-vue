@@ -35,16 +35,19 @@
             </validation-provider>
             <router-link to="/forgot-password" class="d-block">Forgot your password?</router-link>
           </div>
-         <button
-            type="submit"
-            name="submitButton"
-            id="submitButton"
-            class="btn btn-success float-right"
-            :disabled="invalid"
-          >Giriş</button>
-           <router-link to="/signup">
-            <button class="btn btn-outline-primary float-right mr-2">Kayıt Ol</button>
-          </router-link>
+          <div class="row justify-content-between mx-1">
+            <router-link to="/signup">
+              <button class="btn btn-outline-primary">Kaydol</button>
+            </router-link>
+            <div class="block"><i id="info" class=""></i></div>
+            <button
+              type="submit"
+              name="submitButton"
+              id="submitButton"
+              class="btn btn-success"
+              :disabled="invalid"
+            >Giriş</button>
+          </div>
         </form>
             </div>
           </div>
@@ -57,8 +60,7 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
-import VueCookies from 'vue-cookies'
-import router from '../../router'
+import axios from 'axios'
 
 export default {
   name: 'Login',
@@ -74,10 +76,26 @@ export default {
   },
   methods: {
     onSubmit: function () {
-      console.log('Username : ' + this.username + ' Password : ' + this.password)
-      VueCookies.set('Token', this.username)
-
-      router.push('/home')
+      axios
+        .post(
+          'http://localhost:4000/authentications/login/',
+          {
+            username: this.username,
+            password: this.password
+          }
+        ).then(respose => {
+          if (respose.status === 200) {
+            localStorage.setItem('X-AccessToken', respose.data.token.token_value)
+            console.log(respose.data)
+            document.getElementById('info').className = 'fas fa-check fa-2x text-success'
+            location.assign('/home')
+          }
+        }).catch(err => {
+          if (err.response.status === 400) {
+            console.log('User informations Validation Failed')
+            document.getElementById('info').className = 'fas fa-times fa-2x text-danger'
+          }
+        })
     }
   },
 
