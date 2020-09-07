@@ -16,6 +16,7 @@
     "core-js": "^3.6.4",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
+    "sweetalert": "^2.1.2",
     "vee-validate": "^3.2.5",
     "vue": "^2.6.11",
     "vue-cookies": "^1.7.0",
