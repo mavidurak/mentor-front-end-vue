@@ -5,7 +5,7 @@
       <div class="col-sm-6">
         <div class="text-center">
           <img
-            src="../../assets/mavidurak-io-logo.png"
+            src="@/assets/mavidurak-io-logo.png"
             class="rounded"
             id="logo"
             alt="MaviDurak-IO Logo"
@@ -14,10 +14,10 @@
         <ValidationObserver ref="form" v-slot="{ invalid }">
           <div class="card">
             <div class="card-body">
-              <h4>Giriş</h4>
+              <h4>Sign In</h4>
               <form class="text-left" @submit.prevent="onSubmit()">
                 <div class="form-group">
-                  <label for="inputUsername">Kullanıcı Adı :</label>
+                  <label for="inputUsername">Username:</label>
                   <validation-provider name="username" rules="required" v-slot="{ errors }">
                     <input
                       type="text"
@@ -30,7 +30,7 @@
                   </validation-provider>
                 </div>
                 <div class="form-group">
-                  <label for="inputPassword">Password</label>
+                  <label for="inputPassword">Password:</label>
                   <validation-provider name="password" rules="required" v-slot="{ errors }">
                     <input
                       type="password"
@@ -44,7 +44,7 @@
                 </div>
                 <div class="row justify-content-between mx-1">
                   <router-link to="/signup">
-                    <button type="button" class="btn btn-outline-primary">Kaydol</button>
+                    <button type="button" class="btn btn-light">Sign up</button>
                   </router-link>
                   <div class="block">
                     <i id="info" v-bind:class="statusClass"></i>
@@ -55,7 +55,7 @@
                     id="submitButton"
                     class="btn btn-success"
                     :disabled="invalid"
-                  >Giriş</button>
+                  >Sign In</button>
                 </div>
               </form>
             </div>
