@@ -24,34 +24,26 @@
                 </div>
                 <div class="row border-bottom pt-3">
                   <div class="col-lg-6 pb-1">
-                    <h3>Ad Soyad:</h3>
+                    <h3>Username:</h3>
                   </div>
                   <div class="col-lg-6">
-                     <h3>Mert Can Yılmaz</h3>
+                     <h3>{{username}}</h3>
                   </div>
                 </div>
                 <div class="row border-bottom pt-3">
                   <div class="col-lg-6">
-                     <h3>Üyelik Durumu:</h3>
+                     <h3>Name Surname:</h3>
                   </div>
                   <div class="col-lg-6">
-                     <h3>MaviDurak-IO Üyesi</h3>
+                     <h3>{{name}}</h3>
                   </div>
                 </div>
                 <div class="row border-bottom pt-3">
                   <div class="col-lg-6">
-                     <h3>Telefon Numarası:</h3>
+                     <h3>Email:</h3>
                   </div>
                   <div class="col-lg-6">
-                     <h3>*** *** 13 42</h3>
-                  </div>
-                </div>
-                <div class="row pt-3">
-                  <div class="col-lg-6">
-                     <h3 id="3">Eposta:</h3>
-                  </div>
-                  <div class="col-lg-6 text-break">
-                     <h3>xxxyyyzzz@hotmail.com</h3>
+                     <h3>{{email}}</h3>
                   </div>
                 </div>
               </div>
@@ -73,12 +65,38 @@
 
 <script>
 import Navbar from '../Home/Navbar'
+import axios from 'axios'
 
 export default {
   components: {
     Navbar
   },
+  data () {
+    return {
+      username: '',
+      name: '',
+      email: ''
 
+    }
+  },
+  created () {
+    axios
+      .get(
+        '/authentications/me/',
+        {
+          headers: {
+            'X-AccessToken': localStorage.getItem('X-AccessToken')
+          }
+        }
+      )
+      .then(response => {
+        if (response.status === 200) {
+          this.username = response.data.username
+          this.name = response.data.name
+          this.email = response.data.email
+        }
+      })
+  },
   methods: {
     gizleGoster (ID) {
       var secilenID = document.getElementById(ID)
@@ -103,6 +121,7 @@ export default {
   }
  .row{
   font-family:monospace;
+  font-size: 20px;
   }
 
 .sidenav {
@@ -121,7 +140,7 @@ export default {
 .rl {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 20px;
   color: #818181;
   display: block;
   transition: 0.3s;
