@@ -125,28 +125,28 @@ export default {
         password: this.password,
         email: this.email,
         name: this.name
-      }).then((respose) => {
-        console.log(respose)
-        if (respose.status === 201) {
-          localStorage.setItem('X-AccessToken', respose.data.token.token_value)
-          swal({
-            title: 'Thank you ' + this.name + '.Your acount has been succesfully created.',
-            text: 'Please check your mailbox.We send a information mail ...',
-            icon: 'success'
-          }).then(isOk => {
-            location.assign('/')
-          })
-        }
-      }).catch((err) => {
-        if (err.response.status === 400) {
-          const errorText = err.response.data.error
-          swal({
-            title: 'Error!',
-            text: errorText,
-            icon: 'error'
-          })
-        }
       })
+        .then((respose) => {
+          if (respose.status === 201) {
+            swal({
+              title: `Thank you ${this.name}.Your acount has been succesfully created.`,
+              text: 'Please check your mailbox.We send a information mail ...',
+              icon: 'success'
+            }).then((isOk) => {
+              this.$router.push('login')
+            })
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            const errorText = err.response.data.error
+            swal({
+              title: 'Error!',
+              text: errorText,
+              icon: 'error'
+            })
+          }
+        })
     }
   }
 }

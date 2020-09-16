@@ -19,16 +19,27 @@
                 <div class="alert alert-warning" role="alert">
                   Don't worry, please enter your mail address.
                   We will send the password reset instructions to the email address for this account.
-                  <br><br>
-                  If you don't know the your email address is no longer valid, please <a href="#" class="alert-link">Contact Us</a>  for further assistance.
+                  <br />
+                  <br />If you don't know the your email address is no longer valid, please
+                  <a
+                    href="#"
+                    class="alert-link"
+                  >Contact Us</a> for further assistance.
                 </div>
               </div>
               <div>
                 <label for="mail">Email Adress</label>
-                <input type="email" required v-model="mail" id="mail" class="form-control" placeholder="e.g. name@domain.com"/>
+                <input
+                  type="email"
+                  required
+                  v-model="mail"
+                  id="mail"
+                  class="form-control"
+                  placeholder="e.g. name@domain.com"
+                />
               </div>
               <div>
-                <br/>
+                <br />
                 <button type="submit" class="btn btn-success float-right">Reset password</button>
               </div>
             </form>
@@ -107,33 +118,7 @@ export default {
       isReset: false
     }
   },
-  methods: {
-    onSubmit: function () {
-      // isMailCorrect = true => continue
-      this.successReset()
-      this.resetError()
-      this.isReset = true
-    },
-    randomPassword: function () {
-      this.password =
-        Math.random().toString(36).slice(2) +
-        Math.random().toString(36).slice(2)
-    },
-    successReset: function () {
-      this.randomPassword()
-      console.log('mail: ' + this.mail + ' new password: ' + this.password)
-      // more code
-    },
-    resetError: function () {
-      this.isReset = false
-      // more code
-    },
-    tryAgain: function () {
-      this.isReset = false
-      this.mail = ''
-      // more code
-    }
-  },
+  methods: {},
   created: () => {}
 }
 </script>

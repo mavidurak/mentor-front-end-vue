@@ -70,6 +70,7 @@
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import axios from 'axios'
+import swal from 'sweetalert'
 
 export default {
   name: 'Login',
@@ -105,6 +106,14 @@ export default {
         .catch((err) => {
           if (err.response.status === 400) {
             this.statusClass = 'fas fa-times fa-2x text-danger'
+          }
+          if (err.response.status === 401) {
+            // confirm edilmediyse hangi status dönecek??
+            swal({
+              title: 'Confirm Your Account!',
+              text: err.response.data.message,
+              icon: 'error'
+            })
           }
         })
     }
