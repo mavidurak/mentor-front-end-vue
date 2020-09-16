@@ -10,6 +10,9 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 import axios from 'axios'
 import Notifications from 'vue-notification'
+import Gravatar from 'vue-gravatar'
+
+Vue.component('v-gravatar', Gravatar)
 
 var myMixin = {
   created () {

@@ -8,7 +8,7 @@
           <div class="border my-5 py-3 shadow-lg ">
             <div class="row mx-auto">
               <div class="col-lg-4">
-                <img src="../../assets/ppic.png" class="rounded img-fluid px-2" alt="...">
+                <v-gravatar :email="email" size="500" class="rounded img-fluid px-2" />
               </div>
               <div class="col-lg-8 px-5">
                 <div class="row" >
