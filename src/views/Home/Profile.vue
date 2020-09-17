@@ -13,10 +13,10 @@
       />-->
       <div class="container">
         <div class="row">
-          <div class="col-lg-12">
+          <div class="col-12">
             <div class="my-2">
               <div class="row">
-                <div class="col-md-6 px-5">
+                <div class="col-lg-6 px-5">
                   <div class="row">
                     <div class="col-md-12 text-center">
                       <v-gravatar :email="email" :size="200" class=" rounded img-fluid border shadow-lg rounded-circle border-dark" />
@@ -24,52 +24,56 @@
                   </div>
                   <div class="border rounded bg-light border-dark shadow-lg mt-2 px-3">
                   <div class="row border-bottom ">
-                    <div class="col-lg-4">
+                    <div class="col-4">
                       <h5>Username:</h5>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-6">
                       <h5>{{username}}</h5>
                     </div>
-                    <div class="col-md-2 text-right" style="font-size:15px;">
+                    <div class="col-2 text-right" style="font-size:15px;">
                       <router-link to="/change-password"><i class="far fa-edit fa-2x"></i></router-link>
                     </div>
                   </div>
                   <div class="row border-bottom">
-                    <div class="col-lg-4">
+                    <div class="col-4">
                       <h5>Name Surname:</h5>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-6">
                       <h5>{{name}}</h5>
                     </div>
-                    <div class="col-md-2 text-right" style="font-size:15px;">
+                    <div class="col-2 text-right" style="font-size:15px;">
                       <router-link to="/change-password"><i class="far fa-edit fa-2x"></i></router-link>
                     </div>
                   </div>
                   <div class="row border-bottom ">
-                    <div class="col-lg-4">
+                    <div class="col-4">
                       <h5>Email:</h5>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-6 overflow-hidden">
                       <h5>{{email}}</h5>
                     </div>
-                    <div class="col-md-2 text-right" style="font-size:15px;">
+                    <div class="col-2 text-right" style="font-size:15px;">
                       <router-link to="/change-password"><i class="far fa-edit fa-2x"></i></router-link>
                     </div>
                   </div>
                   <div class="row border-bottom ">
-                    <div class="col-lg-4">
+                    <div class="col-4">
                       <h5>Password:</h5>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-6">
                       <h5>******</h5>
                     </div>
-                    <div class="col-md-2 text-right" style="font-size:15px;">
+                    <div class="col-2 text-right" style="font-size:15px;">
                       <router-link to="/change-password"><i class="far fa-edit fa-2x"></i></router-link>
                     </div>
                   </div>
                   </div>
                 </div>
-                <div class="col-md-5 border shadow-lg bg-light"></div>
+                <div class="col-lg-6">
+                  <div class="border shadow-lg bg-light border-dark rounded">
+                   <line-chart ></line-chart>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -82,10 +86,12 @@
 <script>
 import Navbar from '../Home/Navbar'
 import axios from 'axios'
+import LineChart from '@/components/LineChart'
 
 export default {
   components: {
-    Navbar
+    Navbar,
+    LineChart
   },
   data () {
     return {
