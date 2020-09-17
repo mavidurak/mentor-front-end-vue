@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="up-background"></div>
     <Navbar />
     <div class="body">
       <!--<img
@@ -10,7 +11,6 @@
         background-size: cover;
         position:absolute;"
       />-->
-      <!--<div class="up-background"></div>-->
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
@@ -19,10 +19,10 @@
                 <div class="col-md-6 px-5">
                   <div class="row">
                     <div class="col-md-12 text-center">
-                      <v-gravatar :email="email" :size="200" class=" rounded img-fluid border shadow-lg bg-light rounded-circle border-info" />
+                      <v-gravatar :email="email" :size="200" class=" rounded img-fluid border shadow-lg rounded-circle border-dark" />
                     </div>
                   </div>
-                  <div class="border shadow-lg rounded mt-2 px-3">
+                  <div class="border rounded bg-light border-dark shadow-lg mt-2 px-3">
                   <div class="row border-bottom ">
                     <div class="col-lg-4">
                       <h5>Username:</h5>
@@ -125,10 +125,12 @@ export default {
 <style scoped>
 .up-background {
   position: absolute;
-  height: 400px;
+  height: 100vh;
   width: 100vw;
-  background: rgb(153,240,194);
-  background: linear-gradient(223deg, rgba(153,240,194,1) 0%, rgba(58,90,91,1) 50%, rgba(189,102,173,1) 100%);
+  background-image: url(https://picsum.photos/id/1055/720/?blur);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 
 }
 .ppic {
