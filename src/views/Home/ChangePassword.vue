@@ -63,6 +63,7 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import axios from 'axios'
 
 export default {
   name: 'ChangePassword',
@@ -72,7 +73,6 @@ export default {
   },
   data: () => {
     return {
-      truePassword: '123',
       password: '',
       newPassword: '',
       confirmPassword: ''
@@ -80,26 +80,29 @@ export default {
   },
   methods: {
     onSubmit: function () {
-      if (this.password === this.truePassword) {
-        if (this.newPassword === this.confirmPassword) {
-          this.truePassword = this.newPassword
-          console.log('Old Password : ' + this.password + ' New Password : ' + this.newPassword)
-          document.getElementById('success').innerHTML = 'Şifreniz başarıyla değiştirildi'
-        } else {
-          document.getElementById('success').innerHTML = 'Parolalar uyuşmuyor'
-        }
-      } else {
-        document.getElementById('success').innerHTML = 'Parolala hatalı'
+      if (this.confirmPassword === this.newPassword) {
+        axios
+          .post('/user/',
+            {
+              password: this.password,
+              newPassword: this.newPassword
+            },
+            {
+              headers: {
+                'X-AccessToken': localStorage.getItem('X-AccessToken'),
+                'Content-Type': 'application/json'
+              }
+            }
+          )
+          .then((response) => {
+            console.log('Success' + response.data)
+          })
+          .catch((err) => {
+            if (err.response.status === 401) {
+              console.log(this.user)
+            }
+          })
       }
-    },
-    switchLog: function () {
-      // switch the locale.
-      this.locale = this.locale === 'en' ? 'tr' : 'en'
-      // you could also import 'localize' and call it.
-      // localize('ar');
-
-      // re-validate to re-generate the messages.
-      this.$refs.form.validate()
     }
   }
 }
