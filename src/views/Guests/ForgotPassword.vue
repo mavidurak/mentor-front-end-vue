@@ -120,7 +120,17 @@ export default {
       isReset: false
     }
   },
-  methods: {},
+  methods: {
+    onSubmit: function () {
+      // isMailCorrect = true => continue
+      this.isReset = true
+    },
+    tryAgain: function () {
+      this.isReset = false
+      this.mail = ''
+      // more code
+    }
+  },
   created: () => {}
 }
 </script>
