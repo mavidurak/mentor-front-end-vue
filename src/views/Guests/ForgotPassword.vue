@@ -21,10 +21,12 @@
                   We will send the password reset instructions to the email address for this account.
                   <br />
                   <br />If you don't know the your email address is no longer valid, please
-                  <a
-                    href="#"
-                    class="alert-link"
-                  >Contact Us</a> for further assistance.
+                  <abbr
+                    title="Send Mail"
+                  >
+                    <a href="mailto: mavidurak.io@gmail.com" class="alert-link">Contact Us</a>
+                  </abbr>
+                  for further assistance.
                 </div>
               </div>
               <div>
