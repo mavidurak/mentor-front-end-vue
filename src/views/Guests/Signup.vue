@@ -5,32 +5,19 @@
       <div class="col-md-6">
         <div class="text-center">
           <img
-            src="/src/assets/mavidurak-io-logo.png"
+            src="@/assets/mavidurak-io-logo.png"
             class="rounded"
             id="logo"
-            alt="Mavidurak-io Logo"
+            alt="Mavidurak-IO Logo"
           />
         </div>
         <ValidationObserver ref="form" v-slot="{ invalid }">
           <div class="card">
             <div class="card-body">
-              <h4>Kaydol</h4>
+              <h4>Sign Up</h4>
               <form class="text-left" @submit.prevent="onSubmit()">
                 <div class="form-group">
-                  <label for="inputMail">E-Mail :</label>
-                  <validation-provider name="email" rules="required|email" v-slot="{ errors }">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="inputMail"
-                      v-model="email"
-                      placeholder="Mail giriniz"
-                    />
-                    <span>{{ errors[0] }}</span>
-                  </validation-provider>
-                </div>
-                <div class="form-group">
-                  <label for="inputUsername">Kullanıcı Adı :</label>
+                  <label for="inputUsername">Username:</label>
                   <validation-provider
                     name="username"
                     rules="required|min:3|max:20"
@@ -41,24 +28,7 @@
                       class="form-control"
                       id="inputUsername"
                       v-model="username"
-                      placeholder="Kullanıcı adı girinz"
-                    />
-                    <span>{{ errors[0] }}</span>
-                  </validation-provider>
-                </div>
-                <div class="form-group">
-                  <label for="inputname">Ad Soyad :</label>
-                  <validation-provider
-                    name="name"
-                    rules="required|min:3|max:20"
-                    v-slot="{ errors }"
-                  >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputname"
-                      v-model="name"
-                      placeholder="Ad Soyad  giriniz"
+                      placeholder="Enter your username"
                     />
                     <span>{{ errors[0] }}</span>
                   </validation-provider>
@@ -76,18 +46,49 @@
                       class="form-control"
                       id="inputPassword"
                       v-model="password"
-                      placeholder="Şifre giriniz"
+                      placeholder="Enter your password"
                     />
                     <span>{{ errors[0] }}</span>
                   </validation-provider>
                 </div>
+                <div class="form-group">
+                  <label for="inputname">Fullname:</label>
+                  <validation-provider
+                    name="name"
+                    rules="required|min:3|max:20"
+                    v-slot="{ errors }"
+                  >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputname"
+                      v-model="name"
+                      placeholder="Enter your fullname"
+                    />
+                    <span>{{ errors[0] }}</span>
+                  </validation-provider>
+                </div>
+                <div class="form-group">
+                  <label for="inputMail">Email:</label>
+                  <validation-provider name="email" rules="required|email" v-slot="{ errors }">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="inputMail"
+                      v-model="email"
+                      placeholder="Enter your email"
+                    />
+                    <span>{{ errors[0] }}</span>
+                  </validation-provider>
+                </div>
+                <router-link class="btn btn-light" to="/login">Back</router-link>
                 <button
                   type="submit"
                   name="submitButton"
                   id="submitButton"
                   class="btn btn-success float-right"
                   :disabled="invalid"
-                >Kaydol</button>
+                >Sign Up</button>
               </form>
             </div>
           </div>

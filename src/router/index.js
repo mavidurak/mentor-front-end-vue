@@ -86,6 +86,4 @@ const router = new VueRouter({
   routes
 })
 
-router.replace('/login')
-
 export default router
