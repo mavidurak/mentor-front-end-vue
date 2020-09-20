@@ -26,7 +26,7 @@
                       />
                     </div>
                   </div>
-                  <div class="border rounded bg-light  shadow-lg mt-2 px-3">
+                  <div class="border rounded bg-light shadow-lg mt-2 px-3">
                     <div class="row border-bottom">
                       <div class="col-4">
                         <h5>Username:</h5>
@@ -47,7 +47,6 @@
                       <div class="col-6">
                         <h5>{{name}}</h5>
                       </div>
-
                     </div>
                     <div class="row border-bottom">
                       <div class="col-4">
@@ -56,7 +55,6 @@
                       <div class="col-6 overflow-hidden">
                         <h5>{{email}}</h5>
                       </div>
-
                     </div>
                     <div class="row border-bottom">
                       <div class="col-4">
@@ -71,10 +69,26 @@
                         </router-link>
                       </div>
                     </div>
+                    <div class="row border-bottom">
+                      <div class="col-4">
+                        <h5>CreatedAt:</h5>
+                      </div>
+                      <div class="col-6 overflow-hidden">
+                        <h5>{{created}}</h5>
+                      </div>
+                    </div>
+                    <div class="row border-bottom">
+                      <div class="col-4">
+                        <h5>UpdatedAt:</h5>
+                      </div>
+                      <div class="col-6 overflow-hidden">
+                        <h5>{{updated}}</h5>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-lg-6">
-                  <div class="border shadow-lg bg-light  rounded">
+                  <div class="border shadow-lg bg-light rounded">
                     <line-chart></line-chart>
                   </div>
                 </div>
@@ -91,6 +105,7 @@
 import Navbar from '../Home/Navbar'
 import axios from 'axios'
 import LineChart from '@/components/LineChart'
+import moment from 'moment'
 
 export default {
   components: {
@@ -102,7 +117,9 @@ export default {
       username: '',
       name: '',
       email: '',
-      user: ''
+      user: '',
+      created: '',
+      updated: ''
     }
   },
   created () {
@@ -117,18 +134,13 @@ export default {
           this.username = response.data.username
           this.name = response.data.name
           this.email = response.data.email
+          this.created = moment(String(response.data.createdAt)).format('DD/MM/YYYY')
+          this.updated = moment(String(response.data.updatedAt)).format('DD/MM/YYYY')
+          console.log(response.data)
         }
       })
   },
   methods: {
-    gizleGoster (ID) {
-      var secilenID = document.getElementById(ID)
-      if (secilenID.style.width === '0%') {
-        secilenID.style.width = '100%'
-      } else {
-        secilenID.style.width = '0%'
-      }
-    }
   }
 }
 </script>

@@ -2,8 +2,7 @@
   <div>
     <div class="up-background"></div>
     <div class="container">
-      <div class="row text-center mt-5 justify-content-center ">
-
+      <div class="row text-center mt-5 justify-content-center">
         <div class="col-lg-6 border rounded bg-light shadow-lg mt-5 px-3">
           <h5 class="mb-3">Change Username</h5>
           <ValidationObserver ref="form" v-slot="{ invalid }">
@@ -71,53 +70,40 @@ export default {
   },
   methods: {
     onSubmit: function () {
-      if (this.newUsername !== null) {
-        axios
-          .post(
-            '/user/changeUsername/',
-            {
-              password: this.password,
-              newUsername: this.newUsername
-            },
-            {
-              headers: {
-                'X-AccessToken': localStorage.getItem('X-AccessToken'),
-                'Content-Type': 'application/json'
-              }
+      axios
+        .post(
+          '/user/changeUsername/',
+          {
+            password: this.password,
+            newUsername: this.newUsername
+          },
+          {
+            headers: {
+              'X-AccessToken': localStorage.getItem('X-AccessToken'),
+              'Content-Type': 'application/json'
             }
-          )
-          .then((response) => {
-            if (response.status === 200) {
-              swal({
-                title:
+          }
+        )
+        .then((response) => {
+          if (response.status === 200) {
+            swal({
+              title:
                   'Your username has been successfully changed.',
-                icon: 'success'
-              }).then((isOk) => {
-                this.$router.push('/profile')
-              })
-            }
-          })
-          .catch((err) => {
-            if (err.response.status === 401) {
-              swal({
-                title:
+              icon: 'success'
+            }).then((isOk) => {
+              this.$router.push('/profile')
+            })
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 401 || err.response.status === 400) {
+            swal({
+              title:
                   err.response.data.message,
-                icon: 'error'
-              })
-            }
-
-            if (err.response.status === 400) {
-              this.message = 'Password not Correct'
-              swal({
-                title:
-                  err.response.data.message,
-                icon: 'error'
-              })
-            }
-          })
-      } else {
-        this.message = 'New Password not Matching or New Password must be min 8 max 30 character'
-      }
+              icon: 'error'
+            })
+          }
+        })
     }
   }
 }
@@ -127,8 +113,12 @@ export default {
   position: fixed;
   height: 100vh;
   width: 100vw;
-  background: rgb(153,240,194);
-  background: linear-gradient(180deg, rgba(153,240,194,1) 0%, rgba(58,90,91,1) 100%);
+  background: rgb(153, 240, 194);
+  background: linear-gradient(
+    180deg,
+    rgba(153, 240, 194, 1) 0%,
+    rgba(58, 90, 91, 1) 100%
+  );
   background-repeat: no-repeat;
   background-size: cover;
 }

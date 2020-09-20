@@ -112,16 +112,7 @@ export default {
             }
           })
           .catch((err) => {
-            if (err.response.status === 401) {
-              swal({
-                title:
-                  err.response.data.message,
-                icon: 'error'
-              })
-            }
-
-            if (err.response.status === 400) {
-              this.message = 'Password not Correct'
+            if (err.response.status === 401 || err.response.status === 400) {
               swal({
                 title:
                   err.response.data.message,
