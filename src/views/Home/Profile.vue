@@ -16,7 +16,7 @@
           <div class="col-12">
             <div class="my-2">
               <div class="row">
-                <div class="col-lg-6 px-5">
+                <div class="col-lg-6 px-3">
                   <div class="row">
                     <div class="col-md-12 text-center">
                       <v-gravatar
@@ -26,7 +26,7 @@
                       />
                     </div>
                   </div>
-                  <div class="border rounded bg-light border-dark shadow-lg mt-2 px-3">
+                  <div class="border rounded bg-light  shadow-lg mt-2 px-3">
                     <div class="row border-bottom">
                       <div class="col-4">
                         <h5>Username:</h5>
@@ -35,7 +35,7 @@
                         <h5>{{username}}</h5>
                       </div>
                       <div class="col-2 text-right" style="font-size:15px;">
-                        <router-link to="/change-password">
+                        <router-link to="/change-username">
                           <i class="far fa-edit fa-2x"></i>
                         </router-link>
                       </div>
@@ -47,11 +47,7 @@
                       <div class="col-6">
                         <h5>{{name}}</h5>
                       </div>
-                      <div class="col-2 text-right" style="font-size:15px;">
-                        <router-link to="/change-password">
-                          <i class="far fa-edit fa-2x"></i>
-                        </router-link>
-                      </div>
+
                     </div>
                     <div class="row border-bottom">
                       <div class="col-4">
@@ -60,11 +56,7 @@
                       <div class="col-6 overflow-hidden">
                         <h5>{{email}}</h5>
                       </div>
-                      <div class="col-2 text-right" style="font-size:15px;">
-                        <router-link to="/change-password">
-                          <i class="far fa-edit fa-2x"></i>
-                        </router-link>
-                      </div>
+
                     </div>
                     <div class="row border-bottom">
                       <div class="col-4">
@@ -82,7 +74,7 @@
                   </div>
                 </div>
                 <div class="col-lg-6">
-                  <div class="border shadow-lg bg-light border-dark rounded">
+                  <div class="border shadow-lg bg-light  rounded">
                     <line-chart></line-chart>
                   </div>
                 </div>
@@ -122,24 +114,10 @@ export default {
       })
       .then((response) => {
         if (response.status === 200) {
+          this.username = response.data.username
           this.name = response.data.name
           this.email = response.data.email
         }
-        axios
-          .get('/data-sets/', {
-            headers: {
-              'X-AccessToken': localStorage.getItem('X-AccessToken')
-            }
-          })
-          .then((response) => {
-            this.username = response.data.results[0].title
-            console.log(response.data)
-          })
-          .catch((err) => {
-            if (err.response.status === 401) {
-              console.log(this.user)
-            }
-          })
       })
   },
   methods: {

@@ -5,9 +5,22 @@
       <div class="row text-center mt-5 justify-content-center ">
 
         <div class="col-lg-6 border rounded bg-light shadow-lg mt-5 px-3">
-          <h5 class="mb-3">Change Password</h5>
+          <h5 class="mb-3">Change Username</h5>
           <ValidationObserver ref="form" v-slot="{ invalid }">
             <form class="text-left" @submit.prevent="onSubmit()">
+              <div class="form-group">
+                <label for="inputNewUsername">New Username</label>
+                <validation-provider name="newUsername" rules="required" v-slot="{ errors }">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputNewUsername"
+                    v-model="newUsername"
+                    placeholder="Enter Your New Username"
+                  />
+                  <span>{{ errors[0] }}</span>
+                </validation-provider>
+              </div>
               <div class="form-group">
                 <label for="inputPassword">Password</label>
                 <validation-provider name="password" rules="required" v-slot="{ errors }">
@@ -19,32 +32,6 @@
                     placeholder="Enter Your Password"
                   />
                   <span>{{ errors[0] }}</span>
-                </validation-provider>
-              </div>
-              <div class="form-group">
-                <label for="inputNewPassword">New Password</label>
-                <validation-provider name="newPassword" rules="required" v-slot="{ errors }">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="inputNewPassword"
-                    v-model="newPassword"
-                    placeholder="Enter Your New Password"
-                  />
-                  <span>{{ errors[0] }}</span>
-                </validation-provider>
-              </div>
-              <div class="form-group">
-                <label for="inputConfirmPassword">New Password Again</label>
-                <validation-provider name="confirmPassword" rules="required" v-slot="{ errors }">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="inputConfirmPassword"
-                    v-model="confirmPassword"
-                    placeholder="Enter Your New Password Again"
-                  />
-                  <span>{{ errors[0] }}{{message}}</span>
                 </validation-provider>
               </div>
               <button
@@ -69,7 +56,7 @@ import axios from 'axios'
 import swal from 'sweetalert'
 
 export default {
-  name: 'ChangePassword',
+  name: 'ChangeUsername',
   components: {
     ValidationProvider,
     ValidationObserver
@@ -77,21 +64,20 @@ export default {
   data: () => {
     return {
       password: '',
-      newPassword: '',
-      confirmPassword: '',
+      newUsername: '',
       message: '',
       errors: []
     }
   },
   methods: {
     onSubmit: function () {
-      if (this.confirmPassword === this.newPassword && this.newPassword.length >= 8 && this.newPassword.length <= 30) {
+      if (this.newUsername !== null) {
         axios
           .post(
-            '/user/changePassword/',
+            '/user/changeUsername/',
             {
               password: this.password,
-              newPassword: this.newPassword
+              newUsername: this.newUsername
             },
             {
               headers: {
@@ -104,7 +90,7 @@ export default {
             if (response.status === 200) {
               swal({
                 title:
-                  'Your password has been successfully changed.',
+                  'Your username has been successfully changed.',
                 icon: 'success'
               }).then((isOk) => {
                 this.$router.push('/profile')
