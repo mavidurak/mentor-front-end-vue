@@ -54,9 +54,9 @@ const routes = [
     component: () => import('../views/Home/ChangePassword.vue')
   },
   {
-    path: '/change-nick',
-    name: 'ChangeNick',
-    component: () => import('../views/Home/ChangeNick.vue')
+    path: '/change-username',
+    name: 'ChangeUsername',
+    component: () => import('../views/Home/ChangeUsername.vue')
   },
   {
     path: '/change-email',

@@ -9,6 +9,10 @@ import './vee-validate'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 import axios from 'axios'
+import Notifications from 'vue-notification'
+import Gravatar from 'vue-gravatar'
+
+Vue.component('v-gravatar', Gravatar)
 
 var myMixin = {
   created () {
@@ -27,6 +31,11 @@ var myMixin = {
           if (response.status === 200) {
             console.log('Token is Valid')
             this.$router.push('/home')
+            this.$notify({
+              group: 'foo',
+              type: 'success',
+              title: 'Successfully Logged In'
+            })
           }
         }).catch(err => {
           if (err.response.status === 401) {
@@ -43,6 +52,7 @@ var myMixin = {
 
 Vue.config.productionTip = false
 
+Vue.use(Notifications)
 Vue.use(Datatable) // done!
 new Vue({
   router,
