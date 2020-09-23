@@ -107,7 +107,7 @@ export default {
           if (err.response.status === 400) {
             this.statusClass = 'fas fa-times fa-2x text-danger'
           }
-          if (err.response.status === 401) {
+          if (err.response.status === 403) {
             // confirm edilmediyse hangi status dönecek??
             swal({
               title: 'Confirm Your Account!',

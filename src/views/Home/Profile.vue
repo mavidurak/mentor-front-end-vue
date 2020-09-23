@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import Navbar from '../Home/Navbar'
+import Navbar from '../Home/Navbar2'
 import axios from 'axios'
 import LineChart from '@/components/LineChart'
 import moment from 'moment'
