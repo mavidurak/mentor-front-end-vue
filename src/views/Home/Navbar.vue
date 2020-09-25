@@ -837,7 +837,9 @@
 <script>
 import router from '../../router'
 import axios from 'axios'
-import '@/plugins/adminlte.js'
+import '@/adminlte/js/AdminLTE.js'
+// import '@/plugins/adminlte.js'
+// import '@/styles/adminlte.css'
 
 export default {
   name: 'Navbar',
@@ -871,7 +873,7 @@ export default {
 }
 </script>
 
-<style scoped src='@/styles/adminlte.css'>
+<style>
 #side-menu {
   height: 100vh;
   position: absolute;

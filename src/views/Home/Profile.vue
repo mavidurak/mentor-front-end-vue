@@ -1,7 +1,8 @@
 <template>
   <div>
+    <Navbar>
     <div class="up-background"></div>
-    <Navbar />
+
     <div class="body">
       <!--<img
         src="https://www.wallpaperflare.com/static/471/767/754/abstract-ae-plexus-blue-dot-wallpaper.jpg"
@@ -98,6 +99,7 @@
         </div>
       </div>
     </div>
+    </Navbar>
   </div>
 </template>
 
@@ -108,9 +110,10 @@ import LineChart from '@/components/LineChart'
 import moment from 'moment'
 
 export default {
+  name: 'profile',
   components: {
-    Navbar,
-    LineChart
+    LineChart,
+    Navbar
   },
   data () {
     return {
@@ -150,6 +153,7 @@ export default {
   position: fixed;
   height: 100vh;
   width: 100vw;
+  z-index: 0;
   background-image: url(https://picsum.photos/id/1035/720/?blur);
   background-repeat: no-repeat;
   background-size: cover;
