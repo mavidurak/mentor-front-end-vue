@@ -182,16 +182,16 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../../index.html" class="nav-link">
+                <router-link class="nav-link" to="/home">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
+                  <p>Home</p>
+                </router-link>
               </li>
               <li class="nav-item">
-                <a href="../../index2.html" class="nav-link">
+                <router-link class="nav-link" to="/profile">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
-                </a>
+                  <p>Profile</p>
+                </router-link>
               </li>
               <li class="nav-item">
                 <a href="../../index3.html" class="nav-link">
