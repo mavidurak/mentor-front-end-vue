@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar>
     <div class="up-background"></div>
 
     <div class="body">
@@ -99,12 +98,11 @@
         </div>
       </div>
     </div>
-    </Navbar>
   </div>
 </template>
 
 <script>
-import Navbar from '../Home/Navbar2'
+
 import axios from 'axios'
 import LineChart from '@/components/LineChart'
 import moment from 'moment'
@@ -112,8 +110,7 @@ import moment from 'moment'
 export default {
   name: 'profile',
   components: {
-    LineChart,
-    Navbar
+    LineChart
   },
   data () {
     return {
