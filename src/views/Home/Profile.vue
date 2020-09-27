@@ -149,9 +149,10 @@ export default {
 .up-background {
   position: fixed;
   height: 100vh;
+  top:0px;
   width: 100vw;
   z-index: 0;
-  background-image: url(https://picsum.photos/id/1035/720/?blur);
+  background-image: url(https://picsum.photos/id/1018/720/?blur);
   background-repeat: no-repeat;
   background-size: cover;
 }

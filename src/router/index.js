@@ -78,11 +78,13 @@ const routes = [
   {
     path: '/api-dashboard-vmc',
     name: 'ApiDashboardVMC',
+    meta: { layout: 'home-nav' },
     component: () => import('../views/APIDashboardVMC/Index.vue')
   },
   {
     path: '/api-dashboard-vmc/add-or-update',
     name: 'ApiAddOrUpdateMC',
+    meta: { layout: 'home-nav' },
     component: () => import('../views/APIDashboardVMC/AddOrUpdate.vue')
   }
 ]
