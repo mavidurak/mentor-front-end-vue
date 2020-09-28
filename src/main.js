@@ -11,6 +11,11 @@ import '@fortawesome/fontawesome-free/js/all.js'
 import axios from 'axios'
 import Notifications from 'vue-notification'
 import Gravatar from 'vue-gravatar'
+import HomeNav from '@/views/Layouts/HomeNav'
+import None from '@/views/Layouts/None'
+
+Vue.component('home-nav-layout', HomeNav)
+Vue.component('none-layout', None)
 
 Vue.component('v-gravatar', Gravatar)
 

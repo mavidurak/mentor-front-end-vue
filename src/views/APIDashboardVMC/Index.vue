@@ -1,47 +1,50 @@
 <template>
- <div>
-    <Navbar/>
-  <div class="container mt-5">
-    <div class="card">
-      <div class="card-body">
-        <div class="card-title">
-          <div class="row">
-            <div class="col-md-8">
-              <h5>Api Uygulamaları</h5>
-            </div>
-            <div class="col-md-4">
-              <router-link
-                to="/api-dashboard-vmc/add-or-update"
-                class="btn btn-success float-right"
-              >Oluştur</router-link>
-            </div>
+  <div>
+    <div class="container mt-5">
+      <div class="card">
+        <div class="card-body">
+        <div class="row">
+          <div class="col-3 px-5 py-0">
+          <h5>Api</h5>
+          </div>
+          <div class="col-9 px-5 py-0">
+          <router-link
+            to="/api-dashboard-vmc/add-or-update"
+            class="btn btn-success float-right"
+            >Create</router-link
+          >
           </div>
         </div>
-        <hr />
-        <v-data-table :headers="headers" :items="applications" :items-per-page="5" class="elevation-1 table-bordered text-center">
-       <template v-slot:item.actions="{ item }">
-        <router-link
-                  :to="{ name: 'ApiAddOrUpdateMC', params: { app: item } }"
-                  class="btn btn-primary"
-                >Güncelle</router-link>
-      </template>
-        </v-data-table>
+        <div class="row">
+          <div class="col-12">
+          <v-data-table
+            :headers="headers"
+            :items="applications"
+            :items-per-page="5"
+            class="elevation-1 table-bordered text-center"
+          >
+            <template v-slot:item.actions="{ item }">
+              <router-link
+                :to="{ name: 'ApiAddOrUpdateMC', params: { app: item } }"
+                class="btn btn-primary"
+                >Update</router-link
+              >
+            </template>
+          </v-data-table>
+          </div>
+          </div>
+        </div>
       </div>
+      <router-view />
     </div>
-    <router-view />
   </div>
- </div>
 </template>
 
 <script>
-import Navbar from '../Home/Navbar'
-
 export default {
   title: 'ApiTable',
 
-  components: {
-    Navbar
-  },
+  components: {},
 
   data: () => {
     return {
@@ -96,11 +99,11 @@ export default {
           sortable: true,
           value: 'id'
         },
-        { text: 'Başlık', value: 'title' },
-        { text: 'Açıklama', value: 'description' },
-        { text: 'Oluşturma Tarihi', value: 'createDate' },
-        { text: 'Son Güncelleme', value: 'lastUpdate' },
-        { text: 'İşlemler', value: 'actions', sortable: false }
+        { text: 'Title', value: 'title' },
+        { text: 'Description', value: 'description' },
+        { text: 'Create Date', value: 'createDate' },
+        { text: 'Last Update', value: 'lastUpdate' },
+        { text: 'Actions', value: 'actions', sortable: false }
       ]
     }
   }
