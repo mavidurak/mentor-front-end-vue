@@ -519,6 +519,7 @@
 import LineChart from '../../components/LineChart'
 import Axios from 'axios'
 
+
 export default {
   name: 'Home',
   components: {

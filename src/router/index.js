@@ -12,6 +12,7 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
+    meta: { layout: 'home-nav' },
     component: Home
   },
   {
@@ -25,12 +26,13 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
+    meta: { layout: 'none' },
     component: () => import('../views/Guests/Login.vue')
   },
   {
     path: '/signup',
     name: 'Signup',
-
+    meta: { layout: 'none' },
     component: () => import('../views/Guests/Signup.vue')
   },
   {
@@ -46,36 +48,43 @@ const routes = [
   {
     path: '/profile',
     name: 'Profile',
+    meta: { layout: 'home-nav' },
     component: () => import('../views/Home/Profile.vue')
   },
   {
     path: '/change-password',
     name: 'ChangePassword',
+    meta: { layout: 'none' },
     component: () => import('../views/Home/ChangePassword.vue')
   },
   {
     path: '/change-username',
     name: 'ChangeUsername',
+    meta: { layout: 'none' },
     component: () => import('../views/Home/ChangeUsername.vue')
   },
   {
     path: '/change-email',
     name: 'ChangeEmail',
+    meta: { layout: 'none' },
     component: () => import('../views/Home/ChangeEmail.vue')
   },
   {
     path: '/forgot-password',
     name: 'ForgotPassword',
+    meta: { layout: 'none' },
     component: () => import('../views/Guests/ForgotPassword.vue')
   },
   {
     path: '/api-dashboard-vmc',
     name: 'ApiDashboardVMC',
+    meta: { layout: 'home-nav' },
     component: () => import('../views/APIDashboardVMC/Index.vue')
   },
   {
     path: '/api-dashboard-vmc/add-or-update',
     name: 'ApiAddOrUpdateMC',
+    meta: { layout: 'home-nav' },
     component: () => import('../views/APIDashboardVMC/AddOrUpdate.vue')
   }
 ]
