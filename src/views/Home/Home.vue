@@ -1,24 +1,796 @@
 <template>
   <div>
-    <Navbar/>
     <div class="text-center">
-      <h1 class="mt-5">Dashboard</h1>
+      <div class="container">
+        <!--Total api, dataSet and data cards-->
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <span class="icon app-icon"
+                  ><i class="fas fa-3x fa-pager"></i
+                ></span>
+                <div>
+                  Total Application <br />
+                  <strong class="total-data">{{ appCount }}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <span class="icon data-set-icon"
+                  ><i class="fas fa-3x fa-table"></i
+                ></span>
+                <div>
+                  Total Data Set <br />
+                  <strong class="total-data">{{ dataSetCount }}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <span class="icon data-icon"
+                  ><i class="fas fa-3x fa-stopwatch"></i
+                ></span>
+                <div>
+                  Total Data <br />
+                  <strong class="total-data">{{ dataCount }}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End of Total api, dataSet and data cards-->
+        <!--DataSet info-->
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <!--DataSet info navbar-->
+              <div class="card-header chart-header">
+                <div class="data-set-name">
+                  Data Set
+                </div>
+                <!--DataSet edit and select-->
+                <div class="select-data-set">
+                  <div class="btn-group">
+                    <button
+                      type="button"
+                      class="btn dropdown-toggle"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      title="Edit Data Set"
+                    >
+                      <i style="font-size: 1.3em" class="fas fa-pen"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <button class="dropdown-item" type="button">
+                        Change '<strong>title</strong>', '<strong
+                          >key title</strong
+                        >', '<strong>description</strong>'
+                      </button>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item delete-data-set" href="#">
+                        <strong>Delete</strong> this Data Set</a
+                      >
+                    </div>
+                  </div>
+                  <div class="btn-group">
+                    <button
+                      type="button"
+                      class="btn dropdown-toggle"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      title="Select Data Set"
+                    >
+                      <i style="font-size: 1.3em" class="far fa-list-alt"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <h6 class="dropdown-header">Select a Data Set</h6>
+                      <ul>
+                        <li v-for="dataSet in dataSets" :key="dataSet.title">
+                          <button
+                            class="dropdown-item"
+                            type="button"
+                            @click="selectDataSet(dataSet)"
+                          >
+                            {{ dataSet.title }}
+                          </button>
+                        </li>
+                      </ul>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item create-data-set" href="#"
+                        ><strong>Create</strong> Data Set</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!--End of DataSet edit and select-->
+              </div>
+              <!--End of DataSet info navbar-->
+              <!--DataSet info body-->
+              <div class="card-body">
+                <div class="row">
+                  <!--vue-chart-->
+                  <div class="col-8 chart">
+                    <LineChart :height="250" :width="580" />
+                  </div>
+                  <!--End of vue-chart-->
+                  <div class="col-4">
+                    <table
+                      style="
+                        width: 100%;
+                        color: white;
+                        border-collapse: separate;
+                        border-spacing: 0px 30px;
+                      "
+                    >
+                      <tr style="margin-bottom: 25%">
+                        <td class="info-header info-title-header">
+                          <i class="fas fa-3x fa-heading"></i>
+                        </td>
+                        <td>
+                          <ul class="info-body info-title-body">
+                            <li><h4>Title:</h4></li>
+                            <li>{{ dataSets[selectedDataSet]["title"] }}</li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="info-header info-key-title-header">
+                          <i class="fas fa-3x fa-tag"></i>
+                        </td>
+                        <td>
+                          <ul class="info-body info-key-title-body">
+                            <li><h4>Key Title:</h4></li>
+                            <li>
+                              {{ dataSets[selectedDataSet]["key_title"] }}
+                            </li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="info-header info-description-header">
+                          <i class="fas fa-3x fa-stream"></i>
+                        </td>
+                        <td>
+                          <ul class="info-body info-description-body">
+                            <li><h4>Description:</h4></li>
+                            <li>
+                              {{ dataSets[selectedDataSet]["description"] }}
+                            </li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!--End of DataSet info body-->
+              <!--Data info -->
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col" style="padding-top: 0">
+                    <!--header-->
+                    <div class="row" style="padding-bottom: 10px">
+                      <div class="col" style="padding: 0"></div>
+                      <div class="col" style="padding: 0">
+                        Data Type: <strong> Temperature(*C)</strong>
+                      </div>
+                      <div
+                        class="col"
+                        style="
+                          padding: 0;
+                          text-align: right;
+                          padding-right: 15px;
+                        "
+                      >
+                        <button
+                          data-toggle="modal"
+                          data-target="#createData"
+                          title="Add new data"
+                        >
+                          <i class="fas fa-plus"></i>
+                        </button>
+                        <!-- add data Modal -->
+                        <div
+                          class="modal fade"
+                          id="createData"
+                          tabindex="-1"
+                          aria-labelledby="exampleModalLabel"
+                          aria-hidden="true"
+                        >
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">
+                                  Add new data to
+                                  <strong>{{
+                                    dataSets[selectedDataSet]["title"]
+                                  }}</strong>
+                                </h5>
+                                <button
+                                  type="button"
+                                  class="close"
+                                  data-dismiss="modal"
+                                  aria-label="Close"
+                                >
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col-4">Select data set :</div>
+                                  <div class="col-8">
+                                    <strong>{{ dataSets[selectedDataSet]["title"] }}</strong>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-4">Select application :</div>
+                                  <div class="col-8">
+                                    <select class="form-control">
+                                        <option v-for="app in apps" :key="app.title" placeholder="Select application">{{ app.title }}</option>
+                                      </select>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-4">Data :</div>
+                                  <div class="col-8"><input class="form-control" type="text" placeholder="Your data"></div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button
+                                  type="button"
+                                  class="btn btn-secondary"
+                                  data-dismiss="modal"
+                                >
+                                  Close
+                                </button>
+                                <button type="button" class="btn btn-success">
+                                  Add
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <!--end of add data Modal -->
+                        </div>
+                      </div>
+                    </div>
+                    <!--end of header-->
+                    <!--data table-->
+                    <div class="table-responsive data-table">
+                      <table class="table table-bordered table-sm">
+                        <thead>
+                          <tr>
+                            <th scope="col">Id</th>
+                            <th
+                              scope="col"
+                              v-for="data in datas"
+                              :key="data.id"
+                            >
+                              {{ data.id }}
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">Date</th>
+                            <td v-for="data in datas" :key="data.created_at">
+                              {{ data.created_at }}
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Value</th>
+                            <td v-for="data in datas" :key="data.value">
+                              {{ data.value }}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--end of data table-->
+                  </div>
+                </div>
+              </div>
+              <!--End of Data info-->
+            </div>
+          </div>
+        </div>
+        <!--End of DataSet info-->
+        <!--Application info-->
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card-header">
+                <div class="data-set-name">Application</div>
+                <!--Select dataset / application-->
+                <span class="select-app" style="padding-top: 4px">
+                  <button
+                    type="button"
+                    class="btn"
+                    title="Edit This Application"
+                  >
+                    <i style="font-size: 1.3em" class="fas fa-pen"></i>
+                  </button>
+                </span>
+                <div class="select-app" title="Application / Data Set">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <!--Selecet dataset-->
+                      <li class="breadcrumb-item">
+                        <div class="dropdown">
+                          <button
+                            class="dropdown-toggle"
+                            type="button"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            {{ dataSets[selectedDataSet]["title"] }}
+                          </button>
+                          <div
+                            class="dropdown-menu dropdown-menu-right"
+                            aria-labelledby="dropdownMenuButton"
+                          >
+                            <ul
+                              v-for="dataset in dataSets"
+                              :key="dataset.title"
+                            >
+                              <li>
+                                <a
+                                  class="dropdown-item"
+                                  @click="selectDataSet(dataset)"
+                                  >{{ dataset.title }}</a
+                                >
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </li>
+                      <!--end of Selecet dataset-->
+                      <!--Select application-->
+                      <li class="breadcrumb-item">
+                        <div class="dropdown">
+                          <button
+                            class="dropdown-toggle"
+                            type="button"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            {{ apps[selectedApp]["title"] }}
+                          </button>
+                          <div
+                            class="dropdown-menu dropdown-menu-right"
+                            aria-labelledby="dropdownMenuButton"
+                          >
+                            <ul v-for="app in apps" :key="app.title">
+                              <li>
+                                <a
+                                  class="dropdown-item"
+                                  @click="selectApp(app)"
+                                  >{{ app.title }}</a
+                                >
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </li>
+                      <!--end of Selecet application-->
+                    </ol>
+                  </nav>
+                </div>
+                <!--End of Select dataset / application-->
+              </div>
+              <!--Application info-->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <div class="card app-info">
+                      <div
+                        class="card-header"
+                        style="background-color: #dc4146"
+                      >
+                        App Id
+                      </div>
+                      <div class="card-body">
+                        {{ apps[selectedApp]["id"] }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card app-info">
+                      <div
+                        class="card-header"
+                        style="background-color: #31a2b8"
+                      >
+                        App Title
+                      </div>
+                      <div class="card-body">
+                        {{ apps[selectedApp]["title"] }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card app-info">
+                      <div
+                        class="card-header"
+                        style="background-color: #4fa845"
+                      >
+                        Data Set Title
+                      </div>
+                      <div class="card-body">
+                        {{ dataSets[selectedDataSet]["title"] }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    <div class="card app-info">
+                      <div
+                        class="card-header"
+                        style="background-color: #fec134"
+                      >
+                        Data Set Id
+                      </div>
+                      <div class="card-body">
+                        {{ dataSets[selectedDataSet]["id"] }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <div class="card app-info">
+                      <div
+                        class="card-header"
+                        style="background-color: #6c757d"
+                      >
+                        App Description
+                      </div>
+                      <div class="card-body">
+                        {{ apps[selectedApp]["description"] }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="card app-info" style="margin-top: 12px">
+                      <div
+                        class="card-header"
+                        style="background-color: #7952b3"
+                      >
+                        App Read Permission
+                      </div>
+                      <div class="card-body">
+                        {{ apps[selectedApp]["permission_read"] }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="col">
+                      <div class="card app-info">
+                        <div
+                          class="card-header"
+                          style="background-color: #7952b3"
+                        >
+                          App Write Permission
+                        </div>
+                        <div class="card-body">
+                          {{ apps[selectedApp]["permission_write"] }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="col">
+                      <div class="card app-info">
+                        <div
+                          class="card-header"
+                          style="background-color: #7952b3"
+                        >
+                          App Delete Permission
+                        </div>
+                        <div class="card-body">
+                          {{ apps[selectedApp]["permission_delete"] }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--End of Application info-->
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
 </template>
 
 <script>
-import Navbar from './Navbar'
+import LineChart from '../../components/LineChart'
+import Axios from 'axios'
 
 export default {
   name: 'Home',
   components: {
-    Navbar
+    LineChart
   },
-
-  created: () => {
+  methods: {
+    selectDataSet: function (dataset) {
+      this.selectedDataSet = dataset.id - 1
+    },
+    selectApp: function (app) {
+      this.selectedApp = app.id - 1
+    },
+    getDataSets: function () {
+      Axios.get('http://localhost:4000/data-sets/', {
+        headers: {
+          'X-AccessToken': localStorage.getItem('X-AccessToken')
+        }
+      }).then((response) => {
+        this.dataSetCount = response.data.count
+        this.dataSets = response.data.results
+        console.log(this.dataSets)
+      })
+    },
+    getAll: function () {
+      this.getDataSets()
+    }
+  },
+  data () {
+    return {
+      dataSetCount: 3,
+      dataSets: [
+        {
+          id: '1',
+          title: 'Bedroom-Temp',
+          key_title: 'Bedroom,Temperature,Celcius',
+          description: 'It is include my bedroom temperature data'
+        },
+        {
+          id: '2',
+          title: 'My-Data-Set-2',
+          key_title: 'DataSet2',
+          description: 'It is my data set 2'
+        },
+        {
+          id: '3',
+          title: 'My-Data-Set-3',
+          key_title: 'DataSet3',
+          description: 'It is my data set 3'
+        }
+      ],
+      selectedDataSet: 0,
+      appCount: '6',
+      selectedApp: 0,
+      apps: [
+        {
+          id: '1',
+          title: 'GoogleHomeMini',
+          dataSetId: '1',
+          description: 'Google home mini, smart assistant.',
+          permission_read: true,
+          permission_write: true,
+          permission_delete: false
+        },
+        {
+          id: '2',
+          title: 'app2',
+          dataSetId: '2',
+          description: 'its app2 description',
+          permission_read: false,
+          permission_write: false,
+          permission_delete: false
+        },
+        {
+          id: '3',
+          title: 'app3',
+          dataSetId: '3',
+          description: 'its app3 description',
+          permission_read: true,
+          permission_write: true,
+          permission_delete: true
+        },
+        {
+          id: '4',
+          title: 'app4',
+          dataSetId: '2',
+          description: 'its app4 description',
+          permission_read: true,
+          permission_write: false,
+          permission_delete: true
+        },
+        {
+          id: '5',
+          title: 'app5',
+          dataSetId: '4',
+          description: 'its app5 description',
+          permission_read: false,
+          permission_write: false,
+          permission_delete: false
+        },
+        {
+          id: '6',
+          title: 'app6',
+          dataSetId: '5',
+          description: 'its app6 description',
+          permission_read: false,
+          permission_write: true,
+          permission_delete: true
+        }
+      ],
+      dataCount: 689,
+      datas: [
+        { id: '1', created_at: '10.09.2020 10:50', value: '23' },
+        { id: '2', created_at: '10.09.2020 11:00', value: '23.5' },
+        { id: '3', created_at: '10.09.2020 11:15', value: '23.8' },
+        { id: '4', created_at: '10.09.2020 11:22', value: '24' },
+        { id: '5', created_at: '10.09.2020 11:30', value: '24.1' },
+        { id: '6', created_at: '10.09.2020 11:42', value: '23.9' },
+        { id: '7', created_at: '10.09.2020 12:45', value: '24' },
+        { id: '8', created_at: '10.09.2020 12:36', value: '25' },
+        { id: '9', created_at: '10.09.2020 13:52', value: '26' },
+        { id: '10', created_at: '10.09.2020 14:39', value: '22' },
+        { id: '11', created_at: '10.09.2020 15:57', value: '23' },
+        { id: '12', created_at: '10.09.2020 18:11', value: '25.7' }
+      ]
+    }
+  },
+  created () {
     document.body.className = ''
+  },
+  mounted () {
+    // this.getAll()
   }
 }
 </script>
+<style scoped>
+ul {
+  list-style-type: none;
+}
+.data-set-name {
+  text-align: center;
+  font-size: 1.5em;
+  float: left;
+  font-weight: bold;
+}
+.select-data-set {
+  float: right;
+}
+.select-app {
+  float: right;
+  height: 50px;
+}
+.icon {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 5px;
+  float: left;
+  margin-right: 4%;
+  color: white !important;
+}
+.app-icon {
+  background-color: #31a2b8 !important;
+}
+.data-set-icon {
+  background-color: #dc3545 !important;
+}
+.data-icon {
+  background-color: #fec134 !important;
+}
+.card-body {
+  padding: 20px;
+}
+.card-header {
+  padding: 5px;
+  padding-left: 20px;
+  padding-bottom: 0px;
+}
+.card-footer {
+  background-color: white;
+}
+.app-info,
+.app-info .card-header {
+  text-align: left;
+  color: #fff;
+  font-size: 1.1em;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.app-info .card-body {
+  color: #303030;
+  text-align: center;
+  position: relative;
+  bottom: 15px;
+  top: 1px;
+  font-size: 1.3em;
+}
+.app-info .card-header {
+  padding-left: 13px;
+}
+.chart {
+  height: 320px;
+}
+.total-data {
+  font-size: 1.5em;
+}
+.dropdown-divider {
+  margin-bottom: 0px;
+}
+.dropdown-menu {
+  padding-bottom: 0;
+}
+.info-header {
+  width: 60px;
+  height: 100%;
+}
+.info-body {
+  list-style-type: none;
+  text-align: left;
+  padding-left: 12px;
+  height: 100%;
+  margin: 0;
+}
+.list-group {
+  max-height: 300px;
+  margin-bottom: 10px;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.create-data-set {
+  color: #28a745;
+  background-color: #fff;
+  transition: color 0.4s, background-color 0.4s;
+}
+.create-data-set:hover {
+  color: #fff;
+  background-color: #28a745;
+}
+.delete-data-set {
+  color: #dc3545;
+  background-color: #fff;
+  transition: color 0.4s, background-color 0.4s;
+}
+.delete-data-set:hover {
+  color: #fff;
+  background-color: #dc3545;
+}
+.info-title-body {
+  background-color: #f29c2d;
+}
+.info-title-header {
+  background-color: #c17d22;
+}
+.info-key-title-body {
+  background-color: #dd4b39;
+}
+.info-key-title-header {
+  background-color: #b03b2e;
+}
+.info-description-body {
+  background-color: #2fc0ef;
+}
+.info-description-header {
+  background-color: #249abe;
+}
+.fa-plus {
+  transition: color 0.3s;
+}
+.fa-plus:hover {
+  color: #28a745;
+}
+</style>
