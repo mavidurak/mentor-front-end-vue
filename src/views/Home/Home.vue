@@ -519,7 +519,6 @@
 import LineChart from '../../components/LineChart'
 import Axios from 'axios'
 
-
 export default {
   name: 'Home',
   components: {
@@ -540,7 +539,7 @@ export default {
       }).then((response) => {
         this.dataSetCount = response.data.count
         this.dataSets = response.data.results
-        console.log(this.dataSets)
+        // console.log(this.dataSets)
       })
     },
     getAll: function () {
