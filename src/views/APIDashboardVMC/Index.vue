@@ -5,7 +5,7 @@
         <div class="card-body">
         <div class="row">
           <div class="col-3 px-5 py-0">
-          <h5>Api</h5>
+          <h5>Data Sets</h5>
           </div>
           <div class="col-9 px-5 py-0">
           <router-link
@@ -23,7 +23,13 @@
             :items-per-page="5"
             class="elevation-1 table-bordered text-center"
           >
-            <template v-slot:item.actions="{ item }">
+          <template v-slot:[`item.createdAt`]="{ item }">
+           <span>{{new Date(item.createdAt).toLocaleDateString()}}</span>
+         </template>
+         <template v-slot:[`item.updatedAt`]="{ item }">
+           <span>{{new Date(item.updatedAt).toLocaleDateString()}}</span>
+         </template>
+            <template v-slot:[`item.actions`]="{ item }">
               <router-link
                 :to="{ name: 'ApiAddOrUpdateMC', params: { app: item } }"
                 class="btn btn-primary"
@@ -41,57 +47,32 @@
 </template>
 
 <script>
+import Axios from 'axios'
+
 export default {
   title: 'ApiTable',
 
   components: {},
 
+  methods: {
+    getDataSets: function () {
+      Axios.get('http://localhost:4000/data-sets/', {
+        headers: {
+          'X-AccessToken': localStorage.getItem('X-AccessToken')
+        }
+      }).then((response) => {
+        this.applications = response.data.results
+      })
+    }
+  },
+
+  mounted () {
+    this.getDataSets()
+  },
+
   data: () => {
     return {
-      applications: [
-        {
-          id: 1,
-          title: 'app1',
-          createDate: '12.03.2006',
-          lastUpdate: '24.05.2017',
-          description: 'app1-desc'
-        },
-        {
-          id: 2,
-          title: 'app2',
-          createDate: '12.03.2006',
-          lastUpdate: '24.05.2017',
-          description: 'app2-desc'
-        },
-        {
-          id: 3,
-          title: 'app3',
-          createDate: '12.03.2006',
-          lastUpdate: '24.05.2017',
-          description: 'app3-desc'
-        },
-        {
-          id: 4,
-          title: 'app4',
-          createDate: '12.03.2006',
-          lastUpdate: '24.05.2017',
-          description: 'app4-desc'
-        },
-        {
-          id: 5,
-          title: 'app5',
-          createDate: '12.03.2006',
-          lastUpdate: '24.05.2017',
-          description: 'app5-desc'
-        },
-        {
-          id: 6,
-          title: 'app6',
-          createDate: '12.03.2006',
-          lastUpdate: '24.05.2017',
-          description: 'app6-desc'
-        }
-      ],
+      applications: [],
       headers: [
         {
           text: 'Id',
@@ -101,8 +82,8 @@ export default {
         },
         { text: 'Title', value: 'title' },
         { text: 'Description', value: 'description' },
-        { text: 'Create Date', value: 'createDate' },
-        { text: 'Last Update', value: 'lastUpdate' },
+        { text: 'Creation Date', value: 'createdAt' },
+        { text: 'Last Update', value: 'updatedAt' },
         { text: 'Actions', value: 'actions', sortable: false }
       ]
     }

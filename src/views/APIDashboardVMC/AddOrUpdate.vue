@@ -3,9 +3,9 @@
     <div class="container mt-5">
     <div class="card">
       <div class="card-body">
-        <h5 v-if="app.id == 0" class="card-title">Api Oluştur</h5>
-        <h5 v-else class="card-title">Api Güncelle</h5>
-        <hr />
+        <h4 v-if="app.id == 0" class="card-title font-weight-bold">Create Data Set</h4>
+        <h4 v-else class="card-title">Update Data Set</h4>
+        <br/>
         <form @submit.prevent="onSubmit()">
           <div class="form-group">
             <label for="exampleInputEmail1">Title : </label>
@@ -26,19 +26,10 @@
             required minlength="1"
             ></textarea>
           </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">DataSchemaId : </label>
-            <select v-model="app.dataSchemaId" class="form-control" required>
-              <option disabled value="">Please select one</option>
-              <option value=1>DataSchema 1</option>
-              <option value=2>DataSchema 2</option>
-              <option value=3>DataSchema 3</option>
-            </select>
-          </div>
-          <button v-if="app.id == 0" type="submit" class="btn btn-success float-right">Oluştur</button>
+          <button v-if="app.id == 0" type="submit" class="btn btn-success float-right">Create</button>
           <div v-else>
-            <button type="submit" class="btn btn-success float-right">Güncelle</button>
-            <button type="reset" @click="deleteApi()" class="btn btn-danger mr-2 float-right">Sil</button>
+            <button type="submit" class="btn btn-success float-right">Update</button>
+            <button type="reset" @click="deleteDataSet()" class="btn btn-danger mr-2 float-right">Delete</button>
           </div>
         </form>
       </div>
@@ -48,6 +39,8 @@
 </template>
 
 <script>
+import Axios from 'axios'
+import swal from 'sweetalert'
 
 export default {
   name: 'ApiAppAddOrUpdate',
@@ -61,10 +54,9 @@ export default {
         id: 0,
         title: '',
         description: '',
-        createDate: '',
-        lastUpdate: '',
-        deletedAt: '',
-        dataSchemaId: 0
+        createdAt: '',
+        updatedAt: '',
+        deletedAt: ''
       }
     }
   },
@@ -74,21 +66,65 @@ export default {
     }
   },
   methods: {
-    onSubmit: function () {
-      if (this.app.id === 0) {
-        this.app.createDate = new Date().toLocaleString()
-        console.log('------\ndatabase add request sended at ' + this.app.createDate)
-      } else {
-        this.app.lastUpdate = new Date().toLocaleString()
-        console.log('------\ndatabase update request sended at ' + this.app.lastUpdate)
-      }
-      console.log('app.id : ' + this.app.id + '\napp.title : ' + this.app.title + '\napp.description : ' +
-      this.app.description + '\napp.dataSchemaId : ' + this.app.dataSchemaId + '\n------')
+    createDataSet () {
+      return Axios.post('http://localhost:4000/data-sets/', {
+        title: this.app.title, key_title: 'deneme', description: this.app.description
+      }, {
+        headers: {
+          'X-AccessToken': localStorage.getItem('X-AccessToken')
+        }
+      }).then((response) => {
+        swal({
+          title: 'Message',
+          text: 'Created successfully!',
+          icon: 'success'
+        }).then((result) => {
+          this.$router.push('/home')
+        })
+      }).catch(function (error) {
+        console.log(error.response)
+      })
     },
-    deleteApi: function () {
-      this.app.deletedAt = new Date().toLocaleString()
-      console.log('------\ndatabase delete request sended at' + this.app.deletedAt)
-      console.log('Api deleted. ID :' + this.app.id + '\n------')
+    onSubmit: async function () {
+      if (this.app.id === 0) {
+        await this.createDataSet()
+      } else {
+        await this.updateDataSet()
+      }
+    },
+
+    updateDataSet: async function () {
+      Axios.put(`http://localhost:4000/data-sets/${this.app.id}`, {
+        title: this.app.title, title_key: 'deneme', description: this.app.description
+      }, {
+        headers: {
+          'X-AccessToken': localStorage.getItem('X-AccessToken')
+        }
+      }).then((response) => {
+        swal({
+          title: 'Message',
+          text: response.data.message,
+          icon: 'success'
+        }).then((result) => {
+          this.$router.push('/home')
+        })
+      })
+    },
+
+    deleteDataSet: async function () {
+      Axios.delete(`http://localhost:4000/data-sets/${this.app.id}`, {
+        headers: {
+          'X-AccessToken': localStorage.getItem('X-AccessToken')
+        }
+      }).then((response) => {
+        swal({
+          title: 'Message',
+          text: response.data.message,
+          icon: 'success'
+        }).then((result) => {
+          this.$router.push('/home')
+        })
+      })
     }
   }
 }

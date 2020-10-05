@@ -22,7 +22,6 @@ Vue.component('v-gravatar', Gravatar)
 var myMixin = {
   created () {
     if (localStorage.getItem('X-AccessToken') !== null) {
-      console.log('Token not Null')
       axios
         .get(
           '/authentications/me/',
@@ -34,7 +33,6 @@ var myMixin = {
         )
         .then(response => {
           if (response.status === 200) {
-            console.log('Token is Valid')
             this.$router.push('/home')
             this.$notify({
               group: 'foo',
@@ -45,11 +43,9 @@ var myMixin = {
         }).catch(err => {
           if (err.response.status === 401) {
             this.$router.push('login')
-            console.log('Token Validation Failed')
           }
         })
     } else {
-      console.log('Token Null')
       this.$router.push('login')
     }
   }
