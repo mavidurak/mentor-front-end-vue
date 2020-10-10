@@ -26,13 +26,13 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    meta: { layout: 'none' },
+    meta: { layout: 'undefined' },
     component: () => import('../views/Guests/Login.vue')
   },
   {
     path: '/signup',
     name: 'Signup',
-    meta: { layout: 'none' },
+    meta: { layout: 'undefined' },
     component: () => import('../views/Guests/Signup.vue')
   },
   {
@@ -54,25 +54,25 @@ const routes = [
   {
     path: '/change-password',
     name: 'ChangePassword',
-    meta: { layout: 'none' },
+    meta: { layout: 'undefined' },
     component: () => import('../views/Home/ChangePassword.vue')
   },
   {
     path: '/change-username',
     name: 'ChangeUsername',
-    meta: { layout: 'none' },
+    meta: { layout: 'undefined' },
     component: () => import('../views/Home/ChangeUsername.vue')
   },
   {
     path: '/change-email',
     name: 'ChangeEmail',
-    meta: { layout: 'none' },
+    meta: { layout: 'undefined' },
     component: () => import('../views/Home/ChangeEmail.vue')
   },
   {
     path: '/forgot-password',
     name: 'ForgotPassword',
-    meta: { layout: 'none' },
+    meta: { layout: 'undefined' },
     component: () => import('../views/Guests/ForgotPassword.vue')
   },
   {

@@ -104,7 +104,7 @@
                         </li>
                       </ul>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item create-data-set" href="#"
+                      <a class="dropdown-item create-data-set" href="api-dashboard-vmc/add-or-update"
                         ><strong>Create</strong> Data Set</a
                       >
                     </div>

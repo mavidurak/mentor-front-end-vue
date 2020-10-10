@@ -318,7 +318,6 @@
 </template>
 
 <script>
-import router from '../../router'
 import axios from 'axios'
 import '@/plugins/jquery.overlayScrollbars.js'
 // import '@/plugins/adminlte.js'
@@ -342,9 +341,7 @@ export default {
   },
   methods: {
     logout () {
-      // TODO: şuanda cookie silinemiyor. ilgilenilecek
       window.localStorage.removeItem('X-AccessToken')
-      router.push('/login')
     }
   },
   created () {

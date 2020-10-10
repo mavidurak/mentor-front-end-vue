@@ -100,17 +100,19 @@ export default {
               respose.data.token.token_value
             )
             this.statusClass = 'fas fa-check fa-2x text-success'
-            location.assign('/home')
+            this.$router.push('/home')
           }
         })
         .catch((err) => {
-          if (err.response.status === 400) {
-            this.statusClass = 'fas fa-times fa-2x text-danger'
-          }
-          if (err.response.status === 403) {
+          swal({
+            title: err.response.data.message,
+            icon: 'error'
+          })
+          console.log(err.response.data)
+          if (err.response.data.error !== undefined) {
             swal({
-              title: 'Confirm Your Account!',
-              text: err.response.data.message,
+              title: 'Validation Failed!',
+              text: err.response.data.error.details[0].message,
               icon: 'error'
             })
           }
