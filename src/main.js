@@ -15,7 +15,7 @@ import HomeNav from '@/views/Layouts/HomeNav'
 import None from '@/views/Layouts/None'
 
 Vue.component('home-nav-layout', HomeNav)
-Vue.component('none-layout', None)
+Vue.component('undefined-layout', None)
 
 Vue.component('v-gravatar', Gravatar)
 
@@ -33,7 +33,6 @@ var myMixin = {
         )
         .then(response => {
           if (response.status === 200) {
-            this.$router.push('/home')
             this.$notify({
               group: 'foo',
               type: 'success',
