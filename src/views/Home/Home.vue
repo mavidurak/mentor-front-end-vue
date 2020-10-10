@@ -1,5 +1,67 @@
 <template>
   <div>
+    <div
+      class="modal fade"
+      id="deleteDataSet"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Delete to {{ selectedDataSet.title }}
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div
+              class="row"
+              style="text-align: center; font-weight: bold; font-size: 1.2em"
+            >
+              <div class="col">Are you sure to delete this data set.</div>
+            </div>
+            <div class="row">
+              <div class="col">Title :</div>
+              <div class="col">{{ selectedDataSet.title }}</div>
+            </div>
+            <div class="row">
+              <div class="col">Key Title :</div>
+              <div class="col">{{ selectedDataSet.key_title }}</div>
+            </div>
+            <div class="row">
+              <div class="col">Description</div>
+              <div class="col">{{ selectedDataSet.description }}</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              @click="deleteDataSet"
+              type="button"
+              class="btn btn-danger"
+              data-dismiss="modal"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="text-center">
       <div class="container">
         <!--Total api, dataSet and data cards-->
@@ -51,9 +113,7 @@
             <div class="card">
               <!--DataSet info navbar-->
               <div class="card-header chart-header">
-                <div class="data-set-name">
-                  Data Set
-                </div>
+                <div class="data-set-name">Data Set</div>
                 <!--DataSet edit and select-->
                 <div class="select-data-set">
                   <div class="btn-group">
@@ -68,15 +128,26 @@
                       <i style="font-size: 1.3em" class="fas fa-pen"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                      <button class="dropdown-item" type="button">
+                      <router-link
+                        :to="{
+                          name: 'ApiAddOrUpdateMC',
+                          params: { app: selectedDataSet },
+                        }"
+                        class="dropdown-item"
+                      >
                         Change '<strong>title</strong>', '<strong
                           >key title</strong
                         >', '<strong>description</strong>'
-                      </button>
+                      </router-link>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item delete-data-set" href="#">
-                        <strong>Delete</strong> this Data Set</a
+                      <button
+                        type="button"
+                        class="btn btn-primary dropdown-item delete-data-set"
+                        data-toggle="modal"
+                        data-target="#deleteDataSet"
                       >
+                        <strong>Delete</strong> this data set
+                      </button>
                     </div>
                   </div>
                   <div class="btn-group">
@@ -93,7 +164,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                       <h6 class="dropdown-header">Select a Data Set</h6>
                       <ul>
-                        <li v-for="dataSet in dataSets" :key="dataSet.title">
+                        <li v-for="dataSet in dataSets" :key="dataSet.id">
                           <button
                             class="dropdown-item"
                             type="button"
@@ -104,8 +175,10 @@
                         </li>
                       </ul>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item create-data-set" href="api-dashboard-vmc/add-or-update"
-                        ><strong>Create</strong> Data Set</a
+                      <router-link
+                        :to="{ name: 'ApiAddOrUpdateMC' }"
+                        class="dropdown-item create-data-set"
+                        ><strong>Create</strong> Data Set</router-link
                       >
                     </div>
                   </div>
@@ -137,7 +210,7 @@
                         <td>
                           <ul class="info-body info-title-body">
                             <li><h4>Title:</h4></li>
-                            <li>{{ dataSets[selectedDataSet]["title"] }}</li>
+                            <li>{{ selectedDataSet.title }}</li>
                           </ul>
                         </td>
                       </tr>
@@ -149,7 +222,7 @@
                           <ul class="info-body info-key-title-body">
                             <li><h4>Key Title:</h4></li>
                             <li>
-                              {{ dataSets[selectedDataSet]["key_title"] }}
+                              {{ selectedDataSet.key_title }}
                             </li>
                           </ul>
                         </td>
@@ -162,7 +235,7 @@
                           <ul class="info-body info-description-body">
                             <li><h4>Description:</h4></li>
                             <li>
-                              {{ dataSets[selectedDataSet]["description"] }}
+                              {{ selectedDataSet.description }}
                             </li>
                           </ul>
                         </td>
@@ -210,9 +283,7 @@
                               <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">
                                   Add new data to
-                                  <strong>{{
-                                    dataSets[selectedDataSet]["title"]
-                                  }}</strong>
+                                  <strong>{{ selectedDataSet.title }}</strong>
                                 </h5>
                                 <button
                                   type="button"
@@ -227,20 +298,33 @@
                                 <div class="row">
                                   <div class="col-4">Select data set :</div>
                                   <div class="col-8">
-                                    <strong>{{ dataSets[selectedDataSet]["title"] }}</strong>
+                                    <strong>{{ selectedDataSet.title }}</strong>
                                   </div>
                                 </div>
                                 <div class="row">
                                   <div class="col-4">Select application :</div>
                                   <div class="col-8">
-                                    <select class="form-control">
-                                        <option v-for="app in apps" :key="app.title" placeholder="Select application">{{ app.title }}</option>
-                                      </select>
+                                    <select class="form-control" v-model="app">
+                                      <option
+                                        v-for="app in apps"
+                                        :key="app.id"
+                                        placeholder="Select application"
+                                      >
+                                        {{ app.title }}
+                                      </option>
+                                    </select>
                                   </div>
                                 </div>
                                 <div class="row">
                                   <div class="col-4">Data :</div>
-                                  <div class="col-8"><input class="form-control" type="text" placeholder="Your data"></div>
+                                  <div class="col-8">
+                                    <input
+                                      v-model="dataInput"
+                                      class="form-control"
+                                      type="text"
+                                      placeholder="Your data"
+                                    />
+                                  </div>
                                 </div>
                               </div>
                               <div class="modal-footer">
@@ -251,7 +335,18 @@
                                 >
                                   Close
                                 </button>
-                                <button type="button" class="btn btn-success">
+                                <button
+                                  @click="
+                                    addData({
+                                      dataSet: selectedDataSet.id,
+                                      application: app,
+                                      data: dataInput,
+                                    })
+                                  "
+                                  type="button"
+                                  class="btn btn-success"
+                                  data-dismiss="modal"
+                                >
                                   Add
                                 </button>
                               </div>
@@ -280,13 +375,13 @@
                         <tbody>
                           <tr>
                             <th scope="row">Date</th>
-                            <td v-for="data in datas" :key="data.created_at">
+                            <td v-for="data in datas" :key="data.id">
                               {{ data.created_at }}
                             </td>
                           </tr>
                           <tr>
                             <th scope="row">Value</th>
-                            <td v-for="data in datas" :key="data.value">
+                            <td v-for="data in datas" :key="data.id">
                               {{ data.value }}
                             </td>
                           </tr>
@@ -332,16 +427,13 @@
                             aria-haspopup="true"
                             aria-expanded="false"
                           >
-                            {{ dataSets[selectedDataSet]["title"] }}
+                            {{ selectedDataSet.title }}
                           </button>
                           <div
                             class="dropdown-menu dropdown-menu-right"
                             aria-labelledby="dropdownMenuButton"
                           >
-                            <ul
-                              v-for="dataset in dataSets"
-                              :key="dataset.title"
-                            >
+                            <ul v-for="dataset in dataSets" :key="dataset.id">
                               <li>
                                 <a
                                   class="dropdown-item"
@@ -365,13 +457,13 @@
                             aria-haspopup="true"
                             aria-expanded="false"
                           >
-                            {{ apps[selectedApp]["title"] }}
+                            {{ selectedApp.title }}
                           </button>
                           <div
                             class="dropdown-menu dropdown-menu-right"
                             aria-labelledby="dropdownMenuButton"
                           >
-                            <ul v-for="app in apps" :key="app.title">
+                            <ul v-for="app in apps" :key="app.id">
                               <li>
                                 <a
                                   class="dropdown-item"
@@ -401,7 +493,7 @@
                         App Id
                       </div>
                       <div class="card-body">
-                        {{ apps[selectedApp]["id"] }}
+                        {{ selectedApp.id }}
                       </div>
                     </div>
                   </div>
@@ -414,7 +506,7 @@
                         App Title
                       </div>
                       <div class="card-body">
-                        {{ apps[selectedApp]["title"] }}
+                        {{ selectedApp.title }}
                       </div>
                     </div>
                   </div>
@@ -427,7 +519,7 @@
                         Data Set Title
                       </div>
                       <div class="card-body">
-                        {{ dataSets[selectedDataSet]["title"] }}
+                        {{ selectedDataSet.title }}
                       </div>
                     </div>
                   </div>
@@ -442,7 +534,7 @@
                         Data Set Id
                       </div>
                       <div class="card-body">
-                        {{ dataSets[selectedDataSet]["id"] }}
+                        {{ selectedDataSet.id }}
                       </div>
                     </div>
                   </div>
@@ -455,7 +547,7 @@
                         App Description
                       </div>
                       <div class="card-body">
-                        {{ apps[selectedApp]["description"] }}
+                        {{ selectedApp.description }}
                       </div>
                     </div>
                   </div>
@@ -470,7 +562,7 @@
                         App Read Permission
                       </div>
                       <div class="card-body">
-                        {{ apps[selectedApp]["permission_read"] }}
+                        {{ selectedApp.permission_read }}
                       </div>
                     </div>
                   </div>
@@ -484,7 +576,7 @@
                           App Write Permission
                         </div>
                         <div class="card-body">
-                          {{ apps[selectedApp]["permission_write"] }}
+                          {{ selectedApp.permission_write }}
                         </div>
                       </div>
                     </div>
@@ -499,7 +591,7 @@
                           App Delete Permission
                         </div>
                         <div class="card-body">
-                          {{ apps[selectedApp]["permission_delete"] }}
+                          {{ selectedApp.permission_delete }}
                         </div>
                       </div>
                     </div>
@@ -526,10 +618,10 @@ export default {
   },
   methods: {
     selectDataSet: function (dataset) {
-      this.selectedDataSet = dataset.id - 1
+      this.selectedDataSet = dataset
     },
     selectApp: function (app) {
-      this.selectedApp = app.id - 1
+      this.selectedApp = app
     },
     getDataSets: function () {
       Axios.get('http://localhost:4000/data-sets/', {
@@ -539,8 +631,36 @@ export default {
       }).then((response) => {
         this.dataSetCount = response.data.count
         this.dataSets = response.data.results
-        // console.log(this.dataSets)
+        this.selectedDataSet = this.dataSets[0]
       })
+    },
+    addData: function (dataInfo) {
+      console.log('yo')
+      Axios.post(
+        'http://localhost:4000/datas/',
+        {
+          dataset_id: dataInfo.dataSet,
+          value: dataInfo.data
+        },
+        {
+          headers: {
+            'X-AccessToken': localStorage.getItem('X-AccessToken')
+          }
+        }
+      ).catch(err => {
+        console.log(err)
+      })
+    },
+    deleteDataSet: function () {
+      Axios.delete(
+        `http://localhost:4000/data-sets/${this.selectedDataSet.id}`,
+        {
+          headers: {
+            'X-AccessToken': localStorage.getItem('X-AccessToken')
+          }
+        }
+      )
+      this.getAll()
     },
     getAll: function () {
       this.getDataSets()
@@ -548,30 +668,11 @@ export default {
   },
   data () {
     return {
-      dataSetCount: 3,
-      dataSets: [
-        {
-          id: '1',
-          title: 'Bedroom-Temp',
-          key_title: 'Bedroom,Temperature,Celcius',
-          description: 'It is include my bedroom temperature data'
-        },
-        {
-          id: '2',
-          title: 'My-Data-Set-2',
-          key_title: 'DataSet2',
-          description: 'It is my data set 2'
-        },
-        {
-          id: '3',
-          title: 'My-Data-Set-3',
-          key_title: 'DataSet3',
-          description: 'It is my data set 3'
-        }
-      ],
-      selectedDataSet: 0,
+      dataSetCount: null,
+      dataSets: null,
+      selectedDataSet: {},
       appCount: '6',
-      selectedApp: 0,
+      selectedApp: {},
       apps: [
         {
           id: '1',
@@ -599,33 +700,6 @@ export default {
           permission_read: true,
           permission_write: true,
           permission_delete: true
-        },
-        {
-          id: '4',
-          title: 'app4',
-          dataSetId: '2',
-          description: 'its app4 description',
-          permission_read: true,
-          permission_write: false,
-          permission_delete: true
-        },
-        {
-          id: '5',
-          title: 'app5',
-          dataSetId: '4',
-          description: 'its app5 description',
-          permission_read: false,
-          permission_write: false,
-          permission_delete: false
-        },
-        {
-          id: '6',
-          title: 'app6',
-          dataSetId: '5',
-          description: 'its app6 description',
-          permission_read: false,
-          permission_write: true,
-          permission_delete: true
         }
       ],
       dataCount: 689,
@@ -649,7 +723,7 @@ export default {
     document.body.className = ''
   },
   mounted () {
-    // this.getAll()
+    this.getAll()
   }
 }
 </script>

@@ -33,7 +33,7 @@ var myMixin = {
         )
         .then(response => {
           if (response.status === 200) {
-            this.$router.push('/home')
+            // this.$router.push('/home')
             this.$notify({
               group: 'foo',
               type: 'success',
