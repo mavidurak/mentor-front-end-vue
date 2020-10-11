@@ -154,11 +154,11 @@
             </a>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="login">
-              <span v-on:click="logout()"
-                ><i class="fas fa-sign-out-alt"></i
-              ></span>
-            </router-link>
+              <span v-on:click="logout()">
+                <router-link class="nav-link" to="login">
+                  <i class="fas fa-sign-out-alt"></i>
+                  </router-link>
+              </span>
           </li>
         </ul>
       </nav>
@@ -345,20 +345,37 @@ export default {
     }
   },
   created () {
-    axios
-      .get('/authentications/me/', {
-        headers: {
-          'X-AccessToken': localStorage.getItem('X-AccessToken')
-        }
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          this.username = response.data.username
-          this.email = response.data.email
-        }
-      })
+    if (localStorage.getItem('X-AccessToken') !== null) {
+      axios
+        .get(
+          '/authentications/me/',
+          {
+            headers: {
+              'X-AccessToken': localStorage.getItem('X-AccessToken')
+            }
+          }
+        )
+        .then(response => {
+          if (response.status === 200) {
+            this.$notify({
+              group: 'foo',
+              type: 'success',
+              title: 'Successfully Logged In'
+            })
+            this.username = response.data.username
+            this.email = response.data.email
+          }
+        }).catch(err => {
+          if (err.response.status === 401) {
+            this.$router.push('login')
+          }
+        })
+    } else {
+      this.$router.push('login')
+    }
   }
 }
+
 </script>
 
 <style>
