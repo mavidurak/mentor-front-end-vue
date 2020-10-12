@@ -1,19 +1,20 @@
 <template>
   <div align="center">
-    <div>
+    <div @mousemove="isSelect" @keydown.enter="addTag" >
       <multiselect
         style="width: 100%"
         v-model="value"
         :options="options"
         :multiple="true"
-        :close-on-select="true"
+        :close-on-select="false"
         :clearText-on-select="false"
         :preserve-search="true"
-        placeholder="Seçmek için dokun"
+        :preselect-first="false"
         label="key"
         track-by="key"
+        @tag="addTag"
         @input="$emit('get-key', value)"
-        :preselect-first="false"
+        placeholder="Seçmek için dokun"
       >
       </multiselect>
     </div>
@@ -25,9 +26,9 @@ import Multiselect from 'vue-multiselect'
 
 export default {
   components: { Multiselect },
-  props: {
-    selectedkey: Object
-  },
+  props: [
+    'selectedkey'
+  ],
   data () {
     return {
       options: [
@@ -48,6 +49,22 @@ export default {
     }
   },
   methods: {
+    addTag: function () {
+      const search = this.$children[0].search
+      if (search !== '') {
+        const tag = { key: search }
+        this.value.push(tag)
+        this.options.push(tag)
+      }
+    },
+    isSelect: function () {
+      if (this.selectedkey) {
+        this.value.push({ key: this.selectedkey })
+        this.selectedkey = false
+      }
+    }
+  },
+  mounted () {
   }
 }
 </script>

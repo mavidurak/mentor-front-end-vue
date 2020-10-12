@@ -136,7 +136,6 @@ export default {
           this.email = response.data.email
           this.created = moment(String(response.data.createdAt)).format('DD/MM/YYYY')
           this.updated = moment(String(response.data.updatedAt)).format('DD/MM/YYYY')
-          console.log(response.data)
         }
       })
   },

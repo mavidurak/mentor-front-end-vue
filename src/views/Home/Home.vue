@@ -610,6 +610,7 @@
 <script>
 import LineChart from '../../components/LineChart'
 import Axios from 'axios'
+import swal from 'sweetalert'
 
 export default {
   name: 'Home',
@@ -635,7 +636,6 @@ export default {
       })
     },
     addData: function (dataInfo) {
-      console.log('yo')
       Axios.post(
         'http://localhost:4000/datas/',
         {
@@ -647,8 +647,13 @@ export default {
             'X-AccessToken': localStorage.getItem('X-AccessToken')
           }
         }
-      ).catch(err => {
-        console.log(err)
+      ).then((res) => {
+        if (res.status === 201) {
+          swal({
+            title: 'Data has been added successfully!',
+            icon: 'success'
+          })
+        }
       })
     },
     deleteDataSet: function () {

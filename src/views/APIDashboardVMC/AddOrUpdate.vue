@@ -137,9 +137,6 @@ export default {
         await this.updateDataSet()
       }
     },
-    sad () {
-      return 'asd'
-    },
     updateDataSet: async function () {
       Axios.put(
         `http://localhost:4000/data-sets/${this.app.id}`,
