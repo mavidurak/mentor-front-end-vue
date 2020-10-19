@@ -12,11 +12,9 @@ import Notifications from 'vue-notification'
 import Gravatar from 'vue-gravatar'
 import HomeNav from '@/views/Layouts/HomeNav'
 import None from '@/views/Layouts/None'
-import Undefined from '@/views/Layouts/Undefined'
 
 Vue.component('home-nav-layout', HomeNav)
 Vue.component('none-layout', None)
-Vue.component('undefined-layout', Undefined)
 
 Vue.component('v-gravatar', Gravatar)
 
