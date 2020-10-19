@@ -7,7 +7,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/login',
+    meta: { layout: 'none' }
   },
   {
     path: '/home',
@@ -26,13 +27,13 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    meta: { layout: 'undefined' },
+    meta: { layout: 'none' },
     component: () => import('../views/Guests/Login.vue')
   },
   {
     path: '/signup',
     name: 'Signup',
-    meta: { layout: 'undefined' },
+    meta: { layout: 'none' },
     component: () => import('../views/Guests/Signup.vue')
   },
   {
@@ -54,25 +55,25 @@ const routes = [
   {
     path: '/change-password',
     name: 'ChangePassword',
-    meta: { layout: 'undefined' },
+    meta: { layout: 'none' },
     component: () => import('../views/Home/ChangePassword.vue')
   },
   {
     path: '/change-username',
     name: 'ChangeUsername',
-    meta: { layout: 'undefined' },
+    meta: { layout: 'none' },
     component: () => import('../views/Home/ChangeUsername.vue')
   },
   {
     path: '/change-email',
     name: 'ChangeEmail',
-    meta: { layout: 'undefined' },
+    meta: { layout: 'none' },
     component: () => import('../views/Home/ChangeEmail.vue')
   },
   {
     path: '/forgot-password',
     name: 'ForgotPassword',
-    meta: { layout: 'undefined' },
+    meta: { layout: 'none' },
     component: () => import('../views/Guests/ForgotPassword.vue')
   },
   {
