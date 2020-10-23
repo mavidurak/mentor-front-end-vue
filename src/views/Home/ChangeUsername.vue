@@ -71,8 +71,8 @@ export default {
   methods: {
     onSubmit: function () {
       axios
-        .post(
-          '/user/changeUsername/',
+        .patch(
+          '/authentications/update/',
           {
             password: this.password,
             newUsername: this.newUsername
