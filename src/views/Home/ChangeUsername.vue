@@ -72,7 +72,7 @@ export default {
     onSubmit: function () {
       axios
         .patch(
-          '/authentications/update/',
+          '/authentications/me/',
           {
             password: this.password,
             newUsername: this.newUsername

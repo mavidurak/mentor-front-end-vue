@@ -88,7 +88,7 @@ export default {
       if (this.confirmPassword === this.newPassword && this.newPassword.length >= 8 && this.newPassword.length <= 30) {
         axios
           .patch(
-            '/authentications/update/',
+            '/authentications/me/',
             {
               password: this.password,
               newPassword: this.newPassword
