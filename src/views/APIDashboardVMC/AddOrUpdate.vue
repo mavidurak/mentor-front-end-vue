@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     createDataSet () {
-      return Axios.post('http://localhost:4000/data-sets/', {
+      return Axios.post('/data-sets/', {
         title: this.app.title, key_title: 'deneme', description: this.app.description
       }, {
         headers: {
@@ -94,7 +94,7 @@ export default {
     },
 
     updateDataSet: async function () {
-      Axios.put(`http://localhost:4000/data-sets/${this.app.id}`, {
+      Axios.put(`/data-sets/${this.app.id}`, {
         title: this.app.title, title_key: 'deneme', description: this.app.description
       }, {
         headers: {
@@ -112,7 +112,7 @@ export default {
     },
 
     deleteDataSet: async function () {
-      Axios.delete(`http://localhost:4000/data-sets/${this.app.id}`, {
+      Axios.delete(`/data-sets/${this.app.id}`, {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }

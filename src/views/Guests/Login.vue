@@ -89,7 +89,7 @@ export default {
   methods: {
     onSubmit: function () {
       axios
-        .post('http://localhost:4000/authentications/login/', {
+        .post('/authentications/login/', {
           username: this.username,
           password: this.password
         })

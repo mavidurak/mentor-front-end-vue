@@ -56,7 +56,7 @@ export default {
 
   methods: {
     getDataSets: function () {
-      Axios.get('http://localhost:4000/data-sets/', {
+      Axios.get('/data-sets/', {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
