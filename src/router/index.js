@@ -22,6 +22,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
+    meta: { layout: 'none' },
     component: () => import(/* webpackChunkName: "about" */ '../views/Guests/About.vue')
   },
   {
@@ -39,11 +40,13 @@ const routes = [
   {
     path: '/multi-select',
     name: 'multiselect',
+    meta: { layout: 'none' },
     component: () => import('../views/Home/Multiselect.vue')
   },
   {
     path: '/axios-demo',
     name: 'AxiosDemo',
+    meta: { layout: 'none' },
     component: () => import('../views/Home/AxiosDemo.vue')
   },
   {
@@ -55,13 +58,13 @@ const routes = [
   {
     path: '/change-password',
     name: 'ChangePassword',
-    meta: { layout: 'none' },
+    meta: { layout: 'home-nav' },
     component: () => import('../views/Home/ChangePassword.vue')
   },
   {
     path: '/change-username',
     name: 'ChangeUsername',
-    meta: { layout: 'none' },
+    meta: { layout: 'home-nav' },
     component: () => import('../views/Home/ChangeUsername.vue')
   },
   {

@@ -6,6 +6,7 @@
 <script>
 import axios from 'axios'
 export default {
+  name: 'None',
   created () {
     if (localStorage.getItem('X-AccessToken') !== null) {
       axios

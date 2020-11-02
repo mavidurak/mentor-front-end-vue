@@ -87,8 +87,8 @@ export default {
     onSubmit: function () {
       if (this.confirmPassword === this.newPassword && this.newPassword.length >= 8 && this.newPassword.length <= 30) {
         axios
-          .post(
-            '/user/changePassword/',
+          .patch(
+            '/authentications/me/',
             {
               password: this.password,
               newPassword: this.newPassword
