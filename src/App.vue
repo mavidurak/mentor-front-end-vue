@@ -11,11 +11,9 @@
 export default {
   computed: {
     layout () {
-      if (this.$route.meta.layout !== undefined) {
-        return (this.$route.meta.layout) + '-layout'
-      } else {
-        return null
-      }
+      if (this.$route.meta.layout) {
+        return `${this.$route.meta.layout}-layout`
+      } return null
     }
   }
 }
