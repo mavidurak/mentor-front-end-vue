@@ -6,6 +6,7 @@
         v-model="value"
         :options="options"
         :multiple="true"
+        :max=1
         :close-on-select="false"
         :clearText-on-select="false"
         :preserve-search="true"
@@ -26,11 +27,9 @@ import Multiselect from 'vue-multiselect'
 
 export default {
   components: { Multiselect },
-  props: [
-    'selectedkey'
-  ],
   data () {
     return {
+      selectedkey: null,
       options: [
         { key: 'Temperature' },
         { key: 'Humidity' },
@@ -63,8 +62,6 @@ export default {
         this.selectedkey = false
       }
     }
-  },
-  mounted () {
   }
 }
 </script>
