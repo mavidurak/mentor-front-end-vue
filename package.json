@@ -11,7 +11,7 @@
     "build-hooks": "cp -R hooks ./.git/ && chmod +x ./.git/hooks/pre-commit"
   },
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.2",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
