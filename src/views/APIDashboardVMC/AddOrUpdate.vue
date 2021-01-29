@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
               <label for="exampleKeyTitle">Key Title : </label>
-              <multiSelect :selectedkey="app.key_title" @get-key="updateKeyTitle" />
+              <multiSelect :selectedkey="app.data_type" @get-key="updateKeyTitle" />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Description : </label>
@@ -79,7 +79,7 @@ export default {
       app: {
         id: 0,
         title: '',
-        key_title: '',
+        data_type: '',
         description: '',
         createdAt: '',
         updatedAt: '',
@@ -91,7 +91,7 @@ export default {
   mounted () {
     if (this.$route.params.app) {
       this.app = this.$route.params.app
-      this.key = this.app.key_title
+      this.key = this.app.data_type
     }
   },
   methods: {
@@ -100,7 +100,7 @@ export default {
         'http://localhost:4000/data-sets/',
         {
           title: this.app.title,
-          key_title: this.app.key_title,
+          data_type: this.app.data_type,
           description: this.app.description
         },
         {
@@ -115,7 +115,7 @@ export default {
             text: 'Created successfully!',
             icon: 'success'
           }).then((result) => {
-            this.$router.push('/home')
+            this.$router.push('/api-dashboard-vmc')
           })
         })
         .catch(function (error) {
@@ -127,8 +127,10 @@ export default {
         })
     },
     updateKeyTitle (value) {
-      console.table(value)
-      this.app.key_title = value[0].key
+      if (value[0]) {
+        console.table(value)
+        this.app.data_type = value[0].key
+      }
     },
     onSubmit: async function () {
       if (this.app.id === 0) {
@@ -142,7 +144,7 @@ export default {
         `http://localhost:4000/data-sets/${this.app.id}`,
         {
           title: this.app.title,
-          key_title: this.app.key_title,
+          data_type: this.app.data_type,
           description: this.app.description
         },
         {
@@ -156,7 +158,7 @@ export default {
           text: response.data.message,
           icon: 'success'
         }).then((result) => {
-          this.$router.push('/home')
+          this.$router.push('/api-dashboard-vmc')
         })
       })
     },
@@ -172,7 +174,7 @@ export default {
           text: response.data.message,
           icon: 'success'
         }).then((result) => {
-          this.$router.push('/home')
+          this.$router.push('/api-dashboard-vmc')
         })
       })
     }
