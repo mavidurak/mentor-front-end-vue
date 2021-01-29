@@ -16,71 +16,10 @@
             <div class="card-body">
               <h4>Sign Up</h4>
               <form class="text-left" @submit.prevent="onSubmit()">
-                <div class="form-group">
-                  <label for="inputUsername">Username:</label>
-                  <validation-provider
-                    name="username"
-                    rules="required|min:3|max:20"
-                    v-slot="{ errors }"
-                  >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputUsername"
-                      v-model="username"
-                      placeholder="Enter your username"
-                    />
-                    <span>{{ errors[0] }}</span>
-                  </validation-provider>
-                </div>
-                <div class="form-group">
-                  <validation-provider
-                    name="password"
-                    rules="required|min:8|max:16"
-                    v-slot="{ errors }"
-                    :bails="false"
-                  >
-                    <label for="inputPassword">Password</label>
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="inputPassword"
-                      v-model="password"
-                      placeholder="Enter your password"
-                    />
-                    <span>{{ errors[0] }}</span>
-                  </validation-provider>
-                </div>
-                <div class="form-group">
-                  <label for="inputname">Fullname:</label>
-                  <validation-provider
-                    name="name"
-                    rules="required|min:3|max:20"
-                    v-slot="{ errors }"
-                  >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputname"
-                      v-model="name"
-                      placeholder="Enter your fullname"
-                    />
-                    <span>{{ errors[0] }}</span>
-                  </validation-provider>
-                </div>
-                <div class="form-group">
-                  <label for="inputMail">Email:</label>
-                  <validation-provider name="email" rules="required|email" v-slot="{ errors }">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="inputMail"
-                      v-model="email"
-                      placeholder="Enter your email"
-                    />
-                    <span>{{ errors[0] }}</span>
-                  </validation-provider>
-                </div>
+                <UsernameInput v-model='username'/>
+                <PasswordInput v-model='password'/>
+                <FullnameInput v-model='name'/>
+                <EmailInput v-model='email'/>
                 <router-link class="btn btn-light" to="/login">Back</router-link>
                 <button
                   type="submit"
@@ -100,15 +39,22 @@
 </template>
 
 <script>
-import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import { ValidationObserver } from 'vee-validate'
 import Axios from 'axios'
 import swal from 'sweetalert'
+import UsernameInput from '@/components/input/Username'
+import PasswordInput from '@/components/input/Password'
+import FullnameInput from '@/components/input/Fullname'
+import EmailInput from '@/components/input/Email'
 
 export default {
   name: 'Signup',
   components: {
-    ValidationProvider,
-    ValidationObserver
+    ValidationObserver,
+    UsernameInput,
+    PasswordInput,
+    FullnameInput,
+    EmailInput
   },
   data: () => {
     return {
@@ -121,6 +67,7 @@ export default {
   },
   methods: {
     onSubmit: function () {
+      console.log(this.username)
       Axios.post('http://localhost:4000/authentications/register/', {
         username: this.username,
         password: this.password,
@@ -140,7 +87,7 @@ export default {
         })
         .catch((err) => {
           if (err.response.status === 400) {
-            const errorText = err.response.data.error.details[0].message
+            const errorText = err.response.data.error
             swal({
               title: 'Error!',
               text: errorText,

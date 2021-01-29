@@ -3,50 +3,13 @@
     <div class="up-background"></div>
     <div class="container">
       <div class="row text-center mt-5 justify-content-center ">
-
         <div class="col-lg-6 border rounded bg-light shadow-lg mt-5 px-3">
           <h5 class="mb-3">Change Password</h5>
           <ValidationObserver ref="form" v-slot="{ invalid }">
             <form class="text-left" @submit.prevent="onSubmit()">
-              <div class="form-group">
-                <label for="inputPassword">Password</label>
-                <validation-provider name="password" rules="required" v-slot="{ errors }">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="inputPassword"
-                    v-model="password"
-                    placeholder="Enter Your Password"
-                  />
-                  <span>{{ errors[0] }}</span>
-                </validation-provider>
-              </div>
-              <div class="form-group">
-                <label for="inputNewPassword">New Password</label>
-                <validation-provider name="newPassword" rules="required" v-slot="{ errors }">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="inputNewPassword"
-                    v-model="newPassword"
-                    placeholder="Enter Your New Password"
-                  />
-                  <span>{{ errors[0] }}</span>
-                </validation-provider>
-              </div>
-              <div class="form-group">
-                <label for="inputConfirmPassword">New Password Again</label>
-                <validation-provider name="confirmPassword" rules="required" v-slot="{ errors }">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="inputConfirmPassword"
-                    v-model="confirmPassword"
-                    placeholder="Enter Your New Password Again"
-                  />
-                  <span>{{ errors[0] }}{{message}}</span>
-                </validation-provider>
-              </div>
+              <PasswordInput v-model='password'/>
+              <PasswordInput title='New Password:' v-model='newPassword'/>
+              <PasswordInput title='New Password Again: ' v-model='confirmPassword'/>
               <button
                 type="submit"
                 name="submitButton"
@@ -64,15 +27,16 @@
 </template>
 
 <script>
-import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import { ValidationObserver } from 'vee-validate'
+import PasswordInput from '@/components/input/Password'
 import axios from 'axios'
 import swal from 'sweetalert'
 
 export default {
   name: 'ChangePassword',
   components: {
-    ValidationProvider,
-    ValidationObserver
+    ValidationObserver,
+    PasswordInput
   },
   data: () => {
     return {
