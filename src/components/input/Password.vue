@@ -2,20 +2,20 @@
   <div class="form-group">
     <label for="inputPassword">{{title}}</label>
     <validation-provider
+      mode="eager"
       name="password"
       rules="required|min:8|max:16"
-      v-slot="{ errors }"
-      :bails="false"
+      v-slot="{ errors,classes }"
     >
       <input
         type="password"
         class="form-control"
-        id="inputPassword"
+        :class="classes"
         :value="value"
         @input="$emit('update', $event.target.value)"
         placeholder="Enter your password"
       />
-      <span>{{ errors[0] }}</span>
+      <div class="mt-1 invalid-feedback" >{{ errors[0] }}</div>
     </validation-provider>
   </div>
 </template>

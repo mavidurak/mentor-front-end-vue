@@ -2,19 +2,20 @@
   <div class="form-group">
     <label for="inputUsername">{{title}}</label>
     <validation-provider
+      mode="eager"
       name="username"
       rules="required|min:3|max:20"
-      v-slot="{ errors }"
+      v-slot="{ errors,classes }"
     >
       <input
         type="text"
         class="form-control"
-        id="inputUsername"
+        :class="classes"
         :value="value"
         @input="$emit('update', $event.target.value)"
         placeholder="Enter your username"
       />
-      <span>{{ errors[0] }}</span>
+      <div class="mt-1 invalid-feedback" >{{ errors[0] }}</div>
     </validation-provider>
   </div>
 </template>

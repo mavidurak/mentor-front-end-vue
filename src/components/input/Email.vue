@@ -2,19 +2,20 @@
   <div class="form-group">
     <label for="inputMail">{{title}}</label>
     <validation-provider
+      mode="eager"
       name="email"
       rules="required|email"
-      v-slot="{ errors }"
+      v-slot="{ errors,classes }"
     >
       <input
         type="email"
         class="form-control"
-        id="inputMail"
+        :class="classes"
         :value="value"
         @input="$emit('update', $event.target.value)"
         placeholder="Enter your email"
       />
-      <span>{{ errors[0] }}</span>
+      <div class="mt-1 invalid-feedback" >{{ errors[0] }}</div>
     </validation-provider>
   </div>
 </template>
