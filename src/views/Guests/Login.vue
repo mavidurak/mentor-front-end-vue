@@ -16,8 +16,8 @@
             <div class="card-body">
               <h4>Sign In</h4>
               <form class="text-left" @submit.prevent="onSubmit()">
-                <UsernameInput v-model='username'/>
-                <PasswordInput v-model='password'/>
+                <TextInputGenerator v-model='username' title='Username' rules='required|min:3|max:20' type='text'/>
+                <TextInputGenerator v-model='password' title='Password' rules='required|min:8|max:16' type='password'/>
                   <router-link to="/forgot-password" class="d-block">Forgot your password?</router-link>
                 <div class="row justify-content-between mx-1">
                   <router-link to="/signup">
@@ -46,8 +46,7 @@
 
 <script>
 import { ValidationObserver } from 'vee-validate'
-import UsernameInput from '@/components/input/Username'
-import PasswordInput from '@/components/input/Password'
+import TextInputGenerator from '@/components/input/TextInputGenerator'
 import axios from 'axios'
 import swal from 'sweetalert'
 
@@ -55,8 +54,7 @@ export default {
   name: 'Login',
   components: {
     ValidationObserver,
-    UsernameInput,
-    PasswordInput
+    TextInputGenerator
 
   },
   data: () => {
