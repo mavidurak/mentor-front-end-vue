@@ -16,10 +16,10 @@
             <div class="card-body">
               <h4>Sign Up</h4>
               <form class="text-left" @submit.prevent="onSubmit()">
-                <UsernameInput v-model='username'/>
-                <PasswordInput v-model='password'/>
-                <FullnameInput v-model='name'/>
-                <EmailInput v-model='email'/>
+                <TextInputGenerator v-model='username' title='Username' rules='required|min:3|max:20' type='text'/>
+                <TextInputGenerator v-model='password' title='Password' rules='required|min:8|max:16' type='password'/>
+                <TextInputGenerator v-model='name' title='FullName' rules='required|min:3|max:20' type='text'/>
+                <TextInputGenerator v-model='email' title='Email' rules='required|email' type='email'/>
                 <router-link class="btn btn-light" to="/login">Back</router-link>
                 <button
                   type="submit"
@@ -42,19 +42,13 @@
 import { ValidationObserver } from 'vee-validate'
 import Axios from 'axios'
 import swal from 'sweetalert'
-import UsernameInput from '@/components/input/Username'
-import PasswordInput from '@/components/input/Password'
-import FullnameInput from '@/components/input/Fullname'
-import EmailInput from '@/components/input/Email'
+import TextInputGenerator from '@/components/input/TextInputGenerator'
 
 export default {
   name: 'Signup',
   components: {
     ValidationObserver,
-    UsernameInput,
-    PasswordInput,
-    FullnameInput,
-    EmailInput
+    TextInputGenerator
   },
   data: () => {
     return {

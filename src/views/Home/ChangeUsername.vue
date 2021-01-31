@@ -7,8 +7,8 @@
           <h5 class="mb-3">Change Username</h5>
           <ValidationObserver ref="form" v-slot="{ invalid }">
             <form class="text-left" @submit.prevent="onSubmit()">
-              <UsernameInput title='New Username: ' v-model='newUsername'/>
-              <PasswordInput v-model='password'/>
+              <TextInputGenerator v-model='newUsername' title='New Username' rules='required|min:3|max:20' type='text'/>
+              <TextInputGenerator v-model='password' title='Password' rules='required|min:8|max:16' type='password'/>
               <button
                 type="submit"
                 name="submitButton"
@@ -27,8 +27,7 @@
 
 <script>
 import { ValidationObserver } from 'vee-validate'
-import UsernameInput from '@/components/input/Username'
-import PasswordInput from '@/components/input/Password'
+import TextInputGenerator from '@/components/input/TextInputGenerator'
 import axios from 'axios'
 import swal from 'sweetalert'
 
@@ -36,8 +35,7 @@ export default {
   name: 'ChangeUsername',
   components: {
     ValidationObserver,
-    UsernameInput,
-    PasswordInput
+    TextInputGenerator
   },
   data: () => {
     return {

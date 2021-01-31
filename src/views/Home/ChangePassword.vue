@@ -7,9 +7,9 @@
           <h5 class="mb-3">Change Password</h5>
           <ValidationObserver ref="form" v-slot="{ invalid }">
             <form class="text-left" @submit.prevent="onSubmit()">
-              <PasswordInput v-model='password'/>
-              <PasswordInput title='New Password:' v-model='newPassword'/>
-              <PasswordInput title='New Password Again: ' v-model='confirmPassword'/>
+              <TextInputGenerator v-model='password' title='Password' rules='required|min:8|max:16' type='password'/>
+              <TextInputGenerator v-model='newPassword' title='New Password' rules='required|min:8|max:16' type='password'/>
+              <TextInputGenerator v-model='confirmPassword' title='Confirm Password' rules='required|min:8|max:16' type='password'/>
               <button
                 type="submit"
                 name="submitButton"
@@ -28,7 +28,7 @@
 
 <script>
 import { ValidationObserver } from 'vee-validate'
-import PasswordInput from '@/components/input/Password'
+import TextInputGenerator from '@/components/input/TextInputGenerator'
 import axios from 'axios'
 import swal from 'sweetalert'
 
@@ -36,7 +36,7 @@ export default {
   name: 'ChangePassword',
   components: {
     ValidationObserver,
-    PasswordInput
+    TextInputGenerator
   },
   data: () => {
     return {
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     onSubmit: function () {
-      if (this.confirmPassword === this.newPassword && this.newPassword.length >= 8 && this.newPassword.length <= 30) {
+      if (this.confirmPassword === this.newPassword) {
         axios
           .patch(
             '/authentications/me/',
@@ -85,7 +85,10 @@ export default {
             }
           })
       } else {
-        this.message = 'New Password not Matching or New Password must be min 8 max 30 character'
+        swal({
+          title: 'New Password and Confirm Password are not Matching',
+          icon: 'error'
+        })
       }
     }
   }
