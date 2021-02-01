@@ -18,7 +18,7 @@
               placeholder="Yeni email adresinizi girin"
             /> <span>{{ errors[0] }}</span>
             </validation-provider>
-            </div>
+          </div>
          <button
             type="submit"
             name="submitButton"
