@@ -80,6 +80,42 @@ const routes = [
     component: () => import('../views/Guests/ForgotPassword.vue')
   },
   {
+    path: '/datasets/add',
+    name: 'AddDataset',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/Datasets/Add.vue')
+  },
+  {
+    path: '/datasets/list',
+    name: 'ListDatasets',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/Datasets/List.vue')
+  },
+  {
+    path: '/datas/add',
+    name: 'AddData',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/Datas/Add.vue')
+  },
+  {
+    path: '/datas/list',
+    name: 'ListDatas',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/Datas/List.vue')
+  },
+  {
+    path: '/applications/add',
+    name: 'AddApplication',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/Applications/Add.vue')
+  },
+  {
+    path: '/applications/list',
+    name: 'ListApplications',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/Applications/List.vue')
+  },
+  {
     path: '/api-dashboard-vmc',
     name: 'ApiDashboardVMC',
     meta: { layout: 'home-nav' },

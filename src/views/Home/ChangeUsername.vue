@@ -7,32 +7,8 @@
           <h5 class="mb-3">Change Username</h5>
           <ValidationObserver ref="form" v-slot="{ invalid }">
             <form class="text-left" @submit.prevent="onSubmit()">
-              <div class="form-group">
-                <label for="inputNewUsername">New Username</label>
-                <validation-provider name="newUsername" rules="required" v-slot="{ errors }">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="inputNewUsername"
-                    v-model="newUsername"
-                    placeholder="Enter Your New Username"
-                  />
-                  <span>{{ errors[0] }}</span>
-                </validation-provider>
-              </div>
-              <div class="form-group">
-                <label for="inputPassword">Password</label>
-                <validation-provider name="password" rules="required" v-slot="{ errors }">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="inputPassword"
-                    v-model="password"
-                    placeholder="Enter Your Password"
-                  />
-                  <span>{{ errors[0] }}</span>
-                </validation-provider>
-              </div>
+              <TextInputGenerator v-model='newUsername' title='New Username' rules='required|min:3|max:20' type='text'/>
+              <TextInputGenerator v-model='password' title='Password' rules='required|min:8|max:16' type='password'/>
               <button
                 type="submit"
                 name="submitButton"
@@ -50,15 +26,16 @@
 </template>
 
 <script>
-import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import { ValidationObserver } from 'vee-validate'
+import TextInputGenerator from '@/components/input/TextInputGenerator'
 import axios from 'axios'
 import swal from 'sweetalert'
 
 export default {
   name: 'ChangeUsername',
   components: {
-    ValidationProvider,
-    ValidationObserver
+    ValidationObserver,
+    TextInputGenerator
   },
   data: () => {
     return {

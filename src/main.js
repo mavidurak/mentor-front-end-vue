@@ -12,6 +12,7 @@ import Notifications from 'vue-notification'
 import Gravatar from 'vue-gravatar'
 import HomeNav from '@/views/Layouts/HomeNav'
 import None from '@/views/Layouts/None'
+import { configure } from 'vee-validate'
 
 Vue.component('home-nav-layout', HomeNav)
 Vue.component('none-layout', None)
@@ -27,3 +28,12 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
+configure({
+  classes: {
+    valid: 'is-valid',
+    invalid: 'is-invalid',
+    dirty: ['is-dirty', 'is-dirty'] // multiple classes per flag!
+    // ...
+  }
+})
