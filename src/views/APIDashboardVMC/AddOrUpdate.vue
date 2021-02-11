@@ -118,10 +118,10 @@ export default {
             this.$router.push('/home')
           })
         })
-        .catch(function (error) {
+        .catch(function (err) {
           swal({
             title: 'Error',
-            text: error.response.data.error.details[0].message,
+            text: err.response.data.errors[0].message,
             icon: 'error'
           })
         })

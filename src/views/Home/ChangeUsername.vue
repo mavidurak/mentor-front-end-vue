@@ -99,7 +99,7 @@ export default {
           if (err.response.status === 401 || err.response.status === 400) {
             swal({
               title:
-                  err.response.data.message,
+                  err.response.data.errors[0].message,
               icon: 'error'
             })
           }

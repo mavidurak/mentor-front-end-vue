@@ -104,15 +104,15 @@ export default {
           }
         })
         .catch((err) => {
+          console.log(err.response)
           swal({
-            title: err.response.data.message,
+            title: err.response.data.errors[0].message,
             icon: 'error'
           })
-          console.log(err.response.data)
           if (err.response.data.error !== undefined) {
             swal({
               title: 'Validation Failed!',
-              text: err.response.data.error.details[0].message,
+              text: err.response.data.errors[0].message,
               icon: 'error'
             })
           }

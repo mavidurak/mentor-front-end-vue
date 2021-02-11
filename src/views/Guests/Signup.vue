@@ -140,7 +140,7 @@ export default {
         })
         .catch((err) => {
           if (err.response.status === 400) {
-            const errorText = err.response.data.error.details[0].message
+            const errorText = err.response.data.errors[0].message
             swal({
               title: 'Error!',
               text: errorText,
