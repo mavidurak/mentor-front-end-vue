@@ -118,10 +118,14 @@ export default {
             this.$router.push('/home')
           })
         })
-        .catch(function (err) {
+        .catch(err => {
+          let errorMessage = ''
+          err.response.data.errors.forEach(e => {
+            errorMessage += e.message + (err.response.data.errors.length > 1 && (err.response.data.errors.indexOf(e) !== err.response.data.errors.length - 1) ? ', ' : '')
+          })
           swal({
             title: 'Error',
-            text: err.response.data.errors[0].message,
+            text: errorMessage,
             icon: 'error'
           })
         })

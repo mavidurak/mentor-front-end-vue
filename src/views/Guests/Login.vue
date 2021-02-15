@@ -104,9 +104,12 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err.response)
+          let errorMessage = ''
+          err.response.data.errors.forEach(e => {
+            errorMessage += e.message + (err.response.data.errors.length > 1 && (err.response.data.errors.indexOf(e) !== err.response.data.errors.length - 1) ? ', ' : '')
+          })
           swal({
-            title: err.response.data.errors[0].message,
+            title: errorMessage,
             icon: 'error'
           })
           if (err.response.data.error !== undefined) {
