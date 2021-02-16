@@ -16,71 +16,10 @@
             <div class="card-body">
               <h4>Sign Up</h4>
               <form class="text-left" @submit.prevent="onSubmit()">
-                <div class="form-group">
-                  <label for="inputUsername">Username:</label>
-                  <validation-provider
-                    name="username"
-                    rules="required|min:3|max:20"
-                    v-slot="{ errors }"
-                  >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputUsername"
-                      v-model="username"
-                      placeholder="Enter your username"
-                    />
-                    <span>{{ errors[0] }}</span>
-                  </validation-provider>
-                </div>
-                <div class="form-group">
-                  <validation-provider
-                    name="password"
-                    rules="required|min:8|max:16"
-                    v-slot="{ errors }"
-                    :bails="false"
-                  >
-                    <label for="inputPassword">Password</label>
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="inputPassword"
-                      v-model="password"
-                      placeholder="Enter your password"
-                    />
-                    <span>{{ errors[0] }}</span>
-                  </validation-provider>
-                </div>
-                <div class="form-group">
-                  <label for="inputname">Fullname:</label>
-                  <validation-provider
-                    name="name"
-                    rules="required|min:3|max:20"
-                    v-slot="{ errors }"
-                  >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputname"
-                      v-model="name"
-                      placeholder="Enter your fullname"
-                    />
-                    <span>{{ errors[0] }}</span>
-                  </validation-provider>
-                </div>
-                <div class="form-group">
-                  <label for="inputMail">Email:</label>
-                  <validation-provider name="email" rules="required|email" v-slot="{ errors }">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="inputMail"
-                      v-model="email"
-                      placeholder="Enter your email"
-                    />
-                    <span>{{ errors[0] }}</span>
-                  </validation-provider>
-                </div>
+                <TextInputGenerator v-model='username' title='Username' rules='required|min:3|max:20' type='text'/>
+                <TextInputGenerator v-model='password' title='Password' rules='required|min:8|max:16' type='password'/>
+                <TextInputGenerator v-model='name' title='FullName' rules='required|min:3|max:20' type='text'/>
+                <TextInputGenerator v-model='email' title='Email' rules='required|email' type='email'/>
                 <router-link class="btn btn-light" to="/login">Back</router-link>
                 <button
                   type="submit"
@@ -100,15 +39,16 @@
 </template>
 
 <script>
-import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import { ValidationObserver } from 'vee-validate'
 import Axios from 'axios'
 import swal from 'sweetalert'
+import TextInputGenerator from '@/components/input/TextInputGenerator'
 
 export default {
   name: 'Signup',
   components: {
-    ValidationProvider,
-    ValidationObserver
+    ValidationObserver,
+    TextInputGenerator
   },
   data: () => {
     return {
@@ -121,7 +61,8 @@ export default {
   },
   methods: {
     onSubmit: function () {
-      Axios.post('http://localhost:4000/authentications/register/', {
+      console.log(this.username)
+      Axios.post('/authentications/register/', {
         username: this.username,
         password: this.password,
         email: this.email,

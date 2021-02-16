@@ -154,11 +154,11 @@
             </a>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="login">
-              <span v-on:click="logout()"
-                ><i class="fas fa-sign-out-alt"></i
-              ></span>
-            </router-link>
+              <span v-on:click="logout()">
+                <router-link class="nav-link" to="login">
+                  <i class="fas fa-sign-out-alt"></i>
+                  </router-link>
+              </span>
           </li>
         </ul>
       </nav>
@@ -212,8 +212,7 @@
                 <a
                   href="#"
                   :class="[
-                    currentPage.includes('home') ||
-                    currentPage.includes('profile')
+                    currentPage.includes('home')
                       ? activeClass
                       : '',
                     'nav-link',
@@ -251,18 +250,6 @@
                       <p>Dashboard v2</p>
                     </router-link>
                   </li>
-                  <li class="nav-item">
-                    <router-link
-                      :class="[
-                        currentPage.includes('profile') ? activeClass : '',
-                        'nav-link',
-                      ]"
-                      to="/profile"
-                    >
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Profile</p>
-                    </router-link>
-                  </li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -278,6 +265,138 @@
                   <i class="fas fa-cog nav-icon"></i>
                   <p>ApiDashboard</p>
                 </router-link>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="#"
+                  :class="[
+                    currentPage.includes('/datasets/add') ||
+                    currentPage.includes('/datasets/list')
+                      ? activeClass
+                      : '',
+                    'nav-link',
+                  ]"
+                >
+                  <i class="nav-icon fas fa-cubes"></i>
+                  <p>
+                    Datasets
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <router-link
+                      :class="[
+                        currentPage.includes('/datasets/add') ? activeClass : '',
+                        'nav-link',
+                      ]"
+                      to="/datasets/add"
+                    >
+                      <i class="nav-icon fas fa-folder-plus"></i>
+                      <p>Yeni Kayıt Oluştur</p>
+                    </router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link
+                      :class="[
+                        currentPage.includes('/datasets/list') ? activeClass : '',
+                        'nav-link',
+                      ]"
+                      to="/datasets/list"
+                    >
+                      <i class="nav-icon fas fa-list"></i>
+                      <p>Listeyi Gör</p>
+                    </router-link>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="#"
+                  :class="[
+                    currentPage.includes('/datas/add') ||
+                    currentPage.includes('/datas/list')
+                      ? activeClass
+                      : '',
+                    'nav-link',
+                  ]"
+                >
+                  <i class="nav-icon fas fa-layer-group"></i>
+                  <p>
+                    Datas
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <router-link
+                      :class="[
+                        currentPage.includes('/datas/add') ? activeClass : '',
+                        'nav-link',
+                      ]"
+                      to="/datas/add"
+                    >
+                      <i class="nav-icon fas fa-folder-plus"></i>
+                      <p>Yeni Kayıt Oluştur</p>
+                    </router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link
+                      :class="[
+                        currentPage.includes('/datas/list') ? activeClass : '',
+                        'nav-link',
+                      ]"
+                      to="/datas/list"
+                    >
+                      <i class="nav-icon fas fa-list"></i>
+                      <p>Listeyi Gör</p>
+                    </router-link>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="#"
+                  :class="[
+                    currentPage.includes('/applications/add') ||
+                    currentPage.includes('/applications/list')
+                      ? activeClass
+                      : '',
+                    'nav-link',
+                  ]"
+                >
+                  <i class="nav-icon fas fa-rocket"></i>
+                  <p>
+                    Applications
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <router-link
+                      :class="[
+                        currentPage.includes('/applications/add') ? activeClass : '',
+                        'nav-link',
+                      ]"
+                      to="/applications/add"
+                    >
+                      <i class="nav-icon fas fa-folder-plus"></i>
+                      <p>Yeni Kayıt Oluştur</p>
+                    </router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link
+                      :class="[
+                        currentPage.includes('/applications/list') ? activeClass : '',
+                        'nav-link',
+                      ]"
+                      to="/applications/list"
+                    >
+                      <i class="nav-icon fas fa-list"></i>
+                      <p>Listeyi Gör</p>
+                    </router-link>
+                  </li>
+                </ul>
               </li>
             </ul>
           </nav>
@@ -345,20 +464,37 @@ export default {
     }
   },
   created () {
-    axios
-      .get('/authentications/me/', {
-        headers: {
-          'X-AccessToken': localStorage.getItem('X-AccessToken')
-        }
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          this.username = response.data.username
-          this.email = response.data.email
-        }
-      })
+    if (localStorage.getItem('X-AccessToken') !== null) {
+      axios
+        .get(
+          '/authentications/me/',
+          {
+            headers: {
+              'X-AccessToken': localStorage.getItem('X-AccessToken')
+            }
+          }
+        )
+        .then(response => {
+          if (response.status === 200) {
+            this.$notify({
+              group: 'foo',
+              type: 'success',
+              title: 'Successfully Logged In'
+            })
+            this.username = response.data.username
+            this.email = response.data.email
+          }
+        }).catch(err => {
+          if (err.response.status === 401) {
+            this.$router.push('login')
+          }
+        })
+    } else {
+      this.$router.push('login')
+    }
   }
 }
+
 </script>
 
 <style>

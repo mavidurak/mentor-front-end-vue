@@ -11,7 +11,7 @@
     "build-hooks": "cp -R hooks ./.git/ && chmod +x ./.git/hooks/pre-commit"
   },
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.2",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
@@ -35,7 +35,7 @@
     "@vue/cli-plugin-eslint": "~4.5.7",
     "@vue/cli-plugin-router": "~4.5.7",
     "@vue/cli-plugin-unit-jest": "~4.5.7",
-    "@vue/cli-service": "~4.5.7",
+    "@vue/cli-service": "^4.5.8",
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/test-utils": "1.1.0",
     "babel-eslint": "^10.1.0",
