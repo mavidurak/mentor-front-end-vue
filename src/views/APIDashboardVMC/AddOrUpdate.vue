@@ -119,13 +119,14 @@ export default {
           })
         })
         .catch(err => {
-          let errorMessage = ''
-          err.response.data.errors.forEach(e => {
-            errorMessage += e.message + (err.response.data.errors.length > 1 && (err.response.data.errors.indexOf(e) !== err.response.data.errors.length - 1) ? ', ' : '')
-          })
+            const message = err.response.data.errors
+              .map(e => e.message)
+              .join('<br/>')
+            const content = document.createElement('div')
+            content.innerHTML = message
           swal({
-            title: 'Error',
-            text: errorMessage,
+            title: 'Error!',
+            content,
             icon: 'error'
           })
         })
