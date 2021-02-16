@@ -83,7 +83,8 @@ export default {
               const content = document.createElement('div')
               content.innerHTML = message
               swal({
-                title: errorMessage,
+                title: 'Error!',
+                content,
                 icon: 'error'
               })
             }
