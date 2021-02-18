@@ -118,10 +118,15 @@ export default {
             this.$router.push('/api-dashboard-vmc')
           })
         })
-        .catch(function (error) {
+        .catch(err => {
+            const message = err.response.data.errors
+              .map(e => e.message)
+              .join('<br/>')
+            const content = document.createElement('div')
+            content.innerHTML = message
           swal({
-            title: 'Error',
-            text: error.response.data.error.details[0].message,
+            title: 'Error!',
+            content,
             icon: 'error'
           })
         })

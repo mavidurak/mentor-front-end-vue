@@ -81,10 +81,14 @@ export default {
         })
         .catch((err) => {
           if (err.response.status === 400) {
-            const errorText = err.response.data.error
+            const message = err.response.data.errors
+              .map(e => e.message)
+              .join('<br/>')
+            const content = document.createElement('div')
+            content.innerHTML = message
             swal({
               title: 'Error!',
-              text: errorText,
+              content,
               icon: 'error'
             })
           }

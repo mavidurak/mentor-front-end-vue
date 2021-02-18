@@ -74,9 +74,14 @@ export default {
         })
         .catch((err) => {
           if (err.response.status === 401 || err.response.status === 400) {
+            const message = err.response.data.errors
+              .map(e => e.message)
+              .join('<br/>')
+            const content = document.createElement('div')
+            content.innerHTML = message
             swal({
-              title:
-                  err.response.data.message,
+              title: 'Error!',
+              content,
               icon: 'error'
             })
           }

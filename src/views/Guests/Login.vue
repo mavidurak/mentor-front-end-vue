@@ -83,18 +83,16 @@ export default {
           }
         })
         .catch((err) => {
+          const message = err.response.data.errors
+            .map(e => e.message)
+            .join('<br/>')
+          const content = document.createElement('div')
+          content.innerHTML = message
           swal({
-            title: err.response.data.message,
+            title: 'Validation Failed!',
+            content,
             icon: 'error'
           })
-          console.log(err.response.data)
-          if (err.response.data.error !== undefined) {
-            swal({
-              title: 'Validation Failed!',
-              text: err.response.data.error.details[0].message,
-              icon: 'error'
-            })
-          }
         })
     }
   },
