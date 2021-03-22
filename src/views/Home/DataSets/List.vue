@@ -9,7 +9,7 @@
           </div>
           <div class="col-9 px-5 py-0">
           <router-link
-            to="/api-dashboard-vmc/add-or-update"
+            to="/data-sets/update"
             class="btn btn-success float-right"
             >Create</router-link
           >

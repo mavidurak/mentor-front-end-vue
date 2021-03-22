@@ -59,22 +59,30 @@ const routes = [
     component: () => import('../views/Guests/ForgotPassword.vue')
   },
   {
-    path: '/data-sets/add',
-    name: 'AddDataset',
-    meta: { layout: 'home-nav' },
-    component: () => import('../views/Home/DataSets/Add.vue')
-  },
-  {
-    path: '/data-sets/list',
-    name: 'ListDataSets',
-    meta: { layout: 'home-nav' },
-    component: () => import('../views/Home/DataSets/List.vue')
-  },
-  {
-    path: '/data-sets/update',
-    name: 'UpdateDataSets',
-    meta: { layout: 'home-nav' },
-    component: () => import('../views/Home/DataSets/Update.vue')
+    path: '/data-sets',
+    name: 'DataSets',
+    redirect: '/data-sets/list',
+    children: [
+      {
+        path: '/data-sets/add',
+        name: 'AddDataset',
+        meta: { layout: 'home-nav' },
+        component: () => import('../views/Home/DataSets/Add.vue')
+      },
+      {
+        path: '/data-sets/list',
+        name: 'ListDataSets',
+        meta: { layout: 'home-nav' },
+        component: () => import('../views/Home/DataSets/List.vue')
+      },
+      {
+        path: '/data-sets/update',
+        name: 'UpdateDataSets',
+        meta: { layout: 'home-nav' },
+        component: () => import('../views/Home/DataSets/Update.vue')
+      }
+    ],
+    component: () => import('../views/Home/DataSets')
   },
   {
     path: '/datas/add',

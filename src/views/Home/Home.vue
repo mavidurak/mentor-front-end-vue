@@ -130,7 +130,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                       <router-link
                         :to="{
-                          name: 'ApiAddOrUpdateMC',
+                          name: 'UpdateDataSets',
                           params: { app: selectedDataSet },
                         }"
                         class="dropdown-item"
@@ -176,7 +176,7 @@
                       </ul>
                       <div class="dropdown-divider"></div>
                       <router-link
-                        :to="{ name: 'ApiAddOrUpdateMC' }"
+                        :to="{ name: 'UpdateDataSets' }"
                         class="dropdown-item create-data-set"
                         ><strong>Create</strong> Data Set</router-link
                       >
@@ -721,7 +721,9 @@ export default {
         { id: '10', created_at: '10.09.2020 14:39', value: '22' },
         { id: '11', created_at: '10.09.2020 15:57', value: '23' },
         { id: '12', created_at: '10.09.2020 18:11', value: '25.7' }
-      ]
+      ],
+      app: null,
+      dataInput: null
     }
   },
   created () {

@@ -425,10 +425,7 @@
 <script>
 import axios from 'axios'
 import '@/plugins/jquery.overlayScrollbars.js'
-// import '@/plugins/adminlte.js'
-import '@/styles/OverlayScrollbars.min.css'
-// import '@/styles/adminlte.css'
-import '@/adminlte/js/AdminLTE.js'
+import 'admin-lte'
 
 export default {
   name: 'HomeNav',

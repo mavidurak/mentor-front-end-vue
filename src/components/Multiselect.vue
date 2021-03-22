@@ -5,15 +5,13 @@
         style="width: 100%"
         v-model="value"
         :options="options"
-        :multiple="true"
-        :max=1
         :close-on-select="false"
         :clearText-on-select="false"
         :preserve-search="true"
         :preselect-first="false"
         label="key"
         track-by="key"
-        @tag="addTag"
+        @change="addTag"
         @input="$emit('get-key', value)"
         placeholder="Seçmek için dokun"
       >
@@ -31,18 +29,17 @@ export default {
     return {
       selectedkey: null,
       options: [
-        { key: 'Temperature' },
-        { key: 'Humidity' },
-        { key: 'Light intensity' },
+        { key: 'Amount' },
+        { key: 'Liter' },
+        { key: 'Celsius' },
+        { key: 'Humidity(g/m3)' },
+        { key: 'Light intensity(Candela - cd)' },
         { key: 'Acceleration' },
-        { key: 'Distance' },
-        { key: 'Infrared' },
-        { key: 'RGB' },
-        { key: 'UV' },
+        { key: 'Meter(m)' },
         { key: 'Magnetic field' },
-        { key: 'Voltage' },
-        { key: 'Current' },
-        { key: 'Pressure' }
+        { key: 'Voltage(V)' },
+        { key: 'Current(A)' },
+        { key: 'Pressure(Pascal - Pa)' }
       ],
       value: []
     }

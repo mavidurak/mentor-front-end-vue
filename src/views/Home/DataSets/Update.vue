@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
               <label for="exampleKeyTitle">Key Title : </label>
-              <multiSelect :selectedkey="app.data_type" @get-key="updateKeyTitle" />
+              <Multiselect :selectedkey="app.data_type" @get-key="updateKeyTitle" />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Description : </label>
@@ -65,13 +65,13 @@
 <script>
 import Axios from 'axios'
 import swal from 'sweetalert'
-import multiSelect from '@/components/Multiselect.vue'
+import Multiselect from '@/components/Multiselect.vue'
 
 export default {
   name: 'ApiAppAddOrUpdate',
 
   components: {
-    multiSelect
+    Multiselect
   },
 
   data: () => {
@@ -115,7 +115,7 @@ export default {
             text: 'Created successfully!',
             icon: 'success'
           }).then((result) => {
-            this.$router.push('/api-dashboard-vmc')
+            this.$router.push('/data-sets/list')
           })
         })
         .catch(err => {
@@ -163,7 +163,7 @@ export default {
           text: response.data.message,
           icon: 'success'
         }).then((result) => {
-          this.$router.push('/api-dashboard-vmc')
+          this.$router.push('/data-sets/list')
         })
       })
     },
@@ -179,7 +179,7 @@ export default {
           text: response.data.message,
           icon: 'success'
         }).then((result) => {
-          this.$router.push('/api-dashboard-vmc')
+          this.$router.push('/data-sets/list')
         })
       })
     }
