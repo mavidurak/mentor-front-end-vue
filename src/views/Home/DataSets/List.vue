@@ -50,7 +50,7 @@
 import Axios from 'axios'
 
 export default {
-  title: 'ApiTable',
+  name: 'ListDataSet',
   components: {},
   methods: {
     getDataSets: function () {

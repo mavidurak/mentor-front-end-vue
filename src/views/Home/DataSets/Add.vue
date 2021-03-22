@@ -64,15 +64,13 @@
 <script>
 import Axios from 'axios'
 import swal from 'sweetalert'
-import multiSelect from '@/views/Home/Multiselect.vue'
+import multiSelect from '@/components/Multiselect.vue'
 
 export default {
-  name: 'ApiAppAddOrUpdate',
-
+  name: 'AddDataSet',
   components: {
     multiSelect
   },
-
   data: () => {
     return {
       app: {
