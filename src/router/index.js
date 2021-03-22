@@ -80,16 +80,22 @@ const routes = [
     component: () => import('../views/Guests/ForgotPassword.vue')
   },
   {
-    path: '/datasets/add',
+    path: '/data-sets/add',
     name: 'AddDataset',
     meta: { layout: 'home-nav' },
     component: () => import('../views/Home/Datasets/Add.vue')
   },
   {
-    path: '/datasets/list',
+    path: '/data-sets/list',
     name: 'ListDatasets',
     meta: { layout: 'home-nav' },
     component: () => import('../views/Home/Datasets/List.vue')
+  },
+  {
+    path: '/data-sets/update',
+    name: 'UpdateDataSets',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/APIDashboardVMC/AddOrUpdate.vue')
   },
   {
     path: '/datas/add',
@@ -120,12 +126,6 @@ const routes = [
     name: 'ApiDashboardVMC',
     meta: { layout: 'home-nav' },
     component: () => import('../views/APIDashboardVMC/Index.vue')
-  },
-  {
-    path: '/api-dashboard-vmc/add-or-update',
-    name: 'ApiAddOrUpdateMC',
-    meta: { layout: 'home-nav' },
-    component: () => import('../views/APIDashboardVMC/AddOrUpdate.vue')
   }
 ]
 
