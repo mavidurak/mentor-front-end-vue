@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
               <label for="exampleKeyTitle">Key Title : </label>
-              <multiSelect :selectedkey="app.data_type" @get-key="updateKeyTitle" />
+              <multiSelect :options="options" :selectedkey="app.data_type" @getKey="updateKeyTitle" />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Description : </label>
@@ -65,6 +65,7 @@
 import Axios from 'axios'
 import swal from 'sweetalert'
 import multiSelect from '@/components/Multiselect.vue'
+import { DataTypes } from '@/constants/DataTypes'
 
 export default {
   name: 'AddDataSet',
@@ -82,10 +83,12 @@ export default {
         updatedAt: '',
         deletedAt: ''
       },
-      key: ''
+      key: '',
+      options: DataTypes
     }
   },
   mounted () {
+    console.log(this.options)
     if (this.$route.params.app) {
       this.app = this.$route.params.app
       this.key = this.app.data_type
@@ -112,7 +115,7 @@ export default {
             text: 'Created successfully!',
             icon: 'success'
           }).then((result) => {
-            this.$router.push('/api-dashboard-vmc')
+            this.$router.push('/data-set/list')
           })
         })
         .catch(err => {
@@ -129,9 +132,8 @@ export default {
         })
     },
     updateKeyTitle (value) {
-      if (value[0]) {
-        console.table(value)
-        this.app.data_type = value[0].key
+      if (value) {
+        this.app.data_type = value.key
       }
     },
     onSubmit: async function () {
