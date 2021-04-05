@@ -1,13 +1,16 @@
-export const DataTypes = [
-  { key: 'AMOUNT' },
-  { key: 'LITER' },
-  { key: 'CELCIUS' },
-  { key: 'HUMIDITY' },
-  { key: 'LIGHT INTENSITY' },
-  { key: 'ACCELERATİON' },
-  { key: 'METER' },
-  { key: 'MAGNETIC_FIELD' },
-  { key: 'VOLTAGE' },
-  { key: 'CURRENT' },
-  { key: 'PRESSURE' }
-]
+export const DataTypes = {
+  AMOUNT: 'AMOUNT',
+  LITER: 'LITER',
+  CELCIUS: 'CELCIUS',
+  HUMIDITY: 'HUMIDITY',
+  LIGHT_INTENSITY: 'LIGHT INTENSITY',
+  ACCELERATION: 'ACCELERATION',
+  METER: 'METER',
+  MAGNETIC_FIELD: 'MAGNETIC FIELD',
+  VOLTAGE: 'VOLTAGE',
+  CURRENT: 'CURRENT',
+  PRESSURE: 'PRESSURE'
+}
+export default {
+  DataTypes
+}

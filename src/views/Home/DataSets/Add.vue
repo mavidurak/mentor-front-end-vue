@@ -84,15 +84,19 @@ export default {
         deletedAt: ''
       },
       key: '',
-      options: DataTypes
+      options: null
     }
   },
   mounted () {
-    console.log(this.options)
     if (this.$route.params.app) {
       this.app = this.$route.params.app
       this.key = this.app.data_type
     }
+
+    this.options = Object.values(DataTypes)
+      .map(dataType => {
+        return { key: dataType }
+      })
   },
   methods: {
     createDataSet () {
@@ -115,7 +119,7 @@ export default {
             text: 'Created successfully!',
             icon: 'success'
           }).then((result) => {
-            this.$router.push('/data-set/list')
+            this.$router.push('/data-sets/list')
           })
         })
         .catch(err => {
@@ -162,7 +166,7 @@ export default {
           text: response.data.message,
           icon: 'success'
         }).then((result) => {
-          this.$router.push('/api-dashboard-vmc')
+          this.$router.push('/data-sets/list')
         })
       })
     },
@@ -178,7 +182,7 @@ export default {
           text: response.data.message,
           icon: 'success'
         }).then((result) => {
-          this.$router.push('/api-dashboard-vmc')
+          this.$router.push('/data-sets/list')
         })
       })
     }

@@ -5,10 +5,7 @@
         style="width: 100%"
         v-model="value"
         :options="options"
-        :close-on-select="false"
-        :clearText-on-select="false"
-        :preserve-search="true"
-        :preselect-first="false"
+        :close-on-select="true"
         label="key"
         track-by="key"
         @input="$emit('getKey', value)"
@@ -26,12 +23,18 @@ export default {
   components: {
     Multiselect
   },
-  props: ['options'],
+  props: {
+    options: Array,
+    selectedKey: String
+  },
   data () {
     return {
-      selectedkey: null,
-      value: null
+      value: []
     }
+  },
+  mounted () {
+    this.value = this.selectedKey ? { key: this.selectedKey } : []
+    console.log({ options: this.options, selectedKey: this.selectedKey, value: this.value })
   },
   methods: {
   }

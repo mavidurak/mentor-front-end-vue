@@ -22,8 +22,8 @@
               />
             </div>
             <div class="form-group">
-              <label for="exampleKeyTitle">Key Title : </label>
-              <Multiselect :selectedkey="app.data_type" @get-key="updateKeyTitle" />
+              <label for="exampleKeyTitle">Data Type : </label>
+              <Multiselect :options="options" :selectedKey="app.data_type" @get-key="updateKeyTitle" />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Description : </label>
@@ -66,6 +66,7 @@
 import Axios from 'axios'
 import swal from 'sweetalert'
 import Multiselect from '@/components/Multiselect.vue'
+import { DataTypes } from '@/constants/DataTypes'
 
 export default {
   name: 'ApiAppAddOrUpdate',
@@ -85,7 +86,8 @@ export default {
         updatedAt: '',
         deletedAt: ''
       },
-      key: ''
+      key: '',
+      options: null
     }
   },
   mounted () {
@@ -93,6 +95,11 @@ export default {
       this.app = this.$route.params.app
       this.key = this.app.data_type
     }
+
+    this.options = Object.values(DataTypes)
+      .map(dataType => {
+        return { key: dataType }
+      })
   },
   methods: {
     createDataSet () {

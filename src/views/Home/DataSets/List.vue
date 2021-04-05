@@ -9,7 +9,7 @@
           </div>
           <div class="col-9 px-5 py-0">
           <router-link
-            to="/data-sets/update"
+            to="/data-sets/add"
             class="btn btn-success float-right"
             >Create</router-link
           >
@@ -80,6 +80,7 @@ export default {
         },
         { text: 'Title', value: 'title' },
         { text: 'Description', value: 'description' },
+        { text: 'Data Type', value: 'data_type' },
         { text: 'Creation Date', value: 'createdAt' },
         { text: 'Last Update', value: 'updatedAt' },
         { text: 'Actions', value: 'actions', sortable: false }
