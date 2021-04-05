@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
               <label for="exampleKeyTitle">Key Title : </label>
-              <multiSelect :selectedkey="app.data_type" @get-key="updateKeyTitle" />
+              <multiSelect :options="options" :selectedkey="app.data_type" @getKey="updateKeyTitle" />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Description : </label>
@@ -32,7 +32,6 @@
                 class="form-control"
                 type="text"
                 rows="3"
-                required
                 minlength="1"
               ></textarea>
             </div>
@@ -65,15 +64,14 @@
 <script>
 import Axios from 'axios'
 import swal from 'sweetalert'
-import multiSelect from '@/views/Home/Multiselect.vue'
+import multiSelect from '@/components/Multiselect.vue'
+import { DataTypes } from '@/constants/DataTypes'
 
 export default {
-  name: 'ApiAppAddOrUpdate',
-
+  name: 'AddDataSet',
   components: {
     multiSelect
   },
-
   data: () => {
     return {
       app: {
@@ -85,7 +83,8 @@ export default {
         updatedAt: '',
         deletedAt: ''
       },
-      key: ''
+      key: '',
+      options: null
     }
   },
   mounted () {
@@ -93,6 +92,11 @@ export default {
       this.app = this.$route.params.app
       this.key = this.app.data_type
     }
+
+    this.options = Object.values(DataTypes)
+      .map(dataType => {
+        return { key: dataType }
+      })
   },
   methods: {
     createDataSet () {
@@ -115,15 +119,15 @@ export default {
             text: 'Created successfully!',
             icon: 'success'
           }).then((result) => {
-            this.$router.push('/api-dashboard-vmc')
+            this.$router.push('/data-sets/list')
           })
         })
         .catch(err => {
-            const message = err.response.data.errors
-              .map(e => e.message)
-              .join('<br/>')
-            const content = document.createElement('div')
-            content.innerHTML = message
+          const message = err.response.data.errors
+            .map(e => e.message)
+            .join('<br/>')
+          const content = document.createElement('div')
+          content.innerHTML = message
           swal({
             title: 'Error!',
             content,
@@ -132,9 +136,8 @@ export default {
         })
     },
     updateKeyTitle (value) {
-      if (value[0]) {
-        console.table(value)
-        this.app.data_type = value[0].key
+      if (value) {
+        this.app.data_type = value.key
       }
     },
     onSubmit: async function () {
@@ -163,7 +166,7 @@ export default {
           text: response.data.message,
           icon: 'success'
         }).then((result) => {
-          this.$router.push('/api-dashboard-vmc')
+          this.$router.push('/data-sets/list')
         })
       })
     },
@@ -179,7 +182,7 @@ export default {
           text: response.data.message,
           icon: 'success'
         }).then((result) => {
-          this.$router.push('/api-dashboard-vmc')
+          this.$router.push('/data-sets/list')
         })
       })
     }

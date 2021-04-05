@@ -9,7 +9,7 @@
           </div>
           <div class="col-9 px-5 py-0">
           <router-link
-            to="/api-dashboard-vmc/add-or-update"
+            to="/data-sets/add"
             class="btn btn-success float-right"
             >Create</router-link
           >
@@ -31,7 +31,7 @@
          </template>
             <template v-slot:[`item.actions`]="{ item }">
               <router-link
-                :to="{ name: 'ApiAddOrUpdateMC', params: { app: item } }"
+                :to="{ name: 'UpdateDataSets', params: { app: item } }"
                 class="btn btn-primary"
                 >Update</router-link
               >
@@ -50,10 +50,8 @@
 import Axios from 'axios'
 
 export default {
-  title: 'ApiTable',
-
+  name: 'ListDataSet',
   components: {},
-
   methods: {
     getDataSets: function () {
       Axios.get('/data-sets/', {
@@ -82,6 +80,7 @@ export default {
         },
         { text: 'Title', value: 'title' },
         { text: 'Description', value: 'description' },
+        { text: 'Data Type', value: 'data_type' },
         { text: 'Creation Date', value: 'createdAt' },
         { text: 'Last Update', value: 'updatedAt' },
         { text: 'Actions', value: 'actions', sortable: false }

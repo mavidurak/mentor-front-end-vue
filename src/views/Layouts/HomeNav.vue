@@ -253,25 +253,11 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <router-link
-                  :class="[
-                    currentPage.includes('api-dashboard-vmc')
-                      ? activeClass
-                      : '',
-                    'nav-link',
-                  ]"
-                  to="/api-dashboard-vmc"
-                >
-                  <i class="fas fa-cog nav-icon"></i>
-                  <p>ApiDashboard</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
                 <a
                   href="#"
                   :class="[
-                    currentPage.includes('/datasets/add') ||
-                    currentPage.includes('/datasets/list')
+                    currentPage.includes('/data-sets/add') ||
+                    currentPage.includes('/data-sets/list')
                       ? activeClass
                       : '',
                     'nav-link',
@@ -279,7 +265,7 @@
                 >
                   <i class="nav-icon fas fa-cubes"></i>
                   <p>
-                    Datasets
+                    Data Sets
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -287,25 +273,25 @@
                   <li class="nav-item">
                     <router-link
                       :class="[
-                        currentPage.includes('/datasets/add') ? activeClass : '',
+                        currentPage.includes('/data-sets/list') ? activeClass : '',
                         'nav-link',
                       ]"
-                      to="/datasets/add"
+                      to="/data-sets/list"
                     >
-                      <i class="nav-icon fas fa-folder-plus"></i>
-                      <p>Yeni Kayıt Oluştur</p>
+                      <i class="nav-icon fas fa-list"></i>
+                      <p>Listeyi Gör</p>
                     </router-link>
                   </li>
                   <li class="nav-item">
                     <router-link
                       :class="[
-                        currentPage.includes('/datasets/list') ? activeClass : '',
+                        currentPage.includes('/data-sets/add') ? activeClass : '',
                         'nav-link',
                       ]"
-                      to="/datasets/list"
+                      to="/data-sets/add"
                     >
-                      <i class="nav-icon fas fa-list"></i>
-                      <p>Listeyi Gör</p>
+                      <i class="nav-icon fas fa-folder-plus"></i>
+                      <p>Yeni Kayıt Oluştur</p>
                     </router-link>
                   </li>
                 </ul>
@@ -439,10 +425,7 @@
 <script>
 import axios from 'axios'
 import '@/plugins/jquery.overlayScrollbars.js'
-// import '@/plugins/adminlte.js'
-import '@/styles/OverlayScrollbars.min.css'
-// import '@/styles/adminlte.css'
-import '@/adminlte/js/AdminLTE.js'
+import 'admin-lte'
 
 export default {
   name: 'HomeNav',
