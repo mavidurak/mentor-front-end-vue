@@ -80,21 +80,21 @@ const routes = [
         name: 'UpdateDataSets',
         meta: { layout: 'home-nav' },
         component: () => import('../views/Home/DataSets/Update.vue')
+      },
+      {
+        path: '/datas/list',
+        name: 'ListDatas',
+        meta: { layout: 'home-nav' },
+        component: () => import('../views/Home/Datas/List.vue')
+      },
+      {
+        path: '/datas/add',
+        name: 'AddData',
+        meta: { layout: 'home-nav' },
+        component: () => import('../views/Home/Datas/Add.vue')
       }
     ],
     component: () => import('../views/Home/DataSets')
-  },
-  {
-    path: '/datas/add',
-    name: 'AddData',
-    meta: { layout: 'home-nav' },
-    component: () => import('../views/Home/Datas/Add.vue')
-  },
-  {
-    path: '/datas/list',
-    name: 'ListDatas',
-    meta: { layout: 'home-nav' },
-    component: () => import('../views/Home/Datas/List.vue')
   },
   {
     path: '/applications/add',

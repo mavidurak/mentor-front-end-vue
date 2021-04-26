@@ -31,8 +31,13 @@
          </template>
             <template v-slot:[`item.actions`]="{ item }">
               <router-link
+                :to="{ name: 'ListDatas', params: { app: item } }"
+                class="btn btn-primary mx-1"
+                >Datas</router-link
+              >
+              <router-link
                 :to="{ name: 'UpdateDataSets', params: { app: item } }"
-                class="btn btn-primary"
+                class="btn btn-primary mx-1"
                 >Update</router-link
               >
             </template>
