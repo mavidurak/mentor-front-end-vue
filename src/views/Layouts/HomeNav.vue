@@ -300,50 +300,6 @@
                 <a
                   href="#"
                   :class="[
-                    currentPage.includes('/datas/add') ||
-                    currentPage.includes('/datas/list')
-                      ? activeClass
-                      : '',
-                    'nav-link',
-                  ]"
-                >
-                  <i class="nav-icon fas fa-layer-group"></i>
-                  <p>
-                    Datas
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <router-link
-                      :class="[
-                        currentPage.includes('/datas/add') ? activeClass : '',
-                        'nav-link',
-                      ]"
-                      to="/datas/add"
-                    >
-                      <i class="nav-icon fas fa-folder-plus"></i>
-                      <p>Yeni Kayıt Oluştur</p>
-                    </router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link
-                      :class="[
-                        currentPage.includes('/datas/list') ? activeClass : '',
-                        'nav-link',
-                      ]"
-                      to="/datas/list"
-                    >
-                      <i class="nav-icon fas fa-list"></i>
-                      <p>Listeyi Gör</p>
-                    </router-link>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a
-                  href="#"
-                  :class="[
                     currentPage.includes('/applications/add') ||
                     currentPage.includes('/applications/list')
                       ? activeClass

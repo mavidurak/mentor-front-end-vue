@@ -4,10 +4,15 @@
       <div class="card">
         <div class="card-body">
         <div class="row">
+          <div class="col-9 py-0">
+            <h5 class="d-inline-flex">
+              <div class="pr-3 pl-4 border-right d-inline-flex">{{app.title}}</div>
+            </h5>
+            <div class="px-3 border-right d-inline-flex">{{app.data_type}}</div>
+              <div class="px-3 border-right d-inline-flex">{{new Date(app.createdAt).toLocaleDateString()}}</div>
+              <div class="px-3 d-inline-flex">{{new Date(app.updatedAt).toLocaleDateString()}}</div>
+            </div>
           <div class="col-3 px-5 py-0">
-          <h5>{{app.title}}<i> Dataset</i></h5>
-          </div>
-          <div class="col-9 px-5 py-0">
           <router-link
             to="/datas/add"
             class="btn btn-success float-right"
@@ -29,18 +34,6 @@
          <template v-slot:[`item.updatedAt`]="{ item }">
            <span>{{new Date(item.updatedAt).toLocaleDateString()}}</span>
          </template>
-            <template v-slot:[`item.actions`]="{ item }">
-              <router-link
-                :to="{ name: 'ListDatas', params: { app: item } }"
-                class="btn btn-primary mx-1"
-                >Datas</router-link
-              >
-              <router-link
-                :to="{ name: 'UpdateDataSets', params: { app: item } }"
-                class="btn btn-primary mx-1"
-                >Update</router-link
-              >
-            </template>
           </v-data-table>
           </div>
           </div>
@@ -90,8 +83,6 @@ export default {
         updatedAt: '',
         deletedAt: ''
       },
-      key: '',
-      options: null,
       applications: [],
       headers: [
         {
@@ -102,8 +93,7 @@ export default {
         },
         { text: 'Value', value: 'value' },
         { text: 'Creation Date', value: 'createdAt' },
-        { text: 'Last Update', value: 'updatedAt' },
-        { text: 'Actions', value: 'actions', sortable: false }
+        { text: 'Last Update', value: 'updatedAt' }
       ]
     }
   }
