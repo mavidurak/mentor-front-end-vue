@@ -664,8 +664,8 @@ export default {
         }
       })
     },
-    deleteDataSet: function () {
-      Axios.delete(
+    deleteDataSet: async function () {
+      await Axios.delete(
         `http://localhost:4000/data-sets/${this.selectedDataSet.id}`,
         {
           headers: {
