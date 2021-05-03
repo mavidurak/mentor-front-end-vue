@@ -35,7 +35,7 @@
             </div>
             <div class="row">
               <div class="col">Key Title :</div>
-              <div class="col">{{ selectedDataSet.key_title }}</div>
+              <div class="col">{{ selectedDataSet.data_type }}</div>
             </div>
             <div class="row">
               <div class="col">Description</div>
@@ -176,7 +176,7 @@
                       </ul>
                       <div class="dropdown-divider"></div>
                       <router-link
-                        :to="{ name: 'UpdateDataSets' }"
+                        :to="{ name: 'AddDataset' }"
                         class="dropdown-item create-data-set"
                         ><strong>Create</strong> Data Set</router-link
                       >
@@ -222,7 +222,7 @@
                           <ul class="info-body info-key-title-body">
                             <li><h4>Key Title:</h4></li>
                             <li>
-                              {{ selectedDataSet.key_title }}
+                              {{ selectedDataSet.data_type }}
                             </li>
                           </ul>
                         </td>
@@ -632,6 +632,14 @@ export default {
       }).then((response) => {
         this.dataSetCount = response.data.count
         this.dataSets = response.data.results
+        if (this.dataSetCount === 0) {
+          this.dataSets = [{
+            id: '1',
+            title: 'Example Data Sets',
+            data_type: 'Example type',
+            description: 'Please create a data set'
+          }]
+        }
         this.selectedDataSet = this.dataSets[0]
       })
     },
