@@ -17,15 +17,6 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    meta: { layout: 'none' },
-    component: () => import(/* webpackChunkName: "about" */ '../views/Guests/About.vue')
-  },
-  {
     path: '/login',
     name: 'Login',
     meta: { layout: 'none' },
@@ -36,18 +27,6 @@ const routes = [
     name: 'Signup',
     meta: { layout: 'none' },
     component: () => import('../views/Guests/Signup.vue')
-  },
-  {
-    path: '/multi-select',
-    name: 'multiselect',
-    meta: { layout: 'none' },
-    component: () => import('../views/Home/Multiselect.vue')
-  },
-  {
-    path: '/axios-demo',
-    name: 'AxiosDemo',
-    meta: { layout: 'none' },
-    component: () => import('../views/Home/AxiosDemo.vue')
   },
   {
     path: '/profile',
@@ -80,16 +59,30 @@ const routes = [
     component: () => import('../views/Guests/ForgotPassword.vue')
   },
   {
-    path: '/datasets/add',
-    name: 'AddDataset',
-    meta: { layout: 'home-nav' },
-    component: () => import('../views/Home/Datasets/Add.vue')
-  },
-  {
-    path: '/datasets/list',
-    name: 'ListDatasets',
-    meta: { layout: 'home-nav' },
-    component: () => import('../views/Home/Datasets/List.vue')
+    path: '/data-sets',
+    name: 'DataSets',
+    redirect: '/data-sets/list',
+    children: [
+      {
+        path: '/data-sets/add',
+        name: 'AddDataset',
+        meta: { layout: 'home-nav' },
+        component: () => import('../views/Home/DataSets/Add.vue')
+      },
+      {
+        path: '/data-sets/list',
+        name: 'ListDataSets',
+        meta: { layout: 'home-nav' },
+        component: () => import('../views/Home/DataSets/List.vue')
+      },
+      {
+        path: '/data-sets/update',
+        name: 'UpdateDataSets',
+        meta: { layout: 'home-nav' },
+        component: () => import('../views/Home/DataSets/Update.vue')
+      }
+    ],
+    component: () => import('../views/Home/DataSets')
   },
   {
     path: '/datas/add',
@@ -114,18 +107,6 @@ const routes = [
     name: 'ListApplications',
     meta: { layout: 'home-nav' },
     component: () => import('../views/Home/Applications/List.vue')
-  },
-  {
-    path: '/api-dashboard-vmc',
-    name: 'ApiDashboardVMC',
-    meta: { layout: 'home-nav' },
-    component: () => import('../views/APIDashboardVMC/Index.vue')
-  },
-  {
-    path: '/api-dashboard-vmc/add-or-update',
-    name: 'ApiAddOrUpdateMC',
-    meta: { layout: 'home-nav' },
-    component: () => import('../views/APIDashboardVMC/AddOrUpdate.vue')
   }
 ]
 

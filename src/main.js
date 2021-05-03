@@ -22,7 +22,7 @@ Vue.component('v-gravatar', Gravatar)
 Vue.config.productionTip = false
 
 Vue.use(Notifications)
-Vue.use(Datatable) // done!
+Vue.use(Datatable)
 new Vue({
   router,
   vuetify,
