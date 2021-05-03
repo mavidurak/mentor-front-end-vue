@@ -89,9 +89,7 @@ export default {
     }
   },
   created () {
-    this.options = Object.values(DataTypes).map(dataType => {
-      return { key: dataType }
-    })
+    this.options = Object.values(DataTypes).map(dataType => ({ key: dataType }))
   },
   methods: {
     createDataSet () {
@@ -132,7 +130,6 @@ export default {
     },
     updateKeyTitle (value) {
       if (value) {
-        console.table(value)
         this.app.data_type = value.key
       }
     },
