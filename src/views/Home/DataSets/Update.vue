@@ -86,7 +86,7 @@ export default {
       options: null
     }
   },
-  mounted () {
+  created () {
     if (this.$route.params.app) {
       this.app = this.$route.params.app
       this.key = this.app.data_type

@@ -82,21 +82,13 @@ export default {
         id: 0,
         title: '',
         data_type: '',
-        description: '',
-        createdAt: '',
-        updatedAt: '',
-        deletedAt: ''
+        description: ''
       },
       key: '',
       options: null
     }
   },
-  mounted () {
-    if (this.$route.params.app) {
-      this.app = this.$route.params.app
-      this.key = this.app.data_type
-    }
-
+  created () {
     this.options = Object.values(DataTypes).map(dataType => {
       return { key: dataType }
     })
@@ -122,7 +114,7 @@ export default {
             text: 'Created successfully!',
             icon: 'success'
           }).then(result => {
-            this.$router.push('/data-sets/list')
+            this.$router.push('/data-sets/')
           })
         })
         .catch(err => {
