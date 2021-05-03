@@ -23,7 +23,11 @@
             </div>
             <div class="form-group">
               <label for="exampleKeyTitle">Data Type : </label>
-              <Multiselect :options="options" :selectedKey="app.data_type" @get-key="updateKeyTitle" />
+              <Multiselect
+                :options="options"
+                :selectedKey="app.data_type"
+                @getKey="updateKeyTitle"
+              />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Description : </label>
@@ -77,15 +81,7 @@ export default {
 
   data: () => {
     return {
-      app: {
-        id: 0,
-        title: '',
-        data_type: '',
-        description: '',
-        createdAt: '',
-        updatedAt: '',
-        deletedAt: ''
-      },
+      app: null,
       key: '',
       options: null
     }
@@ -96,10 +92,9 @@ export default {
       this.key = this.app.data_type
     }
 
-    this.options = Object.values(DataTypes)
-      .map(dataType => {
-        return { key: dataType }
-      })
+    this.options = Object.values(DataTypes).map(dataType => {
+      return { key: dataType }
+    })
   },
   methods: {
     createDataSet () {
@@ -116,12 +111,12 @@ export default {
           }
         }
       )
-        .then((response) => {
+        .then(response => {
           swal({
             title: 'Success',
             text: 'Created successfully!',
             icon: 'success'
-          }).then((result) => {
+          }).then(result => {
             this.$router.push('/data-sets/list')
           })
         })
@@ -139,9 +134,8 @@ export default {
         })
     },
     updateKeyTitle (value) {
-      if (value[0]) {
-        console.table(value)
-        this.app.data_type = value[0].key
+      if (value) {
+        this.app.data_type = value.key
       }
     },
     onSubmit: async function () {
@@ -164,13 +158,13 @@ export default {
             'X-AccessToken': localStorage.getItem('X-AccessToken')
           }
         }
-      ).then((response) => {
+      ).then(response => {
         swal({
           title: 'Message',
           text: response.data.message,
           icon: 'success'
-        }).then((result) => {
-          this.$router.push('/data-sets/list')
+        }).then(result => {
+          this.$router.push('/data-sets/')
         })
       })
     },
@@ -180,13 +174,13 @@ export default {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
-      }).then((response) => {
+      }).then(response => {
         swal({
           title: 'Message',
           text: response.data.message,
           icon: 'success'
-        }).then((result) => {
-          this.$router.push('/data-sets/list')
+        }).then(result => {
+          this.$router.push('/data-sets/')
         })
       })
     }

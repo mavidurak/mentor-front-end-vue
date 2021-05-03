@@ -23,7 +23,11 @@
             </div>
             <div class="form-group">
               <label for="exampleKeyTitle">Key Title : </label>
-              <multiSelect :options="options" :selectedkey="app.data_type" @getKey="updateKeyTitle" />
+              <multiSelect
+                :options="options"
+                :selectedkey="app.data_type"
+                @getKey="updateKeyTitle"
+              />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Description : </label>
@@ -93,10 +97,9 @@ export default {
       this.key = this.app.data_type
     }
 
-    this.options = Object.values(DataTypes)
-      .map(dataType => {
-        return { key: dataType }
-      })
+    this.options = Object.values(DataTypes).map(dataType => {
+      return { key: dataType }
+    })
   },
   methods: {
     createDataSet () {
@@ -113,12 +116,12 @@ export default {
           }
         }
       )
-        .then((response) => {
+        .then(response => {
           swal({
             title: 'Success',
             text: 'Created successfully!',
             icon: 'success'
-          }).then((result) => {
+          }).then(result => {
             this.$router.push('/data-sets/list')
           })
         })
@@ -137,6 +140,7 @@ export default {
     },
     updateKeyTitle (value) {
       if (value) {
+        console.table(value)
         this.app.data_type = value.key
       }
     },
@@ -160,12 +164,12 @@ export default {
             'X-AccessToken': localStorage.getItem('X-AccessToken')
           }
         }
-      ).then((response) => {
+      ).then(response => {
         swal({
           title: 'Message',
           text: response.data.message,
           icon: 'success'
-        }).then((result) => {
+        }).then(result => {
           this.$router.push('/data-sets/list')
         })
       })
@@ -176,12 +180,12 @@ export default {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
-      }).then((response) => {
+      }).then(response => {
         swal({
           title: 'Message',
           text: response.data.message,
           icon: 'success'
-        }).then((result) => {
+        }).then(result => {
           this.$router.push('/data-sets/list')
         })
       })

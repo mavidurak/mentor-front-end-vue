@@ -3,46 +3,52 @@
     <div class="container mt-5">
       <div class="card">
         <div class="card-body">
-        <div class="row">
-          <div class="col-3 px-5 py-0">
-          <h5>Data Sets</h5>
-          </div>
-          <div class="col-9 px-5 py-0">
-          <router-link
-            to="/data-sets/add"
-            class="btn btn-success float-right"
-            >Create</router-link
-          >
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-          <v-data-table
-            :headers="headers"
-            :items="applications"
-            :items-per-page="5"
-            class="elevation-1 table-bordered text-center"
-          >
-          <template v-slot:[`item.createdAt`]="{ item }">
-           <span>{{new Date(item.createdAt).toLocaleDateString()}}</span>
-         </template>
-         <template v-slot:[`item.updatedAt`]="{ item }">
-           <span>{{new Date(item.updatedAt).toLocaleDateString()}}</span>
-         </template>
-            <template v-slot:[`item.actions`]="{ item }">
+          <div class="row">
+            <div class="col-3 px-5 py-0">
+              <h5>Data Sets</h5>
+            </div>
+            <div class="col-9 px-5 py-0">
               <router-link
-                :to="{ name: 'ListDatas', params: { app: item } }"
-                class="btn btn-primary mx-1"
-                >Datas</router-link
+                to="/data-sets/add"
+                class="btn btn-success float-right"
+                >Create</router-link
               >
-              <router-link
-                :to="{ name: 'UpdateDataSets', params: { app: item } }"
-                class="btn btn-primary mx-1"
-                >Update</router-link
-              >
-            </template>
-          </v-data-table>
+            </div>
           </div>
+          <div class="row">
+            <div class="col-12">
+              <v-data-table
+                :headers="headers"
+                :items="applications"
+                :items-per-page="5"
+                class="elevation-1 table-bordered text-center"
+              >
+                <template v-slot:[`item.createdAt`]="{ item }">
+                  <span>{{
+                    new Date(item.createdAt).toLocaleDateString()
+                  }}</span>
+                </template>
+                <template v-slot:[`item.updatedAt`]="{ item }">
+                  <span>{{
+                    new Date(item.updatedAt).toLocaleDateString()
+                  }}</span>
+                </template>
+                <template v-slot:[`item.actions`]="{ item }">
+                  <router-link
+                    :to="{ name: 'ListDatas', params: { app: item } }"
+                    class="btn btn-primary mx-1"
+                  >
+                    Datas
+                  </router-link>
+                  <router-link
+                    :to="{ name: 'UpdateDataSets', params: { app: item } }"
+                    class="btn btn-primary mx-1"
+                  >
+                    Update
+                  </router-link>
+                </template>
+              </v-data-table>
+            </div>
           </div>
         </div>
       </div>
@@ -63,7 +69,7 @@ export default {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
-      }).then((response) => {
+      }).then(response => {
         this.applications = response.data.results
       })
     }
@@ -95,5 +101,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -59,43 +59,36 @@ const routes = [
     component: () => import('../views/Guests/ForgotPassword.vue')
   },
   {
-    path: '/data-sets',
-    name: 'DataSets',
-    redirect: '/data-sets/list',
-    children: [
-      {
-        path: '/data-sets/add',
-        name: 'AddDataset',
-        meta: { layout: 'home-nav' },
-        component: () => import('../views/Home/DataSets/Add.vue')
-      },
-      {
-        path: '/data-sets/list',
-        name: 'ListDataSets',
-        meta: { layout: 'home-nav' },
-        component: () => import('../views/Home/DataSets/List.vue')
-      },
-      {
-        path: '/data-sets/update',
-        name: 'UpdateDataSets',
-        meta: { layout: 'home-nav' },
-        component: () => import('../views/Home/DataSets/Update.vue')
-      },
-      {
-        path: '/datas/list',
-        name: 'ListDatas',
-        meta: { layout: 'home-nav' },
-        component: () => import('../views/Home/Datas/List.vue')
-      },
-      {
-        path: '/datas/add',
-        name: 'AddData',
-        meta: { layout: 'home-nav' },
-        component: () => import('../views/Home/Datas/Add.vue')
-      }
-    ],
-    component: () => import('../views/Home/DataSets')
+    path: '/data-sets/add',
+    name: 'AddDataset',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/DataSets/Add.vue')
   },
+  {
+    path: '/data-sets/',
+    name: 'ListDataSets',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/DataSets/List.vue')
+  },
+  {
+    path: '/data-sets/update',
+    name: 'UpdateDataSets',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/DataSets/Update.vue')
+  },
+  {
+    path: '/datas/list',
+    name: 'ListDatas',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/Datas/List.vue')
+  },
+  {
+    path: '/datas/add',
+    name: 'AddData',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/Datas/Add.vue')
+  },
+
   {
     path: '/applications/add',
     name: 'AddApplication',
