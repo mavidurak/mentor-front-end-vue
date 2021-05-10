@@ -35,17 +35,24 @@
                 </template>
                 <template v-slot:[`item.actions`]="{ item }">
                   <router-link
-                    :to="{ name: 'ListDatas', params: { app: item } }"
+                    :to="{ name: 'ListDatas', params: { dataset: item } }"
                     class="btn btn-primary mx-1"
                   >
                     Datas
                   </router-link>
                   <router-link
-                    :to="{ name: 'UpdateDataSets', params: { app: item } }"
+                    :to="{ name: 'AddDataset', params: { dataset: item } }"
                     class="btn btn-primary mx-1"
                   >
                     Update
                   </router-link>
+                  <button
+                    type="reset"
+                    @click="deleteDataSet(item)"
+                    class="btn btn-danger mr-2 float-right"
+                  >
+                    Delete
+                  </button>
                 </template>
               </v-data-table>
             </div>
@@ -59,6 +66,7 @@
 
 <script>
 import Axios from 'axios'
+import swal from 'sweetalert'
 
 export default {
   name: 'ListDataSet',
@@ -71,6 +79,21 @@ export default {
         }
       }).then(response => {
         this.applications = response.data.results
+      })
+    },
+    deleteDataSet: async function (dataset) {
+      Axios.delete(`/data-sets/${dataset.id}`, {
+        headers: {
+          'X-AccessToken': localStorage.getItem('X-AccessToken')
+        }
+      }).then(response => {
+        swal({
+          title: 'Message',
+          text: response.data.message,
+          icon: 'success'
+        }).then(result => {
+          this.getDataSets()
+        })
       })
     }
   },

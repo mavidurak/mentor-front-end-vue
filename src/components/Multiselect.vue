@@ -34,7 +34,7 @@ export default {
   },
   mounted () {
     this.value = this.selectedKey ? { key: this.selectedKey } : []
-    console.log({ options: this.options, selectedKey: this.selectedKey, value: this.value })
+    // console.log({ options: this.options, selectedKey: this.selectedKey, value: this.value })
   },
   methods: {
   }

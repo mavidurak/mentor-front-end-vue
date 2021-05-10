@@ -155,7 +155,7 @@
           </li>
           <li class="nav-item">
             <span v-on:click="logout()">
-              <router-link class="nav-link" to="login">
+              <router-link class="nav-link" to="/login">
                 <i class="fas fa-sign-out-alt"></i>
               </router-link>
             </span>

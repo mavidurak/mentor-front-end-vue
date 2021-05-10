@@ -7,6 +7,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'Login',
     redirect: '/login',
     meta: { layout: 'none' }
   },
@@ -69,12 +70,6 @@ const routes = [
     name: 'ListDataSets',
     meta: { layout: 'home-nav' },
     component: () => import('../views/Home/DataSets/List.vue')
-  },
-  {
-    path: '/data-sets/update',
-    name: 'UpdateDataSets',
-    meta: { layout: 'home-nav' },
-    component: () => import('../views/Home/DataSets/Update.vue')
   },
   {
     path: '/datas/list',
