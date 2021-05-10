@@ -72,7 +72,7 @@ const routes = [
     component: () => import('../views/Home/DataSets/List.vue')
   },
   {
-    path: '/datas/list',
+    path: '/datas/',
     name: 'ListDatas',
     meta: { layout: 'home-nav' },
     component: () => import('../views/Home/Datas/List.vue')
