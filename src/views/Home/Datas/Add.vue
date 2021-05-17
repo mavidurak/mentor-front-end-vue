@@ -30,13 +30,6 @@
               <button type="submit" class="btn btn-success float-right">
                 Update
               </button>
-              <button
-                type="reset"
-                @click="deleteDataSet()"
-                class="btn btn-danger mr-2 float-right"
-              >
-                Delete
-              </button>
             </div>
           </form>
         </div>
@@ -53,6 +46,7 @@ export default {
   name: 'AddData',
   data: () => {
     return {
+      dataset: undefined,
       data: {
         id: undefined,
         dataset_id: 0,
@@ -63,6 +57,7 @@ export default {
   created () {
     if (this.$route.params.data) {
       this.data = this.$route.params.data
+      this.dataset = this.$route.params.dataset
     }
   },
   methods: {
@@ -85,7 +80,7 @@ export default {
             text: 'Created successfully!',
             icon: 'success'
           }).then(result => {
-            this.$router.push('/data-sets/')
+            this.$router.push({ name: 'ListDatas', params: { dataset: this.dataset } })
           })
         })
         .catch(err => {
@@ -120,7 +115,7 @@ export default {
           text: response.data.message,
           icon: 'success'
         }).then(result => {
-          this.$router.push('/data-sets/')
+          this.$router.push({ name: 'ListDatas', params: { dataset: this.dataset } })
         })
       })
     },

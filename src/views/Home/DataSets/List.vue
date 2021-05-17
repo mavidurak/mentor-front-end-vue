@@ -19,7 +19,7 @@
             <div class="col-12">
               <v-data-table
                 :headers="headers"
-                :items="applications"
+                :items="datasets"
                 :items-per-page="5"
                 class="elevation-1 table-bordered text-center"
               >
@@ -78,7 +78,7 @@ export default {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
       }).then(response => {
-        this.applications = response.data.results
+        this.datasets = response.data.results
       })
     },
     deleteDataSet: async function (dataset) {
@@ -104,7 +104,7 @@ export default {
 
   data: () => {
     return {
-      applications: [],
+      datasets: [],
       headers: [
         {
           text: 'Id',

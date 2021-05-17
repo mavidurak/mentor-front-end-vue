@@ -22,7 +22,7 @@
             </div>
             <div class="col-3 px-5 py-0">
               <router-link
-                :to="{ name: 'AddData', params: { data: {dataset_id:this.dataset.id} } }"
+                :to="{ name: 'AddData', params: { data: {dataset_id:this.dataset.id}, dataset:dataset } }"
                 class="btn btn-success float-right"
                 >Create</router-link
               >
@@ -32,7 +32,7 @@
             <div class="col-12">
               <v-data-table
                 :headers="headers"
-                :items="applications"
+                :items="datas"
                 :items-per-page="5"
                 class="elevation-1 table-bordered text-center"
               >
@@ -48,7 +48,7 @@
                 </template>
                 <template v-slot:[`item.actions`]="{ item }">
                   <router-link
-                    :to="{ name: 'AddData', params: { data: item } }"
+                    :to="{ name: 'AddData', params: { data: item , dataset:dataset} }"
                     class="btn btn-primary mx-1"
                   >
                     Update
@@ -85,7 +85,7 @@ export default {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
       }).then(response => {
-        this.applications = response.data.result
+        this.datas = response.data.result
       })
     },
     deleteData: async function (data) {
@@ -124,7 +124,7 @@ export default {
         updatedAt: '',
         deletedAt: ''
       },
-      applications: [],
+      datas: [],
       headers: [
         {
           text: 'Id',
