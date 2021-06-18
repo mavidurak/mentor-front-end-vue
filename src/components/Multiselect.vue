@@ -6,6 +6,7 @@
         v-model="value"
         :options="options"
         :close-on-select="true"
+        :multiple="multiple"
         label="key"
         track-by="key"
         @input="$emit('getKey', value)"
@@ -24,6 +25,7 @@ export default {
     Multiselect
   },
   props: {
+    multiple: Boolean,
     options: Array,
     selectedKey: String
   },
