@@ -91,10 +91,22 @@ const routes = [
     component: () => import('../views/Home/Applications/Add.vue')
   },
   {
-    path: '/applications/list',
+    path: '/applications/',
     name: 'ListApplications',
     meta: { layout: 'home-nav' },
     component: () => import('../views/Home/Applications/List.vue')
+  },
+  {
+    path: '/appdatasets/add',
+    name: 'AddAppDatasets',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/AppDatasets/Add.vue')
+  },
+  {
+    path: '/appdatasets/',
+    name: 'ListAppDatasets',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/AppDatasets/List.vue')
   }
 ]
 

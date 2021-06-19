@@ -298,7 +298,7 @@
                   href="#"
                   :class="[
                     currentPage.includes('/applications/add') ||
-                    currentPage.includes('/applications/list')
+                    currentPage.includes('/applications/')
                       ? activeClass
                       : '',
                     'nav-link'
@@ -328,12 +328,12 @@
                   <li class="nav-item">
                     <router-link
                       :class="[
-                        currentPage.includes('/applications/list')
+                        currentPage === '/applications/'
                           ? activeClass
                           : '',
                         'nav-link'
                       ]"
-                      to="/applications/list"
+                      to="/applications/"
                     >
                       <i class="nav-icon fas fa-list"></i>
                       <p>Listeyi Gör</p>

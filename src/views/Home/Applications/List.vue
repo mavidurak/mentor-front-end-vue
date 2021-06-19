@@ -9,7 +9,7 @@
             </div>
             <div class="col-9 px-5 py-0">
               <router-link
-                to="/data-sets/add"
+                to="/applications/add"
                 class="btn btn-success float-right"
                 >Create</router-link
               >
@@ -42,13 +42,13 @@
                 </template>
                 <template v-slot:[`item.actions`]="{ item }">
                   <router-link
-                    :to="{ name: 'ListDatas', params: { dataset: item } }"
+                    :to="{ name: 'ListAppDatasets', params: { application: item } }"
                     class="btn btn-primary mx-1"
                   >
-                    Datas
+                    Datasets
                   </router-link>
                   <router-link
-                    :to="{ name: 'AddDataset', params: { dataset: item } }"
+                    :to="{ name: 'AddApplication', params: { application: item } }"
                     class="btn btn-primary mx-1"
                   >
                     Update
@@ -89,7 +89,6 @@ export default {
         }
       }).then(response => {
         this.applications = response.data.results
-        console.log(response.data)
       })
     },
     deleteApplications: async function (application) {

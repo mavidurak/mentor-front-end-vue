@@ -21,7 +21,7 @@
                 maxlength="255"
               />
             </div>
-            <div class="form-group"  v-if="options">
+            <div class="form-group"  v-if="options&&application.id === undefined">
               <label for="exampleKeyTitle">Key Title : </label>
               <multiSelect
                 :multiple="true"
@@ -38,6 +38,18 @@
                 rows="3"
                 minlength="1"
               ></textarea>
+            </div>
+            <div class="form-group">
+              <label> Permission Read : </label>
+              <input v-model="application.permissionRead" class="mx-3 " type="checkbox"/>
+            </div>
+            <div class="form-group">
+              <label> Permission Write : </label>
+              <input v-model="application.permissionWrite" class="mx-3 " type="checkbox"/>
+            </div>
+            <div class="form-group">
+              <label> Permission Delete : </label>
+              <input v-model="application.permissionDelete" class="mx-3 " type="checkbox"/>
             </div>
             <button
               v-if="application.id == undefined"
@@ -74,7 +86,11 @@ export default {
         id: undefined,
         title: '',
         dataset_ids: [],
-        description: ''
+        description: '',
+        permissionRead: '',
+        permissionWrite: '',
+        permissionDelete: ''
+
       },
       key: '',
       options: null
@@ -95,20 +111,18 @@ export default {
         }
       }).then(response => {
         this.options = Object.values(response.data.results).map(dataType => ({ id: dataType.id, key: dataType.title }))
-        console.log(this.options)
       })
     },
     createApplication () {
-      console.log(this.application.dataset_ids.map(({ id }) => id))
       Axios.post(
         '/applications/',
         {
           title: this.application.title,
           dataset_ids: this.application.dataset_ids.map(({ id }) => id),
           description: this.application.description,
-          permission_read: true,
-          permission_write: true,
-          permission_delete: true
+          permission_read: this.application.permissionRead,
+          permission_write: this.application.permissionWrite,
+          permission_delete: this.application.permissionDelete
         },
         {
           headers: {
@@ -141,7 +155,6 @@ export default {
     updateKeyTitle (value) {
       if (value) {
         this.application.dataset_ids = value
-        console.log(this.application.dataset_ids)
       }
     },
     onSubmit: async function () {
@@ -153,11 +166,13 @@ export default {
     },
     updateDataSet: async function () {
       Axios.put(
-        `/data-sets/${this.application.id}`,
+        `/applications/${this.application.id}`,
         {
           title: this.application.title,
-          data_type: this.application.data_type,
-          description: this.application.description
+          description: this.application.description,
+          permission_read: this.application.permissionRead,
+          permission_write: this.application.permissionWrite,
+          permission_delete: this.application.permissionDelete
         },
         {
           headers: {
@@ -170,7 +185,7 @@ export default {
           text: response.data.message,
           icon: 'success'
         }).then(result => {
-          this.$router.push('/data-sets/')
+          this.$router.push('/applications/list')
         })
       })
     }
