@@ -56,7 +56,7 @@ export default {
   methods: {
     createDataSet () {
       return Axios.post(
-        '/appdatasets/',
+        '/application-datasets/',
         {
           application_id: this.application_id,
           dataset_id: this.dataset_id
@@ -90,7 +90,7 @@ export default {
         })
     },
     getAddableDatasets () {
-      Axios.get(`addablesforapp/${this.application_id}`, {
+      Axios.get(`/application-datasets/unavaible-application-datasets/${this.application_id}`, {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }

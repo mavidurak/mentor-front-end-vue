@@ -136,7 +136,7 @@ export default {
             text: 'Created successfully!',
             icon: 'success'
           }).then(result => {
-            this.$router.push('/data-sets/')
+            this.$router.push('/applications/')
           })
         })
         .catch(err => {
@@ -185,7 +185,7 @@ export default {
           text: response.data.message,
           icon: 'success'
         }).then(result => {
-          this.$router.push('/applications/list')
+          this.$router.push('/applications/')
         })
       })
     }

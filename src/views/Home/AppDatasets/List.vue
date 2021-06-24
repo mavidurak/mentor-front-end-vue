@@ -69,16 +69,17 @@ export default {
   components: {},
   methods: {
     getDatas: async function () {
-      Axios.get(`/appdatasets/app/${this.application.id}`, {
+      Axios.get(`/application-datasets/${this.application.id}`, {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
       }).then(response => {
         this.appDatasets = response.data.result
+        console.log(this.appDatasets)
       })
     },
     deleteData: async function (data) {
-      Axios.delete(`/appdatasets/${this.application.id}/${data.data_set.id}`, {
+      Axios.delete(`/application-datasets/${data.id}`, {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
@@ -112,7 +113,7 @@ export default {
           text: 'Id',
           align: 'start',
           sortable: true,
-          value: 'data_set.id'
+          value: 'id'
         },
         { text: 'Title', value: 'data_set.title' },
         { text: 'Description', value: 'data_set.description' },
