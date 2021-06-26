@@ -23,9 +23,9 @@
             <div class="col-3 px-5 py-0">
               <router-link
                 :to="{ name: 'AddAppDatasets', params: { application_id:this.application.id, application:application } }"
-                class="btn btn-success float-right"
-                >Create</router-link
-              >
+                class="btn btn-success float-right">
+                Create
+              </router-link>
             </div>
           </div>
           <div v-if="appDatasets" class="row">
@@ -34,8 +34,7 @@
                 :headers="headers"
                 :items="appDatasets"
                 :items-per-page="5"
-                class="elevation-1 table-bordered text-center"
-              >
+                class="elevation-1 table-bordered text-center">
                 <template v-slot:[`item.createdAt`]="{ item }">
                   <span>{{
                     new Date(item.createdAt).toLocaleDateString()
@@ -45,8 +44,7 @@
                   <button
                     type="reset"
                     @click="deleteData(item)"
-                    class="btn btn-danger mx-1"
-                  >
+                    class="btn btn-danger mx-1">
                     Delete
                   </button>
                 </template>
