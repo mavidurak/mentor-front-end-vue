@@ -1,11 +1,8 @@
 <template>
 <div>
-  <div class="border rounded d-block">
+  <div class="border rounded d-block m-1 px-1">
     <div class="d-block">
       {{title}}
-    </div>
-    <div class="d-block">
-      {{dataType}}
     </div>
   </div>
 </div>

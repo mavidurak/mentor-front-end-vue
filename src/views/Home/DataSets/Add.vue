@@ -18,16 +18,14 @@
                 placeholder="title"
                 required
                 minlength="1"
-                maxlength="255"
-              />
+                maxlength="255"/>
             </div>
             <div class="form-group">
               <label for="exampleKeyTitle">Key Title : </label>
               <multiSelect
                 :options="options"
                 :selectedKey="dataset.data_type"
-                @getKey="updateKeyTitle"
-              />
+                @getKey="updateKeyTitle"/>
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Description : </label>
@@ -36,14 +34,13 @@
                 class="form-control"
                 type="text"
                 rows="3"
-                minlength="1"
-              ></textarea>
+                minlength="1">
+              </textarea>
             </div>
             <button
               v-if="dataset.id == undefined"
               type="submit"
-              class="btn btn-success float-right"
-            >
+              class="btn btn-success float-right">
               Create
             </button>
             <div v-else>
@@ -161,10 +158,7 @@ export default {
         })
       })
     }
-    /*
-*/
   }
-
 }
 </script>
 

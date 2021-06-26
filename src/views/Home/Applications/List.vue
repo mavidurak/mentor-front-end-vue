@@ -10,9 +10,9 @@
             <div class="col-9 px-5 py-0">
               <router-link
                 to="/applications/add"
-                class="btn btn-success float-right"
-                >Create</router-link
-              >
+                class="btn btn-success float-right">
+                Create
+              </router-link>
             </div>
           </div>
           <div class="row">
@@ -21,14 +21,21 @@
                 :headers="headers"
                 :items="applications"
                 :items-per-page="5"
-                class="elevation-1 table-bordered text-center"
-              >
-                <template v-slot:[`item.data_sets`]="{ item }">
-                  <template v-for="dataSet in item.data_sets">
-                    <div :key="dataSet.id" >
-                      <AppDatasetViewPill :id="dataSet.id" :title="dataSet.title" :dataType="dataSet.data_type" />
+                class="elevation-1 table-bordered text-center">
+                <template v-slot:[`item.application_datasets`]="{ item }">
+                  <template v-for="applicationDataset in item.application_datasets">
+                    <div :key="applicationDataset.id" >
+                      <AppDatasetViewPill
+                        :id="applicationDataset.id"
+                        :title="applicationDataset.data_set.title"
+                        :dataType="applicationDataset.data_set.data_type" />
                     </div>
                   </template>
+                </template>
+                <template v-slot:[`item.permissions`]="{ item }" >
+                  <div class="d-inline mx-1" v-if="item.permission_read">R</div>
+                  <div class="d-inline mx-1" v-if="item.permission_write">W</div>
+                  <div class="d-inline mx-1" v-if="item.permission_delete">D</div>
                 </template>
                 <template v-slot:[`item.createdAt`]="{ item }">
                   <span>{{
@@ -43,21 +50,18 @@
                 <template v-slot:[`item.actions`]="{ item }">
                   <router-link
                     :to="{ name: 'ListAppDatasets', params: { application: item } }"
-                    class="btn btn-primary mx-1"
-                  >
+                    class="btn btn-primary mr-1">
                     Datasets
                   </router-link>
                   <router-link
                     :to="{ name: 'AddApplication', params: { application: item } }"
-                    class="btn btn-primary mx-1"
-                  >
+                    class="btn btn-primary mr-1">
                     Update
                   </router-link>
                   <button
                     type="reset"
                     @click="deleteApplications(item)"
-                    class="btn btn-danger mr-2 float-right"
-                  >
+                    class="btn btn-danger">
                     Delete
                   </button>
                 </template>
@@ -124,9 +128,10 @@ export default {
         },
         { text: 'Title', value: 'title' },
         { text: 'Description', value: 'description' },
-        { text: 'Datasets', value: 'data_sets' },
+        { text: 'Datasets', value: 'application_datasets' },
         { text: 'Creation Date', value: 'createdAt' },
         { text: 'Last Update', value: 'updatedAt' },
+        { text: 'Permissions', value: 'permissions' },
         { text: 'Actions', value: 'actions', sortable: false }
       ]
     }

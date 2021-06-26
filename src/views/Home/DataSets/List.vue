@@ -10,9 +10,9 @@
             <div class="col-9 px-5 py-0">
               <router-link
                 to="/data-sets/add"
-                class="btn btn-success float-right"
-                >Create</router-link
-              >
+                class="btn btn-success float-right">
+                Create
+                </router-link>
             </div>
           </div>
           <div class="row">
@@ -21,8 +21,7 @@
                 :headers="headers"
                 :items="datasets"
                 :items-per-page="5"
-                class="elevation-1 table-bordered text-center"
-              >
+                class="elevation-1 table-bordered text-center">
                 <template v-slot:[`item.createdAt`]="{ item }">
                   <span>{{
                     new Date(item.createdAt).toLocaleDateString()
@@ -36,21 +35,18 @@
                 <template v-slot:[`item.actions`]="{ item }">
                   <router-link
                     :to="{ name: 'ListDatas', params: { dataset: item } }"
-                    class="btn btn-primary mx-1"
-                  >
+                    class="btn btn-primary mx-1">
                     Datas
                   </router-link>
                   <router-link
                     :to="{ name: 'AddDataset', params: { dataset: item } }"
-                    class="btn btn-primary mx-1"
-                  >
+                    class="btn btn-primary mx-1">
                     Update
                   </router-link>
                   <button
                     type="reset"
                     @click="deleteDataSet(item)"
-                    class="btn btn-danger mr-2 float-right"
-                  >
+                    class="btn btn-danger mr-2 float-right">
                     Delete
                   </button>
                 </template>

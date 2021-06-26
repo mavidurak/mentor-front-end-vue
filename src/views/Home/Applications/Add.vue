@@ -18,16 +18,14 @@
                 placeholder="title"
                 required
                 minlength="1"
-                maxlength="255"
-              />
+                maxlength="255"/>
             </div>
             <div class="form-group"  v-if="options&&application.id === undefined">
               <label for="exampleKeyTitle">Key Title : </label>
               <multiSelect
                 :multiple="true"
                 :options="options"
-                @getKey="updateKeyTitle"
-              />
+                @getKey="updateKeyTitle"/>
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Description : </label>
@@ -36,26 +34,25 @@
                 class="form-control"
                 type="text"
                 rows="3"
-                minlength="1"
-              ></textarea>
+                minlength="1">
+              </textarea>
             </div>
             <div class="form-group">
               <label> Permission Read : </label>
-              <input v-model="application.permissionRead" class="mx-3 " type="checkbox"/>
+              <input v-model="application.permission_read" class="mx-3 " type="checkbox"/>
             </div>
             <div class="form-group">
               <label> Permission Write : </label>
-              <input v-model="application.permissionWrite" class="mx-3 " type="checkbox"/>
+              <input v-model="application.permission_write" class="mx-3 " type="checkbox"/>
             </div>
             <div class="form-group">
               <label> Permission Delete : </label>
-              <input v-model="application.permissionDelete" class="mx-3 " type="checkbox"/>
+              <input v-model="application.permission_delete" class="mx-3 " type="checkbox"/>
             </div>
             <button
               v-if="application.id == undefined"
               type="submit"
-              class="btn btn-success float-right"
-            >
+              class="btn btn-success float-right">
               Create
             </button>
             <div v-else>
@@ -87,9 +84,9 @@ export default {
         title: '',
         dataset_ids: [],
         description: '',
-        permissionRead: '',
-        permissionWrite: '',
-        permissionDelete: ''
+        permission_read: false,
+        permission_write: false,
+        permission_delete: false
 
       },
       key: '',
@@ -120,9 +117,9 @@ export default {
           title: this.application.title,
           dataset_ids: this.application.dataset_ids.map(({ id }) => id),
           description: this.application.description,
-          permission_read: this.application.permissionRead,
-          permission_write: this.application.permissionWrite,
-          permission_delete: this.application.permissionDelete
+          permission_read: this.application.permission_read,
+          permission_write: this.application.permission_write,
+          permission_delete: this.application.permission_delete
         },
         {
           headers: {
@@ -170,9 +167,9 @@ export default {
         {
           title: this.application.title,
           description: this.application.description,
-          permission_read: this.application.permissionRead,
-          permission_write: this.application.permissionWrite,
-          permission_delete: this.application.permissionDelete
+          permission_read: this.application.permission_read,
+          permission_write: this.application.permission_write,
+          permission_delete: this.application.permission_delete
         },
         {
           headers: {

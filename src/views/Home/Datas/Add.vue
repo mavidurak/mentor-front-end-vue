@@ -16,14 +16,12 @@
                 type="number"
                 class="form-control"
                 placeholder="value"
-                required
-              />
+                required/>
             </div>
             <button
               v-if="this.data.id == undefined"
               type="submit"
-              class="btn btn-success float-right"
-            >
+              class="btn btn-success float-right">
               Create
             </button>
             <div v-else>
