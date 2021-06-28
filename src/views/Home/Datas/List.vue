@@ -7,28 +7,22 @@
             <div class="col-9 py-0">
               <h5 class="d-inline-flex">
                 <div class="pr-3 pl-4 border-right d-inline-flex">
-                  {{ dataset.title }}
+                  Datas {{ dataset.title }}
                 </div>
               </h5>
               <div class="px-3 border-right d-inline-flex">
                 {{ dataset.data_type }}
               </div>
-              <div class="px-3 border-right d-inline-flex">
-                {{ new Date(dataset.createdAt).toLocaleDateString() }}
-              </div>
-              <div class="px-3 d-inline-flex">
-                {{ new Date(dataset.updatedAt).toLocaleDateString() }}
-              </div>
             </div>
             <div class="col-3 px-5 py-0">
               <router-link
-                :to="{ name: 'AddData', params: { data: {dataset_id:this.dataset.id}, dataset:dataset } }"
+                :to="{ name: 'AddData', params: {dataset:dataset } }"
                 class="btn btn-success float-right">
                 Create</router-link
               >
             </div>
           </div>
-          <div class="row">
+          <div v-if="datas" class="row">
             <div class="col-12">
               <v-data-table
                 :headers="headers"
@@ -77,7 +71,8 @@ export default {
   components: {},
   methods: {
     getDatas: async function () {
-      Axios.get(`/datas/${this.dataset.id}`, {
+      console.log(this.$route.params.dataSetId)
+      Axios.get(`/datas/${this.$route.params.dataSetId}`, {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
@@ -102,24 +97,21 @@ export default {
     }
   },
 
-  mounted () {
+  created () {
     if (this.$route.params.dataset) {
       this.dataset = this.$route.params.dataset
-      this.key = this.dataset.data_type
     }
+    console.log(this.$route.params)
     this.getDatas()
   },
 
   data: () => {
     return {
       dataset: {
-        id: 0,
+        id: undefined,
         title: '',
         data_type: '',
-        description: '',
-        createdAt: '',
-        updatedAt: '',
-        deletedAt: ''
+        description: ''
       },
       datas: [],
       headers: [

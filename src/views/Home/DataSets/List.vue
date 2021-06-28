@@ -34,7 +34,7 @@
                 </template>
                 <template v-slot:[`item.actions`]="{ item }">
                   <router-link
-                    :to="{ name: 'ListDatas', params: { dataset: item } }"
+                    :to="{ path:`/datas/${item.id}`, params: { dataset: item } }"
                     class="btn btn-primary mx-1">
                     Datas
                   </router-link>

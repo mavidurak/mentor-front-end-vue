@@ -72,13 +72,13 @@ const routes = [
     component: () => import('../views/Home/DataSets/List.vue')
   },
   {
-    path: '/datas/',
+    path: '/datas/:dataSetId',
     name: 'ListDatas',
     meta: { layout: 'home-nav' },
     component: () => import('../views/Home/Datas/List.vue')
   },
   {
-    path: '/datas/add',
+    path: '/datas/:dataSetId/add',
     name: 'AddData',
     meta: { layout: 'home-nav' },
     component: () => import('../views/Home/Datas/Add.vue')
@@ -97,13 +97,13 @@ const routes = [
     component: () => import('../views/Home/Applications/List.vue')
   },
   {
-    path: '/appdatasets/add',
+    path: '/appdatasets/:applicationId/add',
     name: 'AddAppDatasets',
     meta: { layout: 'home-nav' },
     component: () => import('../views/Home/AppDatasets/Add.vue')
   },
   {
-    path: '/appdatasets/',
+    path: '/appdatasets/:applicationId',
     name: 'ListAppDatasets',
     meta: { layout: 'home-nav' },
     component: () => import('../views/Home/AppDatasets/List.vue')

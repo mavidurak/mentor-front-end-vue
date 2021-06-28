@@ -6,7 +6,7 @@
           <h4 v-if="application.id === undefined" class="card-title font-weight-bold">
             Create Application
           </h4>
-          <h4 v-else class="card-title">Update Data Set {{application.id}}</h4>
+          <h4 v-else class="card-title">Update Application id: {{application.id}}</h4>
           <br />
           <form @submit.prevent="onSubmit()">
             <div class="form-group">
@@ -21,14 +21,14 @@
                 maxlength="255"/>
             </div>
             <div class="form-group"  v-if="options&&application.id === undefined">
-              <label for="exampleKeyTitle">Key Title : </label>
+              <label>Key Title : </label>
               <multiSelect
                 :multiple="true"
                 :options="options"
                 @getKey="updateKeyTitle"/>
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Description : </label>
+              <label>Description : </label>
               <textarea
                 v-model="application.description"
                 class="form-control"

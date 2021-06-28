@@ -7,32 +7,23 @@
             <div v-if="application" class="col-9 py-0">
               <h5 class="d-inline-flex">
                 <div class="pr-3 pl-4 border-right d-inline-flex">
-                  {{ application.title }}
+                  Application Datasets: {{ application.title }}
                 </div>
               </h5>
-              <div class="px-3 border-right d-inline-flex">
-                {{ application.data_type }}
-              </div>
-              <div class="px-3 border-right d-inline-flex">
-                {{ new Date(application.createdAt).toLocaleDateString() }}
-              </div>
-              <div class="px-3 d-inline-flex">
-                {{ new Date(application.updatedAt).toLocaleDateString() }}
-              </div>
             </div>
             <div class="col-3 px-5 py-0">
               <router-link
-                :to="{ name: 'AddAppDatasets', params: { application_id:this.application.id, application:application } }"
+                :to="{ name: 'AddAppDatasets', params: { application:application } }"
                 class="btn btn-success float-right">
                 Create
               </router-link>
             </div>
           </div>
-          <div v-if="appDatasets" class="row">
+          <div v-if="applicationDatasets" class="row">
             <div class="col-12">
               <v-data-table
                 :headers="headers"
-                :items="appDatasets"
+                :items="applicationDatasets"
                 :items-per-page="5"
                 class="elevation-1 table-bordered text-center">
                 <template v-slot:[`item.createdAt`]="{ item }">
@@ -66,14 +57,14 @@ export default {
   name: 'ListData',
   components: {},
   methods: {
-    getDatas: async function () {
-      Axios.get(`/application-datasets/${this.application.id}`, {
+    getApplicationDatasets: async function () {
+      Axios.get(`/application-datasets/${this.$route.params.applicationId}`, {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
       }).then(response => {
-        this.appDatasets = response.data.result
-        console.log(this.appDatasets)
+        this.applicationDatasets = response.data.result
+        console.log(this.applicationDatasets)
       })
     },
     deleteData: async function (data) {
@@ -87,17 +78,17 @@ export default {
           text: response.data.message,
           icon: 'success'
         }).then(result => {
-          this.getDatas()
+          this.getApplicationDatasets()
         })
       })
     }
   },
 
-  mounted () {
+  created () {
     if (this.$route.params.application) {
       this.application = this.$route.params.application
     }
-    this.getDatas()
+    this.getApplicationDatasets()
   },
 
   data: () => {
@@ -105,7 +96,7 @@ export default {
       application: {
         id: undefined
       },
-      appDatasets: [],
+      applicationDatasets: [],
       headers: [
         {
           text: 'Id',

@@ -4,12 +4,12 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title font-weight-bold">
-            Create Data
+            Create Application Dataset Connection
           </h4>
           <br />
           <form @submit.prevent="onSubmit()">
             <div class="form-group"  v-if="addableDatasets">
-              <label for="exampleInputEmail1">Value : </label>
+              <label>Value : </label>
               <multiSelect
                 :options="addableDatasets"
                 @getKey="updateKeyTitle"/>
@@ -38,7 +38,6 @@ export default {
   },
   data: () => {
     return {
-      application_id: undefined,
       application: undefined,
       addableDatasets: null,
       dataset_id: undefined
@@ -46,7 +45,6 @@ export default {
   },
   created () {
     if (this.$route.params) {
-      this.application_id = this.$route.params.application_id
       this.application = this.$route.params.application
     }
     this.getAddableDatasets()
@@ -56,7 +54,7 @@ export default {
       return Axios.post(
         '/application-datasets/',
         {
-          application_id: this.application_id,
+          application_id: this.$route.params.applicationId,
           dataset_id: this.dataset_id
         },
         {
@@ -88,7 +86,8 @@ export default {
         })
     },
     getAddableDatasets () {
-      Axios.get(`/application-datasets/unavaible-application-datasets/${this.application_id}`, {
+      console.log(this.$route.params.applicationId)
+      Axios.get(`/application-datasets/unavaible-application-datasets/${this.$route.params.applicationId}`, {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }

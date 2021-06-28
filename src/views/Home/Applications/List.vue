@@ -49,7 +49,7 @@
                 </template>
                 <template v-slot:[`item.actions`]="{ item }">
                   <router-link
-                    :to="{ name: 'ListAppDatasets', params: { application: item } }"
+                    :to="{ path:`/appdatasets/${item.id}`, params: { application: item } }"
                     class="btn btn-primary mr-1">
                     Datasets
                   </router-link>

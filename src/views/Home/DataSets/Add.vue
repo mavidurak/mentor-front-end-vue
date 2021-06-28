@@ -10,7 +10,7 @@
           <br />
           <form @submit.prevent="onSubmit()">
             <div class="form-group">
-              <label for="exampleInputEmail1">Title : </label>
+              <label>Title : </label>
               <input
                 v-model="dataset.title"
                 type="text"
@@ -21,14 +21,14 @@
                 maxlength="255"/>
             </div>
             <div class="form-group">
-              <label for="exampleKeyTitle">Key Title : </label>
+              <label>Key Title : </label>
               <multiSelect
                 :options="options"
                 :selectedKey="dataset.data_type"
                 @getKey="updateKeyTitle"/>
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Description : </label>
+              <label>Description : </label>
               <textarea
                 v-model="dataset.description"
                 class="form-control"

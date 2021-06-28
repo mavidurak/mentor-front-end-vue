@@ -10,7 +10,7 @@
           <br />
           <form @submit.prevent="onSubmit()">
             <div class="form-group">
-              <label for="exampleInputEmail1">Value : </label>
+              <label>Value : </label>
               <input
                 v-model="data.value"
                 type="number"
@@ -64,7 +64,7 @@ export default {
         '/datas/',
         {
           value: this.data.value,
-          dataset_id: this.data.dataset_id
+          dataset_id: this.$route.params.dataSetId
         },
         {
           headers: {
@@ -100,7 +100,7 @@ export default {
         {
           id: this.data.id,
           value: this.data.value,
-          dataset_id: this.data.dataset_id
+          dataset_id: this.$route.params.dataSetId
         },
         {
           headers: {
