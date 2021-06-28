@@ -17,7 +17,7 @@
             <router-link
               :class="[
                 currentPage.includes('home') ? activeClass : '',
-                'nav-link',
+                'nav-link'
               ]"
               to="/home"
             >
@@ -154,11 +154,11 @@
             </a>
           </li>
           <li class="nav-item">
-              <span v-on:click="logout()">
-                <router-link class="nav-link" to="login">
-                  <i class="fas fa-sign-out-alt"></i>
-                  </router-link>
-              </span>
+            <span v-on:click="logout()">
+              <router-link class="nav-link" to="/login">
+                <i class="fas fa-sign-out-alt"></i>
+              </router-link>
+            </span>
           </li>
         </ul>
       </nav>
@@ -212,10 +212,8 @@
                 <a
                   href="#"
                   :class="[
-                    currentPage.includes('home')
-                      ? activeClass
-                      : '',
-                    'nav-link',
+                    currentPage.includes('home') ? activeClass : '',
+                    'nav-link'
                   ]"
                 >
                   <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -230,7 +228,7 @@
                     <router-link
                       :class="[
                         currentPage.includes('home') ? activeClass : '',
-                        'nav-link',
+                        'nav-link'
                       ]"
                       to="/home"
                     >
@@ -242,7 +240,7 @@
                     <router-link
                       :class="[
                         currentPage.includes('dashboard2') ? activeClass : '',
-                        'nav-link',
+                        'nav-link'
                       ]"
                       to="#"
                     >
@@ -256,11 +254,8 @@
                 <a
                   href="#"
                   :class="[
-                    currentPage.includes('/data-sets/add') ||
-                    currentPage.includes('/data-sets/list')
-                      ? activeClass
-                      : '',
-                    'nav-link',
+                    currentPage.includes('/data-sets/') ? activeClass : '',
+                    'nav-link'
                   ]"
                 >
                   <i class="nav-icon fas fa-cubes"></i>
@@ -273,10 +268,10 @@
                   <li class="nav-item">
                     <router-link
                       :class="[
-                        currentPage.includes('/data-sets/list') ? activeClass : '',
-                        'nav-link',
+                        currentPage === '/data-sets/' ? activeClass : '',
+                        'nav-link'
                       ]"
-                      to="/data-sets/list"
+                      to="/data-sets/"
                     >
                       <i class="nav-icon fas fa-list"></i>
                       <p>Listeyi Gör</p>
@@ -285,8 +280,10 @@
                   <li class="nav-item">
                     <router-link
                       :class="[
-                        currentPage.includes('/data-sets/add') ? activeClass : '',
-                        'nav-link',
+                        currentPage.includes('/data-sets/add')
+                          ? activeClass
+                          : '',
+                        'nav-link'
                       ]"
                       to="/data-sets/add"
                     >
@@ -300,55 +297,11 @@
                 <a
                   href="#"
                   :class="[
-                    currentPage.includes('/datas/add') ||
-                    currentPage.includes('/datas/list')
-                      ? activeClass
-                      : '',
-                    'nav-link',
-                  ]"
-                >
-                  <i class="nav-icon fas fa-layer-group"></i>
-                  <p>
-                    Datas
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <router-link
-                      :class="[
-                        currentPage.includes('/datas/add') ? activeClass : '',
-                        'nav-link',
-                      ]"
-                      to="/datas/add"
-                    >
-                      <i class="nav-icon fas fa-folder-plus"></i>
-                      <p>Yeni Kayıt Oluştur</p>
-                    </router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link
-                      :class="[
-                        currentPage.includes('/datas/list') ? activeClass : '',
-                        'nav-link',
-                      ]"
-                      to="/datas/list"
-                    >
-                      <i class="nav-icon fas fa-list"></i>
-                      <p>Listeyi Gör</p>
-                    </router-link>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a
-                  href="#"
-                  :class="[
                     currentPage.includes('/applications/add') ||
-                    currentPage.includes('/applications/list')
+                    currentPage.includes('/applications/')
                       ? activeClass
                       : '',
-                    'nav-link',
+                    'nav-link'
                   ]"
                 >
                   <i class="nav-icon fas fa-rocket"></i>
@@ -361,8 +314,10 @@
                   <li class="nav-item">
                     <router-link
                       :class="[
-                        currentPage.includes('/applications/add') ? activeClass : '',
-                        'nav-link',
+                        currentPage.includes('/applications/add')
+                          ? activeClass
+                          : '',
+                        'nav-link'
                       ]"
                       to="/applications/add"
                     >
@@ -373,10 +328,12 @@
                   <li class="nav-item">
                     <router-link
                       :class="[
-                        currentPage.includes('/applications/list') ? activeClass : '',
-                        'nav-link',
+                        currentPage === '/applications/'
+                          ? activeClass
+                          : '',
+                        'nav-link'
                       ]"
-                      to="/applications/list"
+                      to="/applications/"
                     >
                       <i class="nav-icon fas fa-list"></i>
                       <p>Listeyi Gör</p>
@@ -449,14 +406,11 @@ export default {
   created () {
     if (localStorage.getItem('X-AccessToken') !== null) {
       axios
-        .get(
-          '/authentications/me/',
-          {
-            headers: {
-              'X-AccessToken': localStorage.getItem('X-AccessToken')
-            }
+        .get('/authentications/me/', {
+          headers: {
+            'X-AccessToken': localStorage.getItem('X-AccessToken')
           }
-        )
+        })
         .then(response => {
           if (response.status === 200) {
             this.$notify({
@@ -467,7 +421,8 @@ export default {
             this.username = response.data.username
             this.email = response.data.email
           }
-        }).catch(err => {
+        })
+        .catch(err => {
           if (err.response.status === 401) {
             this.$router.push('login')
           }
@@ -477,16 +432,15 @@ export default {
     }
   }
 }
-
 </script>
 
 <style>
 .nav-item {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .brand-text {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .main-header-bg {
   background-color: transparent !important;
