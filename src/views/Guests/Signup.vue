@@ -61,7 +61,6 @@ export default {
   },
   methods: {
     onSubmit: function () {
-      console.log(this.username)
       Axios.post('/authentications/register/', {
         username: this.username,
         password: this.password,

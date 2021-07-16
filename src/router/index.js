@@ -7,6 +7,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'Login',
     redirect: '/login',
     meta: { layout: 'none' }
   },
@@ -59,43 +60,30 @@ const routes = [
     component: () => import('../views/Guests/ForgotPassword.vue')
   },
   {
-    path: '/data-sets',
-    name: 'DataSets',
-    redirect: '/data-sets/list',
-    children: [
-      {
-        path: '/data-sets/add',
-        name: 'AddDataset',
-        meta: { layout: 'home-nav' },
-        component: () => import('../views/Home/DataSets/Add.vue')
-      },
-      {
-        path: '/data-sets/list',
-        name: 'ListDataSets',
-        meta: { layout: 'home-nav' },
-        component: () => import('../views/Home/DataSets/List.vue')
-      },
-      {
-        path: '/data-sets/update',
-        name: 'UpdateDataSets',
-        meta: { layout: 'home-nav' },
-        component: () => import('../views/Home/DataSets/Update.vue')
-      }
-    ],
-    component: () => import('../views/Home/DataSets')
-  },
-  {
-    path: '/datas/add',
-    name: 'AddData',
+    path: '/data-sets/add',
+    name: 'AddDataset',
     meta: { layout: 'home-nav' },
-    component: () => import('../views/Home/Datas/Add.vue')
+    component: () => import('../views/Home/DataSets/Add.vue')
   },
   {
-    path: '/datas/list',
+    path: '/data-sets/',
+    name: 'ListDataSets',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/DataSets/List.vue')
+  },
+  {
+    path: '/datas/:dataSetId',
     name: 'ListDatas',
     meta: { layout: 'home-nav' },
     component: () => import('../views/Home/Datas/List.vue')
   },
+  {
+    path: '/datas/:dataSetId/add',
+    name: 'AddData',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/Datas/Add.vue')
+  },
+
   {
     path: '/applications/add',
     name: 'AddApplication',
@@ -103,10 +91,22 @@ const routes = [
     component: () => import('../views/Home/Applications/Add.vue')
   },
   {
-    path: '/applications/list',
+    path: '/applications/',
     name: 'ListApplications',
     meta: { layout: 'home-nav' },
     component: () => import('../views/Home/Applications/List.vue')
+  },
+  {
+    path: '/appdatasets/:applicationId/add',
+    name: 'AddAppDatasets',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/AppDatasets/Add.vue')
+  },
+  {
+    path: '/appdatasets/:applicationId',
+    name: 'ListAppDatasets',
+    meta: { layout: 'home-nav' },
+    component: () => import('../views/Home/AppDatasets/List.vue')
   }
 ]
 

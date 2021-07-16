@@ -35,7 +35,7 @@
             </div>
             <div class="row">
               <div class="col">Key Title :</div>
-              <div class="col">{{ selectedDataSet.key_title }}</div>
+              <div class="col">{{ selectedDataSet.data_type }}</div>
             </div>
             <div class="row">
               <div class="col">Description</div>
@@ -176,7 +176,7 @@
                       </ul>
                       <div class="dropdown-divider"></div>
                       <router-link
-                        :to="{ name: 'UpdateDataSets' }"
+                        :to="{ name: 'AddDataset' }"
                         class="dropdown-item create-data-set"
                         ><strong>Create</strong> Data Set</router-link
                       >
@@ -187,210 +187,231 @@
               </div>
               <!--End of DataSet info navbar-->
               <!--DataSet info body-->
-              <div class="card-body">
-                <div class="row">
-                  <!--vue-chart-->
-                  <div class="col-8 chart">
-                    <LineChart :height="250" :width="580" />
+              <div v-if="selectedDataSet">
+                <div class="card-body">
+                  <div class="row">
+                    <!--vue-chart-->
+                    <div class="col-8 chart">
+                      <LineChart :height="250" :width="580" />
+                    </div>
+                    <!--End of vue-chart-->
+                    <div class="col-4">
+                      <table
+                        style="
+                          width: 100%;
+                          color: white;
+                          border-collapse: separate;
+                          border-spacing: 0px 30px;
+                        "
+                      >
+                        <tr style="margin-bottom: 25%">
+                          <td class="info-header info-title-header">
+                            <i class="fas fa-3x fa-heading"></i>
+                          </td>
+                          <td>
+                            <ul class="info-body info-title-body">
+                              <li><h4>Title:</h4></li>
+                              <li>{{ selectedDataSet.title }}</li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="info-header info-key-title-header">
+                            <i class="fas fa-3x fa-tag"></i>
+                          </td>
+                          <td>
+                            <ul class="info-body info-key-title-body">
+                              <li><h4>Key Title:</h4></li>
+                              <li>
+                                {{ selectedDataSet.data_type }}
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="info-header info-description-header">
+                            <i class="fas fa-3x fa-stream"></i>
+                          </td>
+                          <td>
+                            <ul class="info-body info-description-body">
+                              <li><h4>Description:</h4></li>
+                              <li>
+                                {{ selectedDataSet.description }}
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
                   </div>
-                  <!--End of vue-chart-->
-                  <div class="col-4">
-                    <table
-                      style="
-                        width: 100%;
-                        color: white;
-                        border-collapse: separate;
-                        border-spacing: 0px 30px;
-                      "
-                    >
-                      <tr style="margin-bottom: 25%">
-                        <td class="info-header info-title-header">
-                          <i class="fas fa-3x fa-heading"></i>
-                        </td>
-                        <td>
-                          <ul class="info-body info-title-body">
-                            <li><h4>Title:</h4></li>
-                            <li>{{ selectedDataSet.title }}</li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="info-header info-key-title-header">
-                          <i class="fas fa-3x fa-tag"></i>
-                        </td>
-                        <td>
-                          <ul class="info-body info-key-title-body">
-                            <li><h4>Key Title:</h4></li>
-                            <li>
-                              {{ selectedDataSet.key_title }}
-                            </li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="info-header info-description-header">
-                          <i class="fas fa-3x fa-stream"></i>
-                        </td>
-                        <td>
-                          <ul class="info-body info-description-body">
-                            <li><h4>Description:</h4></li>
-                            <li>
-                              {{ selectedDataSet.description }}
-                            </li>
-                          </ul>
-                        </td>
-                      </tr>
-                    </table>
+                </div>
+                <!--End of DataSet info body-->
+                <!--Data info -->
+                <div class="card-footer">
+                  <div class="row">
+                    <div class="col" style="padding-top: 0">
+                      <!--header-->
+                      <div class="row" style="padding-bottom: 10px">
+                        <div class="col" style="padding: 0"></div>
+                        <div class="col" style="padding: 0">
+                          Data Type: <strong> Temperature(*C)</strong>
+                        </div>
+                        <div
+                          class="col"
+                          style="
+                            padding: 0;
+                            text-align: right;
+                            padding-right: 15px;
+                          "
+                        >
+                          <button
+                            data-toggle="modal"
+                            data-target="#createData"
+                            title="Add new data"
+                          >
+                            <i class="fas fa-plus"></i>
+                          </button>
+                          <!-- add data Modal -->
+                          <div
+                            class="modal fade"
+                            id="createData"
+                            tabindex="-1"
+                            aria-labelledby="exampleModalLabel"
+                            aria-hidden="true"
+                          >
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5
+                                    class="modal-title"
+                                    id="exampleModalLabel"
+                                  >
+                                    Add new data to
+                                    <strong>{{ selectedDataSet.title }}</strong>
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                  >
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <div class="col-4">Select data set :</div>
+                                    <div class="col-8">
+                                      <strong>{{
+                                        selectedDataSet.title
+                                      }}</strong>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-4">
+                                      Select application :
+                                    </div>
+                                    <div class="col-8">
+                                      <select
+                                        class="form-control"
+                                        v-model="app"
+                                      >
+                                        <option
+                                          v-for="app in apps"
+                                          :key="app.id"
+                                          placeholder="Select application"
+                                        >
+                                          {{ app.title }}
+                                        </option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-4">Data :</div>
+                                    <div class="col-8">
+                                      <input
+                                        v-model="dataInput"
+                                        class="form-control"
+                                        type="text"
+                                        placeholder="Your data"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-dismiss="modal"
+                                  >
+                                    Close
+                                  </button>
+                                  <button
+                                    @click="
+                                      addData({
+                                        dataSet: selectedDataSet.id,
+                                        application: app,
+                                        data: dataInput,
+                                      })
+                                    "
+                                    type="button"
+                                    class="btn btn-success"
+                                    data-dismiss="modal"
+                                  >
+                                    Add
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <!--end of add data Modal -->
+                          </div>
+                        </div>
+                      </div>
+                      <!--end of header-->
+                      <!--data table-->
+                      <div class="table-responsive data-table">
+                        <table class="table table-bordered table-sm">
+                          <thead>
+                            <tr>
+                              <th scope="col">Id</th>
+                              <th
+                                scope="col"
+                                v-for="data in datas"
+                                :key="data.id"
+                              >
+                                {{ data.id }}
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">Date</th>
+                              <td v-for="data in datas" :key="data.id">
+                                {{ data.created_at }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Value</th>
+                              <td v-for="data in datas" :key="data.id">
+                                {{ data.value }}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!--end of data table-->
+                    </div>
                   </div>
                 </div>
               </div>
-              <!--End of DataSet info body-->
-              <!--Data info -->
-              <div class="card-footer">
-                <div class="row">
-                  <div class="col" style="padding-top: 0">
-                    <!--header-->
-                    <div class="row" style="padding-bottom: 10px">
-                      <div class="col" style="padding: 0"></div>
-                      <div class="col" style="padding: 0">
-                        Data Type: <strong> Temperature(*C)</strong>
-                      </div>
-                      <div
-                        class="col"
-                        style="
-                          padding: 0;
-                          text-align: right;
-                          padding-right: 15px;
-                        "
-                      >
-                        <button
-                          data-toggle="modal"
-                          data-target="#createData"
-                          title="Add new data"
-                        >
-                          <i class="fas fa-plus"></i>
-                        </button>
-                        <!-- add data Modal -->
-                        <div
-                          class="modal fade"
-                          id="createData"
-                          tabindex="-1"
-                          aria-labelledby="exampleModalLabel"
-                          aria-hidden="true"
-                        >
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">
-                                  Add new data to
-                                  <strong>{{ selectedDataSet.title }}</strong>
-                                </h5>
-                                <button
-                                  type="button"
-                                  class="close"
-                                  data-dismiss="modal"
-                                  aria-label="Close"
-                                >
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <div class="row">
-                                  <div class="col-4">Select data set :</div>
-                                  <div class="col-8">
-                                    <strong>{{ selectedDataSet.title }}</strong>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-4">Select application :</div>
-                                  <div class="col-8">
-                                    <select class="form-control" v-model="app">
-                                      <option
-                                        v-for="app in apps"
-                                        :key="app.id"
-                                        placeholder="Select application"
-                                      >
-                                        {{ app.title }}
-                                      </option>
-                                    </select>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-4">Data :</div>
-                                  <div class="col-8">
-                                    <input
-                                      v-model="dataInput"
-                                      class="form-control"
-                                      type="text"
-                                      placeholder="Your data"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button
-                                  type="button"
-                                  class="btn btn-secondary"
-                                  data-dismiss="modal"
-                                >
-                                  Close
-                                </button>
-                                <button
-                                  @click="
-                                    addData({
-                                      dataSet: selectedDataSet.id,
-                                      application: app,
-                                      data: dataInput,
-                                    })
-                                  "
-                                  type="button"
-                                  class="btn btn-success"
-                                  data-dismiss="modal"
-                                >
-                                  Add
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                          <!--end of add data Modal -->
-                        </div>
-                      </div>
-                    </div>
-                    <!--end of header-->
-                    <!--data table-->
-                    <div class="table-responsive data-table">
-                      <table class="table table-bordered table-sm">
-                        <thead>
-                          <tr>
-                            <th scope="col">Id</th>
-                            <th
-                              scope="col"
-                              v-for="data in datas"
-                              :key="data.id"
-                            >
-                              {{ data.id }}
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">Date</th>
-                            <td v-for="data in datas" :key="data.id">
-                              {{ data.created_at }}
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Value</th>
-                            <td v-for="data in datas" :key="data.id">
-                              {{ data.value }}
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <!--end of data table-->
-                  </div>
-                </div>
+              <div v-else class="dataset-not-found">
+                <h4>You don't have a data set!</h4>
+                <router-link
+                  :to="{ name: 'AddDataset' }"
+                  id="dataset-not-found-button"
+                >
+                  <strong>Create</strong> Data Set
+                </router-link>
               </div>
               <!--End of Data info-->
             </div>
@@ -630,6 +651,10 @@ export default {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
       }).then((response) => {
+        if (response.data.count === 0) {
+          this.selectedDataSet = false
+          return
+        }
         this.dataSetCount = response.data.count
         this.dataSets = response.data.results
         this.selectedDataSet = this.dataSets[0]
@@ -656,8 +681,8 @@ export default {
         }
       })
     },
-    deleteDataSet: function () {
-      Axios.delete(
+    deleteDataSet: async function () {
+      await Axios.delete(
         `http://localhost:4000/data-sets/${this.selectedDataSet.id}`,
         {
           headers: {
@@ -849,6 +874,18 @@ ul {
 .delete-data-set:hover {
   color: #fff;
   background-color: #dc3545;
+}
+.dataset-not-found {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  color: rgb(43, 43, 43);
+}
+#dataset-not-found-button {
+  width: 20%;
+  margin: auto;
+  color: #28a745;
+  text-decoration: none;
 }
 .info-title-body {
   background-color: #f29c2d;
