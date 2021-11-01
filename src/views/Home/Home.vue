@@ -107,6 +107,73 @@
           </div>
         </div>
         <!--End of Total api, dataSet and data cards-->
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card-header">
+                <div class="data-set-name">Application</div>
+                <!--Select dataset / application-->
+                <span class="select-app" style="padding-top: 4px">
+                  <button
+                    type="button"
+                    class="btn"
+                    title="Edit This Application"
+                  >
+                    <i style="font-size: 1.3em" class="fas fa-pen"></i>
+                  </button>
+                </span>
+                <div class="select-app" title="Application / Data Set">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <!--Selecet dataset-->
+                      <!--end of Selecet dataset-->
+                      <!--Select application-->
+                      <li class="breadcrumb-item">
+                        <div class="dropdown">
+                          <button
+                            class="dropdown-toggle"
+                            type="button"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            {{ selectedApp.title }}
+                          </button>
+                          <div
+                            class="dropdown-menu dropdown-menu-right"
+                            aria-labelledby="dropdownMenuButton"
+                          >
+                            <ul v-for="app in apps" :key="app.id">
+                              <li>
+                                <a
+                                  class="dropdown-item"
+                                  @click="selectApp(app)"
+                                  >{{ app.title }}</a
+                                >
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </li>
+                      <!--end of Selecet application-->
+                    </ol>
+                  </nav>
+                </div>
+                <!--End of Select dataset / application-->
+              </div>
+              <!--Application info-->
+              <div class="card-body">
+              <AppDetailsViewPill title="Id" :content="selectedApp.id"/>
+              <AppDetailsViewPill title="Title" :content="selectedApp.title"/>
+              <AppDetailsViewPill title="Description" :content="selectedApp.description"/>
+              <AppDetailsViewPill title="Permissions" :content="selectedApp.permissions"/>
+              <AppDetailsViewPill title="Creation Date" :content="selectedApp.permissions"/>
+              <AppDetailsViewPill title="Last Update" :content="selectedApp.permissions"/>
+              </div>
+            </div>
+          </div>
+        </div>
         <!--DataSet info-->
         <div class="row">
           <div class="col">
@@ -117,6 +184,36 @@
                 <!--DataSet edit and select-->
                 <div class="select-data-set">
                   <div class="btn-group">
+                  <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <div class="dropdown">
+                      <button
+                        class="dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        {{ selectedDataSet.title }}
+                      </button>
+                      <div
+                        class="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="dropdownMenuButton"
+                      >
+                        <ul v-for="dataset in dataSets" :key="dataset.id">
+                          <li>
+                            <a
+                              class="dropdown-item"
+                              @click="selectDataSet(dataset)"
+                              >{{ dataset.title }}</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                </ol>
                     <button
                       type="button"
                       class="btn dropdown-toggle"
@@ -192,7 +289,7 @@
                   <div class="row">
                     <!--vue-chart-->
                     <div class="col-8 chart">
-                      <LineChart :height="250" :width="580" />
+                      <apexchart width= "100%" height="100%" type="area" :responsive="responsive" :options="options" :series="series"></apexchart>
                     </div>
                     <!--End of vue-chart-->
                     <div class="col-4">
@@ -419,224 +516,21 @@
         </div>
         <!--End of DataSet info-->
         <!--Application info-->
-        <div class="row">
-          <div class="col">
-            <div class="card">
-              <div class="card-header">
-                <div class="data-set-name">Application</div>
-                <!--Select dataset / application-->
-                <span class="select-app" style="padding-top: 4px">
-                  <button
-                    type="button"
-                    class="btn"
-                    title="Edit This Application"
-                  >
-                    <i style="font-size: 1.3em" class="fas fa-pen"></i>
-                  </button>
-                </span>
-                <div class="select-app" title="Application / Data Set">
-                  <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                      <!--Selecet dataset-->
-                      <li class="breadcrumb-item">
-                        <div class="dropdown">
-                          <button
-                            class="dropdown-toggle"
-                            type="button"
-                            id="dropdownMenuButton"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            {{ selectedDataSet.title }}
-                          </button>
-                          <div
-                            class="dropdown-menu dropdown-menu-right"
-                            aria-labelledby="dropdownMenuButton"
-                          >
-                            <ul v-for="dataset in dataSets" :key="dataset.id">
-                              <li>
-                                <a
-                                  class="dropdown-item"
-                                  @click="selectDataSet(dataset)"
-                                  >{{ dataset.title }}</a
-                                >
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-                      <!--end of Selecet dataset-->
-                      <!--Select application-->
-                      <li class="breadcrumb-item">
-                        <div class="dropdown">
-                          <button
-                            class="dropdown-toggle"
-                            type="button"
-                            id="dropdownMenuButton"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            {{ selectedApp.title }}
-                          </button>
-                          <div
-                            class="dropdown-menu dropdown-menu-right"
-                            aria-labelledby="dropdownMenuButton"
-                          >
-                            <ul v-for="app in apps" :key="app.id">
-                              <li>
-                                <a
-                                  class="dropdown-item"
-                                  @click="selectApp(app)"
-                                  >{{ app.title }}</a
-                                >
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-                      <!--end of Selecet application-->
-                    </ol>
-                  </nav>
-                </div>
-                <!--End of Select dataset / application-->
-              </div>
-              <!--Application info-->
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #dc4146"
-                      >
-                        App Id
-                      </div>
-                      <div class="card-body">
-                        {{ selectedApp.id }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #31a2b8"
-                      >
-                        App Title
-                      </div>
-                      <div class="card-body">
-                        {{ selectedApp.title }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #4fa845"
-                      >
-                        Data Set Title
-                      </div>
-                      <div class="card-body">
-                        {{ selectedDataSet.title }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-4">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #fec134"
-                      >
-                        Data Set Id
-                      </div>
-                      <div class="card-body">
-                        {{ selectedDataSet.id }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-8">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #6c757d"
-                      >
-                        App Description
-                      </div>
-                      <div class="card-body">
-                        {{ selectedApp.description }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="card app-info" style="margin-top: 12px">
-                      <div
-                        class="card-header"
-                        style="background-color: #7952b3"
-                      >
-                        App Read Permission
-                      </div>
-                      <div class="card-body">
-                        {{ selectedApp.permission_read }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="col">
-                      <div class="card app-info">
-                        <div
-                          class="card-header"
-                          style="background-color: #7952b3"
-                        >
-                          App Write Permission
-                        </div>
-                        <div class="card-body">
-                          {{ selectedApp.permission_write }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="col">
-                      <div class="card app-info">
-                        <div
-                          class="card-header"
-                          style="background-color: #7952b3"
-                        >
-                          App Delete Permission
-                        </div>
-                        <div class="card-body">
-                          {{ selectedApp.permission_delete }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!--End of Application info-->
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import LineChart from '../../components/LineChart'
+
 import Axios from 'axios'
 import swal from 'sweetalert'
+import AppDetailsViewPill from '@/components/viewpill/AppDetailsViewPill'
 
 export default {
   name: 'Home',
   components: {
-    LineChart
+    AppDetailsViewPill
   },
   methods: {
     selectDataSet: function (dataset) {
@@ -644,6 +538,21 @@ export default {
     },
     selectApp: function (app) {
       this.selectedApp = app
+    },
+    getAppOptions: function () {
+      Axios.get('http://localhost:4000/applications/', {
+        headers: {
+          'X-AccessToken': localStorage.getItem('X-AccessToken')
+        }
+      }).then((response) => {
+        if (response.data.count === 0) {
+          return
+        }
+        this.apps = response.data.results
+        console.log(response.data.results)
+      }).catch(err => {
+        console.log(err)
+      })
     },
     getDataSets: function () {
       Axios.get('http://localhost:4000/data-sets/', {
@@ -708,7 +617,7 @@ export default {
           id: '1',
           title: 'GoogleHomeMini',
           dataSetId: '1',
-          description: 'Google home mini, smart assistant.',
+          description: 'Google home mini, smart assistant. asdas asd asd as dsad as d asd',
           permission_read: true,
           permission_write: true,
           permission_delete: false
@@ -748,7 +657,39 @@ export default {
         { id: '12', created_at: '10.09.2020 18:11', value: '25.7' }
       ],
       app: null,
-      dataInput: null
+      dataInput: null,
+      options: {
+        chart: {
+          id: 'vuechart-example'
+        },
+        xaxis: {
+          type: 'datetime'
+        }
+      },
+      series: [{
+        data: [
+          { x: '10.09.2020 10:50', y: 30 },
+          { x: '10.09.2020 11:00', y: 33 },
+          { x: '10.09.2020 11:15', y: 12 },
+          { x: '10.09.2020 11:22', y: 38 },
+          { x: '10.09.2020 11:30', y: 44 },
+          { x: '10.09.2020 11:42', y: 23 },
+          { x: '10.09.2020 12:45', y: 27 }
+        ]
+      }],
+      responsive: [{
+        breakpoint: 1000,
+        options: {
+          plotOptions: {
+            bar: {
+              horizontal: false
+            }
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }]
     }
   },
   created () {
@@ -756,6 +697,7 @@ export default {
   },
   mounted () {
     this.getAll()
+    this.getAppOptions()
   }
 }
 </script>
