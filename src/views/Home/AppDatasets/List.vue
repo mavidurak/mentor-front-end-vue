@@ -15,7 +15,7 @@
               <router-link
                 :to="{ name: 'AddAppDatasets', params: { application:application } }"
                 class="btn btn-success float-right">
-                Create
+                <i class="fas fa-plus-square"/>
               </router-link>
             </div>
           </div>
@@ -36,7 +36,7 @@
                     type="reset"
                     @click="deleteData(item)"
                     class="btn btn-danger mx-1">
-                    Delete
+                    <i class="fas fa-trash-alt"/>
                   </button>
                 </template>
               </v-data-table>
