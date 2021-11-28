@@ -167,9 +167,13 @@
               <AppDetailsViewPill title="Id" :content="selectedApp.id"/>
               <AppDetailsViewPill title="Title" :content="selectedApp.title"/>
               <AppDetailsViewPill title="Description" :content="selectedApp.description"/>
-              <AppDetailsViewPill title="Permissions" :content="selectedApp.permissions"/>
-              <AppDetailsViewPill title="Creation Date" :content="selectedApp.permissions"/>
-              <AppDetailsViewPill title="Last Update" :content="selectedApp.permissions"/>
+              <AppDetailsViewPill title="Permissions">
+                <app-dataset-view-pill v-if="selectedApp.permission_read" color="border-success" title="Read"/>
+                <app-dataset-view-pill v-if="selectedApp.permission_write" color="border-primary" title="Write"/>
+                <app-dataset-view-pill v-if="selectedApp.permission_delete" color="border-danger" title="Delete"/>
+              </AppDetailsViewPill>
+              <AppDetailsViewPill title="Creation Date" :content="selectedApp.createdAt"/>
+              <AppDetailsViewPill title="Last Update" :content="selectedApp.updatedAt"/>
               </div>
             </div>
           </div>
@@ -261,13 +265,13 @@
                     <div class="dropdown-menu dropdown-menu-right">
                       <h6 class="dropdown-header">Select a Data Set</h6>
                       <ul>
-                        <li v-for="dataSet in dataSets" :key="dataSet.id">
+                        <li v-for="dataSet in dataSets" :key="dataSet.data_set.id">
                           <button
                             class="dropdown-item"
                             type="button"
-                            @click="selectDataSet(dataSet)"
+                            @click="selectDataSet(dataSet.data_set)"
                           >
-                            {{ dataSet.title }}
+                            {{ dataSet.data_set.title }}
                           </button>
                         </li>
                       </ul>
@@ -289,7 +293,7 @@
                   <div class="row">
                     <!--vue-chart-->
                     <div class="col-8 chart">
-                      <apexchart width= "100%" height="100%" type="area" :responsive="responsive" :options="options" :series="series"></apexchart>
+                      <apexchart ref="realtimeChart" width= "100%" height="100%" type="area" :responsive="responsive" :options="options" :series="series"></apexchart>
                     </div>
                     <!--End of vue-chart-->
                     <div class="col-4">
@@ -526,21 +530,54 @@
 import Axios from 'axios'
 import swal from 'sweetalert'
 import AppDetailsViewPill from '@/components/viewpill/AppDetailsViewPill'
+import AppDatasetViewPill from '@/components/viewpill/AppDatasetViewPill'
 
 export default {
   name: 'Home',
   components: {
-    AppDetailsViewPill
+    AppDetailsViewPill,
+    AppDatasetViewPill
+
   },
   methods: {
+    updateSeriesLine () {
+      this.$refs.realtimeChart.updateSeries([{
+        data: this.series[0].data
+      }], false, true)
+    },
     selectDataSet: function (dataset) {
       this.selectedDataSet = dataset
+      Axios.get(`http://localhost:4000/datas/${dataset.id}`, {
+        headers: {
+          'X-AccessToken': localStorage.getItem('X-AccessToken')
+        }
+      }).then(response => {
+        console.log(response.data.result)
+        this.series[0].data = response.data.result.map(function (val) {
+          return {
+            x: val.createdAt,
+            y: val.value
+          }
+        })
+        this.updateSeriesLine()
+        console.log(this.series)
+      })
     },
     selectApp: function (app) {
       this.selectedApp = app
+      Axios.get(`http://localhost:4000/applications/dataset-options/${app.id}`, {
+        headers: {
+          'X-AccessToken': localStorage.getItem('X-AccessToken')
+        }
+      }).then(response => {
+        this.selectedApp = response.data.results
+        console.log(response.data)
+        this.dataSets = response.data.results.application_datasets
+        this.selectedDataSet = this.dataSets[0]
+      })
     },
-    getAppOptions: function () {
-      Axios.get('http://localhost:4000/applications/', {
+    getAppOptions: async function () {
+      await Axios.get('http://localhost:4000/applications/options', {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
@@ -602,7 +639,7 @@ export default {
       this.getAll()
     },
     getAll: function () {
-      this.getDataSets()
+      // this.getDataSets()
     }
   },
   data () {
@@ -697,7 +734,9 @@ export default {
   },
   mounted () {
     this.getAll()
-    this.getAppOptions()
+    this.getAppOptions().then(
+      this.selectedApp(this.apps[0])
+    )
   }
 }
 </script>

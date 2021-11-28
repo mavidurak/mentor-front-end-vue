@@ -7,6 +7,7 @@
     <div class="d-flex"><h5 class="col">:</h5></div>
     <h5 class="col d-flex mx-2">
       {{content}}
+      <slot></slot>
     </h5>
   </div>
 </div>
