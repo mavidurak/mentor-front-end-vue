@@ -262,30 +262,29 @@ export default {
       }], false, true)
     },
     selectDataSet: function (dataset) {
-      this.selectedDataSet = dataset
-      Axios.get(`http://localhost:4000/datas/${dataset.id}`, {
+      Axios.get(`http://localhost:4000/data-sets/with-datas/${dataset.id}`, {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
       }).then(response => {
-        this.series[0].data = response.data.result.map(function (val) {
+        this.series[0].data = response.data.result.datas.map(function (val) {
           return {
             x: val.createdAt,
             y: val.value
           }
         })
+        this.selectedDataSet = response.data.result
         this.updateSeriesLine()
       })
     },
     selectApp: function (app) {
-      this.selectedApp = app
-      Axios.get(`http://localhost:4000/applications/dataset-options/${app.id}`, {
+      Axios.get(`http://localhost:4000/applications/with-dataset-options/${app.id}`, {
         headers: {
           'X-AccessToken': localStorage.getItem('X-AccessToken')
         }
       }).then(response => {
-        this.selectedApp = response.data.results
-        this.dataSets = response.data.results.application_datasets
+        this.selectedApp = response.data.result
+        this.dataSets = response.data.result.application_datasets
         if (this.dataSets.length === 0) {
           return
         }
