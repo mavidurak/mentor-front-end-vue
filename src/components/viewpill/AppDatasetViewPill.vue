@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div v-bind:class="'border rounded d-block m-1 px-1 '+color">
+  <div v-bind:class="`border rounded d-block m-1 px-1 ${color}`">
     <div class="d-block">
       {{title}}
     </div>
