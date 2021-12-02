@@ -346,164 +346,6 @@
                     </div>
                   </div>
                 </div>
-                <!--End of DataSet info body-->
-                <!--Data info -->
-                <div class="card-footer">
-                  <div class="row">
-                    <div class="col" style="padding-top: 0">
-                      <!--header-->
-                      <div class="row" style="padding-bottom: 10px">
-                        <div class="col" style="padding: 0"></div>
-                        <div class="col" style="padding: 0">
-                          Data Type: <strong> Temperature(*C)</strong>
-                        </div>
-                        <div
-                          class="col"
-                          style="
-                            padding: 0;
-                            text-align: right;
-                            padding-right: 15px;
-                          "
-                        >
-                          <button
-                            data-toggle="modal"
-                            data-target="#createData"
-                            title="Add new data"
-                          >
-                            <i class="fas fa-plus"></i>
-                          </button>
-                          <!-- add data Modal -->
-                          <div
-                            class="modal fade"
-                            id="createData"
-                            tabindex="-1"
-                            aria-labelledby="exampleModalLabel"
-                            aria-hidden="true"
-                          >
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5
-                                    class="modal-title"
-                                    id="exampleModalLabel"
-                                  >
-                                    Add new data to
-                                    <strong>{{ selectedDataSet.title }}</strong>
-                                  </h5>
-                                  <button
-                                    type="button"
-                                    class="close"
-                                    data-dismiss="modal"
-                                    aria-label="Close"
-                                  >
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <div class="row">
-                                    <div class="col-4">Select data set :</div>
-                                    <div class="col-8">
-                                      <strong>{{
-                                        selectedDataSet.title
-                                      }}</strong>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-4">
-                                      Select application :
-                                    </div>
-                                    <div class="col-8">
-                                      <select
-                                        class="form-control"
-                                        v-model="app"
-                                      >
-                                        <option
-                                          v-for="app in apps"
-                                          :key="app.id"
-                                          placeholder="Select application"
-                                        >
-                                          {{ app.title }}
-                                        </option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-4">Data :</div>
-                                    <div class="col-8">
-                                      <input
-                                        v-model="dataInput"
-                                        class="form-control"
-                                        type="text"
-                                        placeholder="Your data"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button
-                                    type="button"
-                                    class="btn btn-secondary"
-                                    data-dismiss="modal"
-                                  >
-                                    Close
-                                  </button>
-                                  <button
-                                    @click="
-                                      addData({
-                                        dataSet: selectedDataSet.id,
-                                        application: app,
-                                        data: dataInput,
-                                      })
-                                    "
-                                    type="button"
-                                    class="btn btn-success"
-                                    data-dismiss="modal"
-                                  >
-                                    Add
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                            <!--end of add data Modal -->
-                          </div>
-                        </div>
-                      </div>
-                      <!--end of header-->
-                      <!--data table-->
-                      <div class="table-responsive data-table">
-                        <table class="table table-bordered table-sm">
-                          <thead>
-                            <tr>
-                              <th scope="col">Id</th>
-                              <th
-                                scope="col"
-                                v-for="data in datas"
-                                :key="data.id"
-                              >
-                                {{ data.id }}
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <th scope="row">Date</th>
-                              <td v-for="data in datas" :key="data.id">
-                                {{ data.created_at }}
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">Value</th>
-                              <td v-for="data in datas" :key="data.id">
-                                {{ data.value }}
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <!--end of data table-->
-                    </div>
-                  </div>
-                </div>
               </div>
               <div v-else class="dataset-not-found">
                 <h4>You don't have a data set!</h4>
@@ -537,7 +379,6 @@ export default {
   components: {
     AppDetailsViewPill,
     AppDatasetViewPill
-
   },
   methods: {
     updateSeriesLine () {
@@ -601,7 +442,7 @@ export default {
           this.selectedDataSet = false
           return
         }
-        this.dataSetCount = response.data.count
+        this.dataSetCount = response.data.results.length
         this.dataSets = response.data.results
         this.selectedDataSet = this.dataSets[0]
       })
@@ -636,10 +477,6 @@ export default {
           }
         }
       )
-      this.getAll()
-    },
-    getAll: function () {
-      // this.getDataSets()
     }
   },
   data () {
@@ -733,7 +570,6 @@ export default {
     document.body.className = ''
   },
   mounted () {
-    this.getAll()
     this.getAppOptions().then(
       this.selectedApp(this.apps[0])
     )
