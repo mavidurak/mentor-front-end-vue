@@ -29,7 +29,7 @@
 <script>
 import { ValidationObserver } from 'vee-validate'
 import TextInputGenerator from '@/components/input/TextInputGenerator'
-import axios from '@/helpers/axios'
+import axios from 'axios'
 import swal from 'sweetalert'
 
 export default {

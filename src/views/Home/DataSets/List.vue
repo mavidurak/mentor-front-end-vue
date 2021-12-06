@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import Axios from '@/helpers/axios'
+import Axios from 'axios'
 import swal from 'sweetalert'
 
 export default {

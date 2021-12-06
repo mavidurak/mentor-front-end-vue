@@ -103,7 +103,7 @@
 
 <script>
 
-import axios from '@/helpers/axios'
+import axios from 'axios'
 import LineChart from '@/components/LineChart'
 import moment from 'moment'
 

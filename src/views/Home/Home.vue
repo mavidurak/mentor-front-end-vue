@@ -630,7 +630,7 @@
 
 <script>
 import LineChart from '../../components/LineChart'
-import Axios from '@/helpers/axios'
+import Axios from 'axios'
 import swal from 'sweetalert'
 
 export default {

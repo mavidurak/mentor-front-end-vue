@@ -4,7 +4,7 @@
     </v-main>
 </template>
 <script>
-import axios from '@/helpers/axios'
+import axios from 'axios'
 export default {
   name: 'None',
   created () {

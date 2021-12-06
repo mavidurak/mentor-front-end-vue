@@ -380,7 +380,7 @@
 </template>
 
 <script>
-import axios from '@/helpers/axios'
+import axios from 'axios'
 import '@/plugins/jquery.overlayScrollbars.js'
 import 'admin-lte'
 

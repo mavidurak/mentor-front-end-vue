@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import Axios from '@/helpers/axios'
+import Axios from 'axios'
 import swal from 'sweetalert'
 import multiSelect from '@/components/Multiselect.vue'
 
