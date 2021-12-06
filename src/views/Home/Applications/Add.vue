@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import Axios from 'axios'
+import Axios from '@/helpers/axios'
 import swal from 'sweetalert'
 import multiSelect from '@/components/Multiselect.vue'
 
@@ -102,11 +102,7 @@ export default {
   },
   methods: {
     getDatasets () {
-      Axios.get('/data-sets/', {
-        headers: {
-          'X-AccessToken': localStorage.getItem('X-AccessToken')
-        }
-      }).then(response => {
+      Axios.get('/data-sets/').then(response => {
         this.options = Object.values(response.data.results).map(dataType => ({ id: dataType.id, key: dataType.title }))
       })
     },
@@ -120,13 +116,7 @@ export default {
           permission_read: this.application.permission_read,
           permission_write: this.application.permission_write,
           permission_delete: this.application.permission_delete
-        },
-        {
-          headers: {
-            'X-AccessToken': localStorage.getItem('X-AccessToken')
-          }
-        }
-      )
+        })
         .then(response => {
           swal({
             title: 'Success',
@@ -170,13 +160,7 @@ export default {
           permission_read: this.application.permission_read,
           permission_write: this.application.permission_write,
           permission_delete: this.application.permission_delete
-        },
-        {
-          headers: {
-            'X-AccessToken': localStorage.getItem('X-AccessToken')
-          }
-        }
-      ).then(response => {
+        }).then(response => {
         swal({
           title: 'Message',
           text: response.data.message,

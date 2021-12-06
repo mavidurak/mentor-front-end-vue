@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import Axios from 'axios'
+import Axios from '@/helpers/axios'
 import swal from 'sweetalert'
 
 export default {
@@ -69,28 +69,22 @@ export default {
   components: {},
   methods: {
     getDataSets: function () {
-      Axios.get('/data-sets/', {
-        headers: {
-          'X-AccessToken': localStorage.getItem('X-AccessToken')
-        }
-      }).then(response => {
-        this.datasets = response.data.results
-      })
+      Axios.get('/data-sets/')
+        .then(response => {
+          this.datasets = response.data.results
+        })
     },
     deleteDataSet: async function (dataset) {
-      Axios.delete(`/data-sets/${dataset.id}`, {
-        headers: {
-          'X-AccessToken': localStorage.getItem('X-AccessToken')
-        }
-      }).then(response => {
-        swal({
-          title: 'Message',
-          text: response.data.message,
-          icon: 'success'
-        }).then(result => {
-          this.getDataSets()
+      Axios.delete(`/data-sets/${dataset.id}`)
+        .then(response => {
+          swal({
+            title: 'Message',
+            text: response.data.message,
+            icon: 'success'
+          }).then(result => {
+            this.getDataSets()
+          })
         })
-      })
     }
   },
 

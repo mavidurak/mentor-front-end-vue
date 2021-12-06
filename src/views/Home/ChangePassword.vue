@@ -29,7 +29,7 @@
 <script>
 import { ValidationObserver } from 'vee-validate'
 import TextInputGenerator from '@/components/input/TextInputGenerator'
-import axios from 'axios'
+import axios from '@/helpers/axios'
 import swal from 'sweetalert'
 
 export default {
@@ -56,15 +56,7 @@ export default {
             {
               password: this.password,
               newPassword: this.newPassword
-            },
-            {
-              headers: {
-                'X-AccessToken': localStorage.getItem('X-AccessToken'),
-                'Content-Type': 'application/json'
-              }
-            }
-          )
-          .then((response) => {
+            }).then((response) => {
             if (response.status === 200) {
               swal({
                 title:

@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import Axios from 'axios'
+import Axios from '@/helpers/axios'
 import swal from 'sweetalert'
 import multiSelect from '@/components/Multiselect.vue'
 
@@ -56,13 +56,7 @@ export default {
         {
           application_id: this.$route.params.applicationId,
           dataset_id: this.dataset_id
-        },
-        {
-          headers: {
-            'X-AccessToken': localStorage.getItem('X-AccessToken')
-          }
-        }
-      )
+        })
         .then(response => {
           swal({
             title: 'Success',
@@ -87,11 +81,8 @@ export default {
     },
     getAddableDatasets () {
       console.log(this.$route.params.applicationId)
-      Axios.get(`/application-datasets/unavaible-application-datasets/${this.$route.params.applicationId}`, {
-        headers: {
-          'X-AccessToken': localStorage.getItem('X-AccessToken')
-        }
-      }).then(response => {
+      Axios.get(`/application-datasets/unavaible-application-datasets/${this.$route.params.applicationId}`
+      ).then(response => {
         this.addableDatasets = response.data.results
       })
     },

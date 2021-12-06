@@ -630,7 +630,7 @@
 
 <script>
 import LineChart from '../../components/LineChart'
-import Axios from 'axios'
+import Axios from '@/helpers/axios'
 import swal from 'sweetalert'
 
 export default {
@@ -646,11 +646,7 @@ export default {
       this.selectedApp = app
     },
     getDataSets: function () {
-      Axios.get('http://localhost:4000/data-sets/', {
-        headers: {
-          'X-AccessToken': localStorage.getItem('X-AccessToken')
-        }
-      }).then((response) => {
+      Axios.get('http://localhost:4000/data-sets/').then((response) => {
         if (response.data.count === 0) {
           this.selectedDataSet = false
           return
@@ -666,13 +662,7 @@ export default {
         {
           dataset_id: dataInfo.dataSet,
           value: dataInfo.data
-        },
-        {
-          headers: {
-            'X-AccessToken': localStorage.getItem('X-AccessToken')
-          }
-        }
-      ).then((res) => {
+        }).then((res) => {
         if (res.status === 201) {
           swal({
             title: 'Data has been added successfully!',
@@ -683,13 +673,7 @@ export default {
     },
     deleteDataSet: async function () {
       await Axios.delete(
-        `http://localhost:4000/data-sets/${this.selectedDataSet.id}`,
-        {
-          headers: {
-            'X-AccessToken': localStorage.getItem('X-AccessToken')
-          }
-        }
-      )
+        `http://localhost:4000/data-sets/${this.selectedDataSet.id}`)
       this.getAll()
     },
     getAll: function () {

@@ -103,7 +103,7 @@
 
 <script>
 
-import axios from 'axios'
+import axios from '@/helpers/axios'
 import LineChart from '@/components/LineChart'
 import moment from 'moment'
 
@@ -124,11 +124,7 @@ export default {
   },
   created () {
     axios
-      .get('/authentications/me/', {
-        headers: {
-          'X-AccessToken': localStorage.getItem('X-AccessToken')
-        }
-      })
+      .get('/authentications/me/')
       .then((response) => {
         if (response.status === 200) {
           this.username = response.data.username

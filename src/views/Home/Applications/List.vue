@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import Axios from 'axios'
+import Axios from '@/helpers/axios'
 import swal from 'sweetalert'
 import AppDatasetViewPill from '@/components/viewpill/AppDatasetViewPill'
 
@@ -87,20 +87,12 @@ export default {
   },
   methods: {
     getApplications: function () {
-      Axios.get('/applications/', {
-        headers: {
-          'X-AccessToken': localStorage.getItem('X-AccessToken')
-        }
-      }).then(response => {
+      Axios.get('/applications/').then(response => {
         this.applications = response.data.results
       })
     },
     deleteApplications: async function (application) {
-      Axios.delete(`/applications/${application.id}`, {
-        headers: {
-          'X-AccessToken': localStorage.getItem('X-AccessToken')
-        }
-      }).then(response => {
+      Axios.delete(`/applications/${application.id}`).then(response => {
         swal({
           title: 'Message',
           text: response.data.message,
