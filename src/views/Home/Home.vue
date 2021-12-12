@@ -506,121 +506,142 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #dc4146"
-                      >
-                        App Id
-                      </div>
-                      <div class="card-body">
-                        {{ selectedApp.id }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #31a2b8"
-                      >
-                        App Title
-                      </div>
-                      <div class="card-body">
-                        {{ selectedApp.title }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #4fa845"
-                      >
-                        Data Set Title
-                      </div>
-                      <div class="card-body">
-                        {{ selectedDataSet.title }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-4">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #fec134"
-                      >
-                        Data Set Id
-                      </div>
-                      <div class="card-body">
-                        {{ selectedDataSet.id }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-8">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #6c757d"
-                      >
-                        App Description
-                      </div>
-                      <div class="card-body">
-                        {{ selectedApp.description }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="card app-info" style="margin-top: 12px">
-                      <div
-                        class="card-header"
-                        style="background-color: #7952b3"
-                      >
-                        App Read Permission
-                      </div>
-                      <div class="card-body">
-                        {{ selectedApp.permission_read }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
+                    <div class="row">
                     <div class="col">
                       <div class="card app-info">
                         <div
                           class="card-header"
-                          style="background-color: #7952b3"
+                          style="background-color: #dc4146"
                         >
-                          App Write Permission
+                          App Id
                         </div>
                         <div class="card-body">
-                          {{ selectedApp.permission_write }}
+                          {{ selectedApp.id }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="card app-info">
+                        <div
+                          class="card-header"
+                          style="background-color: #31a2b8"
+                        >
+                          App Title
+                        </div>
+                        <div class="card-body">
+                          {{ selectedApp.title }}
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                      <div class="card app-info">
+                        <div
+                          class="card-header"
+                          style="background-color: #4fa845"
+                        >
+                          Data Set Title
+                        </div>
+                        <div class="card-body">
+                          {{ selectedDataSet.title }}
+                        </div>
+                      </div>
+                    </div>
+                      <div class="col">
+                        <div class="card app-info">
+                          <div
+                            class="card-header"
+                            style="background-color: #fec134"
+                          >
+                            Data Set Id
+                          </div>
+                          <div class="card-body">
+                            {{ selectedDataSet.id }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="card app-info">
+                          <div
+                            class="card-header"
+                            style="background-color: #6c757d"
+                          >
+                            App Description
+                          </div>
+                          <div class="card-body">
+                            {{ selectedApp.description }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="card app-info">
+                          <div
+                            class="card-header"
+                            style="background-color: #7952b3"
+                          >
+                            App Read Permission
+                          </div>
+                          <div class="card-body">
+                            {{ selectedApp.permission_read }}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                          <div class="card app-info">
+                            <div
+                              class="card-header"
+                              style="background-color: #7952b3"
+                            >
+                              App Write Permission
+                            </div>
+                            <div class="card-body">
+                              {{ selectedApp.permission_write }}
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                          <div class="card app-info">
+                            <div
+                              class="card-header"
+                              style="background-color: #7952b3"
+                            >
+                              App Delete Permission
+                            </div>
+                            <div class="card-body">
+                              {{ selectedApp.permission_delete }}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="col">
-                    <div class="col">
-                      <div class="card app-info">
-                        <div
-                          class="card-header"
-                          style="background-color: #7952b3"
-                        >
-                          App Delete Permission
-                        </div>
-                        <div class="card-body">
-                          {{ selectedApp.permission_delete }}
+                    <div class="row">
+                      <div class="col">
+                        <div class="card app-info">
+                          <div
+                            class="card-header"
+                            style="background-color: black"
+                          >
+                            Location
+                          </div>
+                          <div class="card-body">
+                            <div id="map">
+                              <google-map />
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <!--End of Application info-->
             </div>
+            <!--End of Application info-->
           </div>
         </div>
       </div>
@@ -629,6 +650,7 @@
 </template>
 
 <script>
+import GoogleMap from '../../components/GoogleMap'
 import LineChart from '../../components/LineChart'
 import Axios from 'axios'
 import swal from 'sweetalert'
@@ -636,7 +658,8 @@ import swal from 'sweetalert'
 export default {
   name: 'Home',
   components: {
-    LineChart
+    LineChart,
+    GoogleMap
   },
   methods: {
     selectDataSet: function (dataset) {

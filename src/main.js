@@ -13,6 +13,7 @@ import Gravatar from 'vue-gravatar'
 import HomeNav from '@/views/Layouts/HomeNav'
 import None from '@/views/Layouts/None'
 import { configure } from 'vee-validate'
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.component('home-nav-layout', HomeNav)
 Vue.component('none-layout', None)
@@ -28,6 +29,13 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'GOOGLE_MAP_KEY', 
+    libraries: 'places'
+  }
+})
 
 configure({
   classes: {
