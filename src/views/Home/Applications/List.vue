@@ -11,7 +11,7 @@
               <router-link
                 to="/applications/add"
                 class="btn btn-success float-right">
-                Create
+                <i class="fas fa-plus-square"/>
               </router-link>
             </div>
           </div>
@@ -56,18 +56,18 @@
                   <router-link
                     :to="{ path:`/appdatasets/${item.id}`, params: { application: item } }"
                     class="btn btn-primary mr-1">
-                    Datasets
+                    <i class="fas fa-list-alt"/>
                   </router-link>
                   <router-link
                     :to="{ name: 'AddApplication', params: { application: item } }"
                     class="btn btn-primary mr-1">
-                    Update
+                    <i class="fas fa-pen"/>
                   </router-link>
                   <button
                     type="reset"
                     @click="deleteApplications(item)"
                     class="btn btn-danger">
-                    Delete
+                    <i class="fas fa-trash-alt"/>
                   </button>
                 </template>
               </v-data-table>
