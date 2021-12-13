@@ -15,6 +15,11 @@ import None from '@/views/Layouts/None'
 import { configure } from 'vee-validate'
 import * as VueGoogleMaps from 'vue2-google-maps'
 
+import VueApexCharts from 'vue-apexcharts'
+Vue.use(VueApexCharts)
+
+Vue.component('apexchart', VueApexCharts)
+
 Vue.component('home-nav-layout', HomeNav)
 Vue.component('none-layout', None)
 

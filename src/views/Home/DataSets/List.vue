@@ -11,7 +11,7 @@
               <router-link
                 to="/data-sets/add"
                 class="btn btn-success float-right">
-                Create
+                <i class="fas fa-plus-square"/>
                 </router-link>
             </div>
           </div>
@@ -35,19 +35,19 @@
                 <template v-slot:[`item.actions`]="{ item }">
                   <router-link
                     :to="{ path:`/datas/${item.id}`, params: { dataset: item } }"
-                    class="btn btn-primary mx-1">
-                    Datas
+                    class="btn btn-primary mx-1 ">
+                    <i class="fas fa-list-alt"/>
                   </router-link>
                   <router-link
                     :to="{ name: 'AddDataset', params: { dataset: item } }"
-                    class="btn btn-primary mx-1">
-                    Update
+                    class="btn btn-primary mx-1 ">
+                    <i class="fas fa-pen"/>
                   </router-link>
                   <button
                     type="reset"
                     @click="deleteDataSet(item)"
-                    class="btn btn-danger mr-2 float-right">
-                    Delete
+                    class="btn btn-danger mx-1">
+                    <i class="fas fa-trash-alt"/>
                   </button>
                 </template>
               </v-data-table>
