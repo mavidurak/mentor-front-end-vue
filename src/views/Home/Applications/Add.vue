@@ -49,6 +49,28 @@
               <label> Permission Delete : </label>
               <input v-model="application.permission_delete" class="mx-3 " type="checkbox"/>
             </div>
+            <div v-if="application.id === undefined" class="form-group">
+              <label>Longitude : </label>
+              <input
+                v-model="application.longitude"
+                type="number"
+                class="form-control"
+                placeholder="longitude"
+                required
+                min="-180"
+                max="180"/>
+            </div>
+            <div v-if="application.id === undefined" class="form-group">
+              <label>Latitude : </label>
+              <input
+                v-model="application.latitude"
+                type="number"
+                class="form-control"
+                placeholder="latitude"
+                required
+                min="-90"
+                max="90"/>
+            </div>
             <button
               v-if="application.id == undefined"
               type="submit"
@@ -86,8 +108,9 @@ export default {
         description: '',
         permission_read: false,
         permission_write: false,
-        permission_delete: false
-
+        permission_delete: false,
+        longitude: undefined,
+        latitude: undefined
       },
       key: '',
       options: null
@@ -119,7 +142,9 @@ export default {
           description: this.application.description,
           permission_read: this.application.permission_read,
           permission_write: this.application.permission_write,
-          permission_delete: this.application.permission_delete
+          permission_delete: this.application.permission_delete,
+          longitude: this.application.longitude,
+          latitude: this.application.latitude
         },
         {
           headers: {

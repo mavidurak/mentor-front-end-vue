@@ -32,6 +32,11 @@
                     </div>
                   </template>
                 </template>
+                <template v-slot:[`item.locations`]="{ item }">
+                  <template v-for="location in item.locations">
+                    {{location.longitude}}-{{location.latitude}}
+                  </template>
+                </template>
                 <template v-slot:[`item.permissions`]="{ item }" >
                   <div class="d-inline mx-1" v-if="item.permission_read">R</div>
                   <div class="d-inline mx-1" v-if="item.permission_write">W</div>
@@ -128,6 +133,7 @@ export default {
         },
         { text: 'Title', value: 'title' },
         { text: 'Description', value: 'description' },
+        { text: 'Locations', value: 'locations' },
         { text: 'Datasets', value: 'application_datasets' },
         { text: 'Creation Date', value: 'createdAt' },
         { text: 'Last Update', value: 'updatedAt' },
