@@ -106,6 +106,11 @@
               </div>
             </div>
           </div>
+          <div class="col">
+            <div id="map">
+                <google-map />
+            </div>
+            </div>
         </div>
         <!--DataSet info-->
         <div class="row">
@@ -237,247 +242,23 @@
         </div>
         <!--End of DataSet info-->
         <!--Application info-->
-        <div class="row">
-          <div class="col">
-            <div class="card">
-              <div class="card-header">
-                <div class="data-set-name">Application</div>
-                <!--Select dataset / application-->
-                <span class="select-app" style="padding-top: 4px">
-                  <button
-                    type="button"
-                    class="btn"
-                    title="Edit This Application"
-                  >
-                    <i style="font-size: 1.3em" class="fas fa-pen"></i>
-                  </button>
-                </span>
-                <div class="select-app" title="Application / Data Set">
-                  <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                      <!--Selecet dataset-->
-                      <li class="breadcrumb-item">
-                        <div class="dropdown">
-                          <button
-                            class="dropdown-toggle"
-                            type="button"
-                            id="dropdownMenuButton"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            {{ selectedDataSet.title }}
-                          </button>
-                          <div
-                            class="dropdown-menu dropdown-menu-right"
-                            aria-labelledby="dropdownMenuButton"
-                          >
-                            <ul v-for="dataset in dataSets" :key="dataset.id">
-                              <li>
-                                <a
-                                  class="dropdown-item"
-                                  @click="selectDataSet(dataset)"
-                                  >{{ dataset.title }}</a
-                                >
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-                      <!--end of Selecet dataset-->
-                      <!--Select application-->
-                      <li class="breadcrumb-item">
-                        <div class="dropdown">
-                          <button
-                            class="dropdown-toggle"
-                            type="button"
-                            id="dropdownMenuButton"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            {{ selectedApp.title }}
-                          </button>
-                          <div
-                            class="dropdown-menu dropdown-menu-right"
-                            aria-labelledby="dropdownMenuButton"
-                          >
-                            <ul v-for="app in apps" :key="app.id">
-                              <li>
-                                <a
-                                  class="dropdown-item"
-                                  @click="selectApp(app)"
-                                  >{{ app.title }}</a
-                                >
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-                      <!--end of Selecet application-->
-                    </ol>
-                  </nav>
-                </div>
-                <!--End of Select dataset / application-->
-              </div>
-              <!--Application info-->
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <div class="row">
-                    <div class="col">
-                      <div class="card app-info">
-                        <div
-                          class="card-header"
-                          style="background-color: #dc4146"
-                        >
-                          App Id
-                        </div>
-                        <div class="card-body">
-                          {{ selectedApp.id }}
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="card app-info">
-                        <div
-                          class="card-header"
-                          style="background-color: #31a2b8"
-                        >
-                          App Title
-                        </div>
-                        <div class="card-body">
-                          {{ selectedApp.title }}
-                        </div>
-                      </div>
-                    </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                      <div class="card app-info">
-                        <div
-                          class="card-header"
-                          style="background-color: #4fa845"
-                        >
-                          Data Set Title
-                        </div>
-                        <div class="card-body">
-                          {{ selectedDataSet.title }}
-                        </div>
-                      </div>
-                    </div>
-                      <div class="col">
-                        <div class="card app-info">
-                          <div
-                            class="card-header"
-                            style="background-color: #fec134"
-                          >
-                            Data Set Id
-                          </div>
-                          <div class="card-body">
-                            {{ selectedDataSet.id }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <div class="card app-info">
-                          <div
-                            class="card-header"
-                            style="background-color: #6c757d"
-                          >
-                            App Description
-                          </div>
-                          <div class="card-body">
-                            {{ selectedApp.description }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <div class="card app-info">
-                          <div
-                            class="card-header"
-                            style="background-color: #7952b3"
-                          >
-                            App Read Permission
-                          </div>
-                          <div class="card-body">
-                            {{ selectedApp.permission_read }}
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col">
-                          <div class="card app-info">
-                            <div
-                              class="card-header"
-                              style="background-color: #7952b3"
-                            >
-                              App Write Permission
-                            </div>
-                            <div class="card-body">
-                              {{ selectedApp.permission_write }}
-                            </div>
-                        </div>
-                      </div>
-                      <div class="col">
-                          <div class="card app-info">
-                            <div
-                              class="card-header"
-                              style="background-color: #7952b3"
-                            >
-                              App Delete Permission
-                            </div>
-                            <div class="card-body">
-                              {{ selectedApp.permission_delete }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="row">
-                      <div class="col">
-                        <div class="card app-info">
-                          <div
-                            class="card-header"
-                            style="background-color: black"
-                          >
-                            Location
-                          </div>
-                          <div class="card-body">
-                            <div id="map">
-                              <google-map />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--End of Application info-->
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import GoogleMap from '../../components/GoogleMap'
-import LineChart from '../../components/LineChart'
+
 import Axios from 'axios'
 import AppDetailsViewPill from '@/components/viewpill/AppDetailsViewPill'
 import AppDatasetViewPill from '@/components/viewpill/AppDatasetViewPill'
+import GoogleMap from '../../components/GoogleMap'
 
 export default {
   name: 'Home',
   components: {
-    LineChart,
+    AppDetailsViewPill,
+    AppDatasetViewPill,
     GoogleMap
   },
   methods: {
@@ -729,5 +510,9 @@ ul {
 }
 .fa-plus:hover {
   color: #28a745;
+}
+#map {
+  margin-top:40px;
+  margin-bottom:40px;
 }
 </style>
