@@ -13,6 +13,7 @@ import Gravatar from 'vue-gravatar'
 import HomeNav from '@/views/Layouts/HomeNav'
 import None from '@/views/Layouts/None'
 import { configure } from 'vee-validate'
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 import VueApexCharts from 'vue-apexcharts'
 Vue.use(VueApexCharts)
@@ -33,6 +34,13 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyD53TscQ9xR25JXLDEIDv3LXx5lNKvcPBs',
+    libraries: 'places'
+  }
+})
 
 configure({
   classes: {
