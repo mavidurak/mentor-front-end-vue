@@ -16,6 +16,11 @@ import { configure } from 'vee-validate'
 import axios from 'axios'
 import swal from 'sweetalert'
 
+import VueApexCharts from 'vue-apexcharts'
+Vue.use(VueApexCharts)
+
+Vue.component('apexchart', VueApexCharts)
+
 Vue.component('home-nav-layout', HomeNav)
 Vue.component('none-layout', None)
 

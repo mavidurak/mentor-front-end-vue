@@ -1,67 +1,5 @@
 <template>
   <div>
-    <div
-      class="modal fade"
-      id="deleteDataSet"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Delete to {{ selectedDataSet.title }}
-            </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div
-              class="row"
-              style="text-align: center; font-weight: bold; font-size: 1.2em"
-            >
-              <div class="col">Are you sure to delete this data set.</div>
-            </div>
-            <div class="row">
-              <div class="col">Title :</div>
-              <div class="col">{{ selectedDataSet.title }}</div>
-            </div>
-            <div class="row">
-              <div class="col">Key Title :</div>
-              <div class="col">{{ selectedDataSet.data_type }}</div>
-            </div>
-            <div class="row">
-              <div class="col">Description</div>
-              <div class="col">{{ selectedDataSet.description }}</div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button
-              @click="deleteDataSet"
-              type="button"
-              class="btn btn-danger"
-              data-dismiss="modal"
-            >
-              Delete
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="text-center">
       <div class="container">
         <!--Total api, dataSet and data cards-->
@@ -107,6 +45,68 @@
           </div>
         </div>
         <!--End of Total api, dataSet and data cards-->
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card-header">
+                <div class="data-set-name">Application</div>
+                <!--Select dataset / application-->
+                <div class="select-app" title="Application / Data Set">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <!--Selecet dataset-->
+                      <!--end of Selecet dataset-->
+                      <!--Select application-->
+                      <li class="breadcrumb-item">
+                        <div class="dropdown">
+                          <button
+                            class="dropdown-toggle"
+                            type="button"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            {{ selectedApp.title }}
+                          </button>
+                          <div
+                            class="dropdown-menu dropdown-menu-right"
+                            aria-labelledby="dropdownMenuButton"
+                          >
+                            <ul v-for="app in apps" :key="app.id">
+                              <li>
+                                <a
+                                  class="dropdown-item"
+                                  @click="selectApp(app)"
+                                  >{{ app.title }}</a
+                                >
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </li>
+                      <!--end of Selecet application-->
+                    </ol>
+                  </nav>
+                </div>
+                <!--End of Select dataset / application-->
+              </div>
+              <!--Application info-->
+              <div class="card-body">
+              <AppDetailsViewPill title="Id" :content="selectedApp.id"/>
+              <AppDetailsViewPill title="Title" :content="selectedApp.title"/>
+              <AppDetailsViewPill title="Description" :content="selectedApp.description"/>
+              <AppDetailsViewPill title="Permissions">
+                <AppDatasetViewPill v-if="selectedApp.permission_read" color="border-success" title="Read"/>
+                <AppDatasetViewPill v-if="selectedApp.permission_write" color="border-primary" title="Write"/>
+                <AppDatasetViewPill v-if="selectedApp.permission_delete" color="border-danger" title="Delete"/>
+              </AppDetailsViewPill>
+              <AppDetailsViewPill title="Creation Date" :content="selectedApp.createdAt"/>
+              <AppDetailsViewPill title="Last Update" :content="selectedApp.updatedAt"/>
+              </div>
+            </div>
+          </div>
+        </div>
         <!--DataSet info-->
         <div class="row">
           <div class="col">
@@ -117,72 +117,40 @@
                 <!--DataSet edit and select-->
                 <div class="select-data-set">
                   <div class="btn-group">
-                    <button
-                      type="button"
-                      class="btn dropdown-toggle"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      title="Edit Data Set"
-                    >
-                      <i style="font-size: 1.3em" class="fas fa-pen"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <router-link
-                        :to="{
-                          name: 'UpdateDataSets',
-                          params: { app: selectedDataSet },
-                        }"
-                        class="dropdown-item"
-                      >
-                        Change '<strong>title</strong>', '<strong
-                          >key title</strong
-                        >', '<strong>description</strong>'
-                      </router-link>
-                      <div class="dropdown-divider"></div>
+                  <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <div class="dropdown">
                       <button
+                        class="dropdown-toggle"
                         type="button"
-                        class="btn btn-primary dropdown-item delete-data-set"
-                        data-toggle="modal"
-                        data-target="#deleteDataSet"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
                       >
-                        <strong>Delete</strong> this data set
+                        {{ selectedDataSet.title }}
                       </button>
-                    </div>
-                  </div>
-                  <div class="btn-group">
-                    <button
-                      type="button"
-                      class="btn dropdown-toggle"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      title="Select Data Set"
-                    >
-                      <i style="font-size: 1.3em" class="far fa-list-alt"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <h6 class="dropdown-header">Select a Data Set</h6>
+                      <div
+                        class="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="dropdownMenuButton"
+                      >
                       <ul>
-                        <li v-for="dataSet in dataSets" :key="dataSet.id">
+                        <li v-for="dataSet in dataSets" :key="dataSet.data_set.id">
                           <button
                             class="dropdown-item"
                             type="button"
-                            @click="selectDataSet(dataSet)"
+                            @click="selectDataSet(dataSet.data_set)"
                           >
-                            {{ dataSet.title }}
+                            {{ dataSet.data_set.title }}
                           </button>
                         </li>
                       </ul>
-                      <div class="dropdown-divider"></div>
-                      <router-link
-                        :to="{ name: 'AddDataset' }"
-                        class="dropdown-item create-data-set"
-                        ><strong>Create</strong> Data Set</router-link
-                      >
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  </li>
+                </ol>
+              </div>
+              </div>
                 <!--End of DataSet edit and select-->
               </div>
               <!--End of DataSet info navbar-->
@@ -192,7 +160,15 @@
                   <div class="row">
                     <!--vue-chart-->
                     <div class="col-8 chart">
-                      <LineChart :height="250" :width="580" />
+                      <apexchart
+                        ref="realtimeChart"
+                        width= "100%"
+                        height="100%"
+                        type="area"
+                        :responsive="responsive"
+                        :options="options"
+                        :series="series">
+                      </apexchart>
                     </div>
                     <!--End of vue-chart-->
                     <div class="col-4">
@@ -245,164 +221,6 @@
                     </div>
                   </div>
                 </div>
-                <!--End of DataSet info body-->
-                <!--Data info -->
-                <div class="card-footer">
-                  <div class="row">
-                    <div class="col" style="padding-top: 0">
-                      <!--header-->
-                      <div class="row" style="padding-bottom: 10px">
-                        <div class="col" style="padding: 0"></div>
-                        <div class="col" style="padding: 0">
-                          Data Type: <strong> Temperature(*C)</strong>
-                        </div>
-                        <div
-                          class="col"
-                          style="
-                            padding: 0;
-                            text-align: right;
-                            padding-right: 15px;
-                          "
-                        >
-                          <button
-                            data-toggle="modal"
-                            data-target="#createData"
-                            title="Add new data"
-                          >
-                            <i class="fas fa-plus"></i>
-                          </button>
-                          <!-- add data Modal -->
-                          <div
-                            class="modal fade"
-                            id="createData"
-                            tabindex="-1"
-                            aria-labelledby="exampleModalLabel"
-                            aria-hidden="true"
-                          >
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5
-                                    class="modal-title"
-                                    id="exampleModalLabel"
-                                  >
-                                    Add new data to
-                                    <strong>{{ selectedDataSet.title }}</strong>
-                                  </h5>
-                                  <button
-                                    type="button"
-                                    class="close"
-                                    data-dismiss="modal"
-                                    aria-label="Close"
-                                  >
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <div class="row">
-                                    <div class="col-4">Select data set :</div>
-                                    <div class="col-8">
-                                      <strong>{{
-                                        selectedDataSet.title
-                                      }}</strong>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-4">
-                                      Select application :
-                                    </div>
-                                    <div class="col-8">
-                                      <select
-                                        class="form-control"
-                                        v-model="app"
-                                      >
-                                        <option
-                                          v-for="app in apps"
-                                          :key="app.id"
-                                          placeholder="Select application"
-                                        >
-                                          {{ app.title }}
-                                        </option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-4">Data :</div>
-                                    <div class="col-8">
-                                      <input
-                                        v-model="dataInput"
-                                        class="form-control"
-                                        type="text"
-                                        placeholder="Your data"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button
-                                    type="button"
-                                    class="btn btn-secondary"
-                                    data-dismiss="modal"
-                                  >
-                                    Close
-                                  </button>
-                                  <button
-                                    @click="
-                                      addData({
-                                        dataSet: selectedDataSet.id,
-                                        application: app,
-                                        data: dataInput,
-                                      })
-                                    "
-                                    type="button"
-                                    class="btn btn-success"
-                                    data-dismiss="modal"
-                                  >
-                                    Add
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                            <!--end of add data Modal -->
-                          </div>
-                        </div>
-                      </div>
-                      <!--end of header-->
-                      <!--data table-->
-                      <div class="table-responsive data-table">
-                        <table class="table table-bordered table-sm">
-                          <thead>
-                            <tr>
-                              <th scope="col">Id</th>
-                              <th
-                                scope="col"
-                                v-for="data in datas"
-                                :key="data.id"
-                              >
-                                {{ data.id }}
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <th scope="row">Date</th>
-                              <td v-for="data in datas" :key="data.id">
-                                {{ data.created_at }}
-                              </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">Value</th>
-                              <td v-for="data in datas" :key="data.id">
-                                {{ data.value }}
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <!--end of data table-->
-                    </div>
-                  </div>
-                </div>
               </div>
               <div v-else class="dataset-not-found">
                 <h4>You don't have a data set!</h4>
@@ -419,265 +237,64 @@
         </div>
         <!--End of DataSet info-->
         <!--Application info-->
-        <div class="row">
-          <div class="col">
-            <div class="card">
-              <div class="card-header">
-                <div class="data-set-name">Application</div>
-                <!--Select dataset / application-->
-                <span class="select-app" style="padding-top: 4px">
-                  <button
-                    type="button"
-                    class="btn"
-                    title="Edit This Application"
-                  >
-                    <i style="font-size: 1.3em" class="fas fa-pen"></i>
-                  </button>
-                </span>
-                <div class="select-app" title="Application / Data Set">
-                  <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                      <!--Selecet dataset-->
-                      <li class="breadcrumb-item">
-                        <div class="dropdown">
-                          <button
-                            class="dropdown-toggle"
-                            type="button"
-                            id="dropdownMenuButton"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            {{ selectedDataSet.title }}
-                          </button>
-                          <div
-                            class="dropdown-menu dropdown-menu-right"
-                            aria-labelledby="dropdownMenuButton"
-                          >
-                            <ul v-for="dataset in dataSets" :key="dataset.id">
-                              <li>
-                                <a
-                                  class="dropdown-item"
-                                  @click="selectDataSet(dataset)"
-                                  >{{ dataset.title }}</a
-                                >
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-                      <!--end of Selecet dataset-->
-                      <!--Select application-->
-                      <li class="breadcrumb-item">
-                        <div class="dropdown">
-                          <button
-                            class="dropdown-toggle"
-                            type="button"
-                            id="dropdownMenuButton"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            {{ selectedApp.title }}
-                          </button>
-                          <div
-                            class="dropdown-menu dropdown-menu-right"
-                            aria-labelledby="dropdownMenuButton"
-                          >
-                            <ul v-for="app in apps" :key="app.id">
-                              <li>
-                                <a
-                                  class="dropdown-item"
-                                  @click="selectApp(app)"
-                                  >{{ app.title }}</a
-                                >
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </li>
-                      <!--end of Selecet application-->
-                    </ol>
-                  </nav>
-                </div>
-                <!--End of Select dataset / application-->
-              </div>
-              <!--Application info-->
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #dc4146"
-                      >
-                        App Id
-                      </div>
-                      <div class="card-body">
-                        {{ selectedApp.id }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #31a2b8"
-                      >
-                        App Title
-                      </div>
-                      <div class="card-body">
-                        {{ selectedApp.title }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #4fa845"
-                      >
-                        Data Set Title
-                      </div>
-                      <div class="card-body">
-                        {{ selectedDataSet.title }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-4">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #fec134"
-                      >
-                        Data Set Id
-                      </div>
-                      <div class="card-body">
-                        {{ selectedDataSet.id }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-8">
-                    <div class="card app-info">
-                      <div
-                        class="card-header"
-                        style="background-color: #6c757d"
-                      >
-                        App Description
-                      </div>
-                      <div class="card-body">
-                        {{ selectedApp.description }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="card app-info" style="margin-top: 12px">
-                      <div
-                        class="card-header"
-                        style="background-color: #7952b3"
-                      >
-                        App Read Permission
-                      </div>
-                      <div class="card-body">
-                        {{ selectedApp.permission_read }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="col">
-                      <div class="card app-info">
-                        <div
-                          class="card-header"
-                          style="background-color: #7952b3"
-                        >
-                          App Write Permission
-                        </div>
-                        <div class="card-body">
-                          {{ selectedApp.permission_write }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="col">
-                      <div class="card app-info">
-                        <div
-                          class="card-header"
-                          style="background-color: #7952b3"
-                        >
-                          App Delete Permission
-                        </div>
-                        <div class="card-body">
-                          {{ selectedApp.permission_delete }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!--End of Application info-->
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import LineChart from '../../components/LineChart'
+
 import Axios from 'axios'
-import swal from 'sweetalert'
+import AppDetailsViewPill from '@/components/viewpill/AppDetailsViewPill'
+import AppDatasetViewPill from '@/components/viewpill/AppDatasetViewPill'
 
 export default {
   name: 'Home',
   components: {
-    LineChart
+    AppDetailsViewPill,
+    AppDatasetViewPill
   },
   methods: {
+    // For chart refreshing
+    updateSeriesLine () {
+      this.$refs.realtimeChart.updateSeries([{
+        data: this.series[0].data
+      }], false, true)
+    },
     selectDataSet: function (dataset) {
-      this.selectedDataSet = dataset
+      Axios.get(`http://localhost:4000/data-sets/with-datas/${dataset.id}`, {
+        headers: {
+          'X-AccessToken': localStorage.getItem('X-AccessToken')
+        }
+      }).then(response => {
+        this.series[0].data = response.data.result.datas.map(function (val) {
+          return {
+            x: val.createdAt,
+            y: val.value
+          }
+        })
+        this.selectedDataSet = response.data.result
+        this.updateSeriesLine()
+      })
     },
     selectApp: function (app) {
-      this.selectedApp = app
-    },
-    getDataSets: function () {
-      Axios.get('http://localhost:4000/data-sets/').then((response) => {
-        if (response.data.count === 0) {
-          this.selectedDataSet = false
+      Axios.get(`http://localhost:4000/applications/with-dataset-options/${app.id}`).then(response => {
+        this.selectedApp = response.data.result
+        this.dataSets = response.data.result.application_datasets
+        if (this.dataSets.length === 0) {
           return
         }
-        this.dataSetCount = response.data.count
-        this.dataSets = response.data.results
-        this.selectedDataSet = this.dataSets[0]
+        this.selectDataSet(this.dataSets[0].data_set)
       })
     },
-    addData: function (dataInfo) {
-      Axios.post(
-        'http://localhost:4000/datas/',
-        {
-          dataset_id: dataInfo.dataSet,
-          value: dataInfo.data
-        }).then((res) => {
-        if (res.status === 201) {
-          swal({
-            title: 'Data has been added successfully!',
-            icon: 'success'
-          })
+    getAppOptions: async function () {
+      await Axios.get('http://localhost:4000/applications/options').then((response) => {
+        if (response.data.count === 0) {
+          return
         }
+        this.apps = response.data.results
+        this.selectApp(this.apps[0])
       })
-    },
-    deleteDataSet: async function () {
-      await Axios.delete(
-        `http://localhost:4000/data-sets/${this.selectedDataSet.id}`)
-      this.getAll()
-    },
-    getAll: function () {
-      this.getDataSets()
     }
   },
   data () {
@@ -685,61 +302,47 @@ export default {
       dataSetCount: null,
       dataSets: null,
       selectedDataSet: {},
-      appCount: '6',
+      appCount: '',
       selectedApp: {},
-      apps: [
-        {
-          id: '1',
-          title: 'GoogleHomeMini',
-          dataSetId: '1',
-          description: 'Google home mini, smart assistant.',
-          permission_read: true,
-          permission_write: true,
-          permission_delete: false
-        },
-        {
-          id: '2',
-          title: 'app2',
-          dataSetId: '2',
-          description: 'its app2 description',
-          permission_read: false,
-          permission_write: false,
-          permission_delete: false
-        },
-        {
-          id: '3',
-          title: 'app3',
-          dataSetId: '3',
-          description: 'its app3 description',
-          permission_read: true,
-          permission_write: true,
-          permission_delete: true
-        }
-      ],
-      dataCount: 689,
-      datas: [
-        { id: '1', created_at: '10.09.2020 10:50', value: '23' },
-        { id: '2', created_at: '10.09.2020 11:00', value: '23.5' },
-        { id: '3', created_at: '10.09.2020 11:15', value: '23.8' },
-        { id: '4', created_at: '10.09.2020 11:22', value: '24' },
-        { id: '5', created_at: '10.09.2020 11:30', value: '24.1' },
-        { id: '6', created_at: '10.09.2020 11:42', value: '23.9' },
-        { id: '7', created_at: '10.09.2020 12:45', value: '24' },
-        { id: '8', created_at: '10.09.2020 12:36', value: '25' },
-        { id: '9', created_at: '10.09.2020 13:52', value: '26' },
-        { id: '10', created_at: '10.09.2020 14:39', value: '22' },
-        { id: '11', created_at: '10.09.2020 15:57', value: '23' },
-        { id: '12', created_at: '10.09.2020 18:11', value: '25.7' }
-      ],
+      apps: [],
+      dataCount: null,
+      datas: [],
       app: null,
-      dataInput: null
+      dataInput: null,
+      // Chart settings
+      options: {
+        chart: {
+          id: 'vuechart-example'
+        },
+        xaxis: {
+          type: 'datetime'
+        }
+      },
+      // Datas which will show at one chart
+      series: [{
+        data: []
+      }],
+      // Configration for responsive charts
+      responsive: [{
+        breakpoint: 1000,
+        options: {
+          plotOptions: {
+            bar: {
+              horizontal: false
+            }
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }]
     }
   },
   created () {
     document.body.className = ''
   },
   mounted () {
-    this.getAll()
+    this.getAppOptions()
   }
 }
 </script>
@@ -812,9 +415,7 @@ ul {
 .app-info .card-header {
   padding-left: 13px;
 }
-.chart {
-  height: 320px;
-}
+
 .total-data {
   font-size: 1.5em;
 }

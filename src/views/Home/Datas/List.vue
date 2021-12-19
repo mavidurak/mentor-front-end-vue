@@ -18,8 +18,8 @@
               <router-link
                 :to="{ name: 'AddData', params: {dataset:dataset } }"
                 class="btn btn-success float-right">
-                Create</router-link
-              >
+                <i class="fas fa-plus-square"/>
+              </router-link>
             </div>
           </div>
           <div v-if="datas" class="row">
@@ -43,13 +43,13 @@
                   <router-link
                     :to="{ name: 'AddData', params: { data: item , dataset:dataset} }"
                     class="btn btn-primary mx-1">
-                    Update
+                    <i class="fas fa-pen"/>
                   </router-link>
                   <button
                     type="reset"
                     @click="deleteData(item)"
                     class="btn btn-danger mx-1">
-                    Delete
+                    <i class="fas fa-trash-alt"/>
                   </button>
                 </template>
               </v-data-table>
