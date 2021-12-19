@@ -13,7 +13,7 @@ import Gravatar from 'vue-gravatar'
 import HomeNav from '@/views/Layouts/HomeNav'
 import None from '@/views/Layouts/None'
 import { configure } from 'vee-validate'
-
+import axios from 'axios'
 import VueApexCharts from 'vue-apexcharts'
 Vue.use(VueApexCharts)
 
@@ -42,3 +42,5 @@ configure({
     // ...
   }
 })
+
+axios.defaults.baseURL = 'http://localhost:4000'
