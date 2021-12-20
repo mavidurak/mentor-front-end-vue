@@ -406,11 +406,7 @@ export default {
   created () {
     if (localStorage.getItem('X-AccessToken') !== null) {
       axios
-        .get('/authentications/me/', {
-          headers: {
-            'X-AccessToken': localStorage.getItem('X-AccessToken')
-          }
-        })
+        .get('/authentications/me/')
         .then(response => {
           if (response.status === 200) {
             this.$notify({
