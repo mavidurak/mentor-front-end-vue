@@ -106,6 +106,11 @@
               </div>
             </div>
           </div>
+          <div class="col">
+            <div id="map">
+                <google-map />
+            </div>
+            </div>
         </div>
         <!--DataSet info-->
         <div class="row">
@@ -247,12 +252,14 @@
 import Axios from 'axios'
 import AppDetailsViewPill from '@/components/viewpill/AppDetailsViewPill'
 import AppDatasetViewPill from '@/components/viewpill/AppDatasetViewPill'
+import GoogleMap from '../../components/GoogleMap'
 
 export default {
   name: 'Home',
   components: {
     AppDetailsViewPill,
-    AppDatasetViewPill
+    AppDatasetViewPill,
+    GoogleMap
   },
   methods: {
     // For chart refreshing
@@ -495,5 +502,9 @@ ul {
 }
 .fa-plus:hover {
   color: #28a745;
+}
+#map {
+  margin-top:40px;
+  margin-bottom:40px;
 }
 </style>
