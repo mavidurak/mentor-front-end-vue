@@ -65,13 +65,7 @@ export default {
         {
           value: this.data.value,
           dataset_id: this.$route.params.dataSetId
-        },
-        {
-          headers: {
-            'X-AccessToken': localStorage.getItem('X-AccessToken')
-          }
-        }
-      )
+        })
         .then(response => {
           swal({
             title: 'Success',
@@ -101,21 +95,16 @@ export default {
           id: this.data.id,
           value: this.data.value,
           dataset_id: this.$route.params.dataSetId
-        },
-        {
-          headers: {
-            'X-AccessToken': localStorage.getItem('X-AccessToken')
-          }
-        }
-      ).then(response => {
-        swal({
-          title: 'Message',
-          text: response.data.message,
-          icon: 'success'
-        }).then(result => {
-          this.$router.push({ name: 'ListDatas', params: { dataset: this.dataset } })
         })
-      })
+        .then(response => {
+          swal({
+            title: 'Message',
+            text: response.data.message,
+            icon: 'success'
+          }).then(result => {
+            this.$router.push({ name: 'ListDatas', params: { dataset: this.dataset } })
+          })
+        })
     },
     onSubmit: async function () {
       if (this.data.id === undefined) {

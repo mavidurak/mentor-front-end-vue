@@ -56,15 +56,7 @@ export default {
             {
               password: this.password,
               newPassword: this.newPassword
-            },
-            {
-              headers: {
-                'X-AccessToken': localStorage.getItem('X-AccessToken'),
-                'Content-Type': 'application/json'
-              }
-            }
-          )
-          .then((response) => {
+            }).then((response) => {
             if (response.status === 200) {
               swal({
                 title:

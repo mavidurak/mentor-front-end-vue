@@ -278,11 +278,7 @@ export default {
       })
     },
     selectApp: function (app) {
-      Axios.get(`http://localhost:4000/applications/with-dataset-options/${app.id}`, {
-        headers: {
-          'X-AccessToken': localStorage.getItem('X-AccessToken')
-        }
-      }).then(response => {
+      Axios.get(`http://localhost:4000/applications/with-dataset-options/${app.id}`).then(response => {
         this.selectedApp = response.data.result
         this.dataSets = response.data.result.application_datasets
         if (this.dataSets.length === 0) {
@@ -292,11 +288,7 @@ export default {
       })
     },
     getAppOptions: async function () {
-      await Axios.get('http://localhost:4000/applications/options', {
-        headers: {
-          'X-AccessToken': localStorage.getItem('X-AccessToken')
-        }
-      }).then((response) => {
+      await Axios.get('http://localhost:4000/applications/options').then((response) => {
         if (response.data.count === 0) {
           return
         }

@@ -94,13 +94,7 @@ export default {
           title: this.dataset.title,
           data_type: this.dataset.data_type,
           description: this.dataset.description
-        },
-        {
-          headers: {
-            'X-AccessToken': localStorage.getItem('X-AccessToken')
-          }
-        }
-      )
+        })
         .then(response => {
           swal({
             title: 'Success',
@@ -142,13 +136,7 @@ export default {
           title: this.dataset.title,
           data_type: this.dataset.data_type,
           description: this.dataset.description
-        },
-        {
-          headers: {
-            'X-AccessToken': localStorage.getItem('X-AccessToken')
-          }
-        }
-      ).then(response => {
+        }).then(response => {
         swal({
           title: 'Message',
           text: response.data.message,
