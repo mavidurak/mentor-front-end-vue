@@ -11,13 +11,7 @@ export default {
     if (localStorage.getItem('X-AccessToken') !== null) {
       axios
         .get(
-          '/authentications/me/',
-          {
-            headers: {
-              'X-AccessToken': localStorage.getItem('X-AccessToken')
-            }
-          }
-        )
+          '/authentications/me/')
         .then(response => {
           if (response.status === 200) {
             this.$router.push('home')

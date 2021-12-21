@@ -13,7 +13,9 @@ import Gravatar from 'vue-gravatar'
 import HomeNav from '@/views/Layouts/HomeNav'
 import None from '@/views/Layouts/None'
 import { configure } from 'vee-validate'
+import * as VueGoogleMaps from 'vue2-google-maps'
 import axios from 'axios'
+import swal from 'sweetalert'
 import VueApexCharts from 'vue-apexcharts'
 Vue.use(VueApexCharts)
 
@@ -28,11 +30,33 @@ Vue.config.productionTip = false
 
 Vue.use(Notifications)
 Vue.use(Datatable)
+
+const token = localStorage.getItem('X-AccessToken')
+axios.interceptors.request.use((config) => {
+  config.headers.common['X-AccessToken'] = token
+  return config
+}, (error) => {
+  if (error.response.status === 401) {
+    swal(
+      'Session expired!',
+      'Please sign in again!',
+      'error'
+    )
+  }
+  return Promise.reject(error)
+})
 new Vue({
   router,
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'GOOGLE_MAP_KEY', 
+    libraries: 'places'
+  }
+})
 
 configure({
   classes: {
