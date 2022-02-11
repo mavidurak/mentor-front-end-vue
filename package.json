@@ -18,6 +18,7 @@
     "chart.js": "^2.9.4",
     "core-js": "^3.6.5",
     "jquery": "^3.5.1",
+    "marker-clusterer-plus": "^2.1.4",
     "popper.js": "^1.16.1",
     "sweetalert": "^2.1.2",
     "vee-validate": "^3.4.0",
@@ -54,6 +55,7 @@
     "fibers": "^5.0.0",
     "sass": "^1.27.0",
     "sass-loader": "^8.0.2",
+    "vue-browser-geolocation": "^1.8.0",
     "vue-template-compiler": "^2.6.12"
   }
 }

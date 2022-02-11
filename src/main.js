@@ -14,9 +14,12 @@ import HomeNav from '@/views/Layouts/HomeNav'
 import None from '@/views/Layouts/None'
 import { configure } from 'vee-validate'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import VueGeolocation from 'vue-browser-geolocation'
 
 import VueApexCharts from 'vue-apexcharts'
 Vue.use(VueApexCharts)
+
+Vue.use(VueGeolocation)
 
 Vue.component('apexchart', VueApexCharts)
 

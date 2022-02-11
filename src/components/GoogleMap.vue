@@ -9,6 +9,8 @@
         :key="index"
         v-for="(m, index) in markers"
         :position="m"
+        :clickable="true"
+        :draggable="true"
         @click="center=m"
       ></gmap-marker>
     </gmap-map>
@@ -21,7 +23,7 @@ export default {
   name: 'GoogleMap',
   data () {
     return {
-      center: { lat: 39.925533, lng: 32.866287 },
+      center: { lat: 40.82000, lng: 29.866287 },
       markers: [],
       currentPlace: null
     }

@@ -107,10 +107,10 @@
             </div>
           </div>
           <div class="col">
-             <div id="map" style="margin-top:40px; margin-bottom:40px">
-               <google-map />
-              </div>
-          </div>
+            <div id="map">
+                <google-map />
+            </div>
+            </div>
         </div>
         <!--DataSet info-->
         <div class="row">
@@ -510,5 +510,9 @@ ul {
 }
 .fa-plus:hover {
   color: #28a745;
+}
+#map {
+  margin-top:40px;
+  margin-bottom:40px;
 }
 </style>

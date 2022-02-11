@@ -49,7 +49,13 @@
               <label> Permission Delete : </label>
               <input v-model="application.permission_delete" class="mx-3 " type="checkbox"/>
             </div>
-            <div v-if="application.id === undefined" class="form-group">
+            <div id="map" >
+              <!-- <google-map >
+              </google-map> -->
+              <p>p: {{mapMarker}}</p>
+              <Map @coordinate="emitCoordinates" @coordinateMap="emitMap"/>
+            </div>
+            <!-- <div v-if="application.id === undefined" class="form-group">
               <label>Longitude : </label>
               <input
                 v-model="application.longitude"
@@ -70,7 +76,7 @@
                 required
                 min="-90"
                 max="90"/>
-            </div>
+            </div> -->
             <button
               v-if="application.id == undefined"
               type="submit"
@@ -93,11 +99,14 @@
 import Axios from 'axios'
 import swal from 'sweetalert'
 import multiSelect from '@/components/Multiselect.vue'
+import Map from '@/components/Map'
+// import GmapCluster from 'gmap-vue/dist/components/cluster'
 
 export default {
   name: 'AddDataSet',
   components: {
-    multiSelect
+    multiSelect,
+    Map
   },
   data: () => {
     return {
@@ -112,6 +121,7 @@ export default {
         longitude: undefined,
         latitude: undefined
       },
+      mapMarker: '',
       key: '',
       options: null
     }
@@ -124,6 +134,12 @@ export default {
     this.getDatasets()
   },
   methods: {
+    emitCoordinates (coordinate) {
+      console.log(coordinate)
+    },
+    emitMap (coordinateMap) {
+      console.log('aaaaaaaa: ', coordinateMap)
+    },
     getDatasets () {
       Axios.get('/data-sets/', {
         headers: {
