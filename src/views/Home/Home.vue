@@ -108,7 +108,7 @@
           </div>
           <div class="col">
             <div id="map">
-                <google-map />
+                <show-map />
             </div>
             </div>
         </div>
@@ -252,14 +252,14 @@
 import Axios from 'axios'
 import AppDetailsViewPill from '@/components/viewpill/AppDetailsViewPill'
 import AppDatasetViewPill from '@/components/viewpill/AppDatasetViewPill'
-import GoogleMap from '../../components/GoogleMap'
+import ShowMap from '../../components/ShowMap'
 
 export default {
   name: 'Home',
   components: {
     AppDetailsViewPill,
     AppDatasetViewPill,
-    GoogleMap
+    ShowMap
   },
   methods: {
     // For chart refreshing

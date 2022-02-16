@@ -2,7 +2,7 @@
   <div>
     <gmap-map
       :center="center"
-      :zoom="8"
+      :zoom="6"
       style="width:100%; height:400px"
     >
       <gmap-marker
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'GoogleMap',
+  name: 'ShowMap',
   data () {
     return {
       center: { lat: 40.82000, lng: 29.866287 },

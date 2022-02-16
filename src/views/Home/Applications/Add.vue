@@ -50,33 +50,9 @@
               <input v-model="application.permission_delete" class="mx-3 " type="checkbox"/>
             </div>
             <div id="map" >
-              <!-- <google-map >
-              </google-map> -->
-              <p>p: {{mapMarker}}</p>
-              <Map @coordinate="emitCoordinates" @coordinateMap="emitMap"/>
+              <label> Location : </label>
+              <AddMap @mapLat="emitLat" @mapLng="emitLng"/><br>
             </div>
-            <!-- <div v-if="application.id === undefined" class="form-group">
-              <label>Longitude : </label>
-              <input
-                v-model="application.longitude"
-                type="number"
-                class="form-control"
-                placeholder="longitude"
-                required
-                min="-180"
-                max="180"/>
-            </div>
-            <div v-if="application.id === undefined" class="form-group">
-              <label>Latitude : </label>
-              <input
-                v-model="application.latitude"
-                type="number"
-                class="form-control"
-                placeholder="latitude"
-                required
-                min="-90"
-                max="90"/>
-            </div> -->
             <button
               v-if="application.id == undefined"
               type="submit"
@@ -99,14 +75,13 @@
 import Axios from 'axios'
 import swal from 'sweetalert'
 import multiSelect from '@/components/Multiselect.vue'
-import Map from '@/components/Map'
-// import GmapCluster from 'gmap-vue/dist/components/cluster'
+import AddMap from '@/components/AddMap'
 
 export default {
   name: 'AddDataSet',
   components: {
     multiSelect,
-    Map
+    AddMap
   },
   data: () => {
     return {
@@ -121,7 +96,6 @@ export default {
         longitude: undefined,
         latitude: undefined
       },
-      mapMarker: '',
       key: '',
       options: null
     }
@@ -134,11 +108,11 @@ export default {
     this.getDatasets()
   },
   methods: {
-    emitCoordinates (coordinate) {
-      console.log(coordinate)
+    emitLat (lat) {
+      this.application.latitude = lat
     },
-    emitMap (coordinateMap) {
-      console.log('aaaaaaaa: ', coordinateMap)
+    emitLng (lng) {
+      this.application.longitude = lng
     },
     getDatasets () {
       Axios.get('/data-sets/', {

@@ -1,6 +1,5 @@
 <template>
   <div>
-      <p>Markers: {{mapCoordinates.markers}}</p>
     <gmap-map
       :center="myCoordinates"
       :zoom="8"
@@ -19,7 +18,7 @@
 
 <script>
 export default {
-  name: 'Map',
+  name: 'AddMap',
   data () {
     return {
       currentPlace: null,
@@ -43,15 +42,18 @@ export default {
           lng: 0,
           markers: {}
         }
-      }
-      return {
-        lat: this.map.getCenter().lat(),
-        lng: this.map.getCenter().lng(),
-        markers:
+      } else {
+        const mapLat = this.map.getCenter().lat()
+        this.$emit('mapLat', mapLat)
+        const mapLng = this.map.getCenter().lng()
+        this.$emit('mapLng', mapLng)
+
+        const markers =
           {
             lat: this.map.getCenter().lat(),
             lng: this.map.getCenter().lng()
           }
+        return { mapLat, mapLng, markers }
       }
     }
   },
@@ -77,7 +79,6 @@ export default {
           lng: this.mapCoordinates.lng,
           label: 'map'
         }
-      this.$emit('coordinate', this.mapCoordinates)
     }
   }
 }
